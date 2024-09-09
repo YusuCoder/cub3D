@@ -24,7 +24,8 @@ LIBFT		:= $(LIBFT_PATH)/libft.a
 
 all: $(NAME)
 
-submodule: git submodule update --init --recursive
+submodule:
+	git submodule update --init --recursive
 
 $(NAME): $(MAIN_OBJ) $(OBJS) $(LIBFT)
 	@$(CC) $(CFLAGS) $^ -o $@ -lreadline
