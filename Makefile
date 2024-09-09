@@ -37,7 +37,7 @@ HEADER := include/cub3d.h
 all: submodule mlx $(LIBFT) $(NAME)
 
 submodule:
-	@git submodule update --init --recursive > /dev/null 2>&1
+	@git submodule update --init --recursive
 
 mlx:
 	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4 > /dev/null 2>&1
