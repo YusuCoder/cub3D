@@ -15,7 +15,8 @@ RM		:= rm -rf
 LIBFT_PATH  := ./libft
 OBJ_PATH	:= ./obj
 MAIN		:= main.c
-SRC_FILES	:=
+SRC_FILES	:=	./parse/parse.c \
+				./parse/errors.c
 
 OBJS		:= $(patsubst %, $(OBJ_PATH)/%, $(SRC_FILES:.c=.o))
 MAIN_OBJ	:= $(OBJ_PATH)/main.o
