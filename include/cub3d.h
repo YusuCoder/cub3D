@@ -67,7 +67,6 @@ typedef struct s_map
 	int		fd;
 	int		line_count;
 	char	*path;
-	char	**file;
 	int		height;
 	int		width;
 	int		eom;

@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 11:21:11 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/09/13 14:24:05 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/09/13 16:47:14 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	is_dir(char *str)
 	int	res;
 
 	res = 0;
-	fd = open(str, O_RDONLY);
+	fd = open(str, O_DIRECTORY);
 	if (fd >= 0)
 	{
 		close (fd);
@@ -59,8 +59,22 @@ int	parse(t_data *data, char **argv)
 	if (check_file(argv[1], 1) == FAIL)
 		exit(FAIL);
 		// clean_exit(data, FAIL);
-	// validate_map(argv[1], data);
-	// if (file_data(data, data->map_info.file) == FAIL)
+	validate_map(argv[1], data);
+
+	int i, j;
+	i = 0;
+	j = 0;
+	while (data->map_info.map[i] != NULL)
+	{
+		j = 0;
+		while (data->map_info.map[i][j] != '\0')
+		{
+			printf("%c", data->map_info.map[i][j]);
+			j++;
+		}
+		i++;
+	}
+	// if (file_data(data, data->map_info.map) == FAIL)
 	// 	return(free_data(data));
 	return (0);
 }

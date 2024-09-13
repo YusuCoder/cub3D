@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:14:13 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/09/13 14:22:11 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/09/13 14:53:20 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*read_data(t_struct *vars, char *buffer)
 		}
 		temp[i] = '\0';
 		buffer = ft_strjoin_new(buffer, temp);
-		if (buffer == NULL || ft_strlen(buffer) == 0)
+		if (buffer == NULL || ft_strlen_new(buffer) == 0)
 		{
 			free(buffer);
 			return (NULL);
@@ -50,7 +50,7 @@ char	*g_new_line(t_struct *vars, char *buffer)
 	char	*temp;
 	char	*result;
 
-	if (buffer == NULL || ft_strlen(buffer) == '\0')
+	if (buffer == NULL || ft_strlen_new(buffer) == '\0')
 	{
 		return (NULL);
 	}
@@ -60,7 +60,7 @@ char	*g_new_line(t_struct *vars, char *buffer)
 		result = ft_strndup(buffer, 0, vars->new_l_buffer + 1);
 		return (result);
 	}
-	temp = ft_strndup(buffer, 0, ft_strlen(buffer));
+	temp = ft_strndup(buffer, 0, ft_strlen_new(buffer));
 	return (temp);
 }
 
@@ -69,13 +69,13 @@ char	*remaining(t_struct *vars, char *buffer)
 	char	*temp;
 
 	temp = NULL;
-	if (buffer == NULL || ft_strlen(buffer) == '\0')
+	if (buffer == NULL || ft_strlen_new(buffer) == '\0')
 	{
 		free(buffer);
 		return (NULL);
 	}
 	if (vars->new_l_buffer != -1)
-		temp = ft_strndup(buffer, vars->new_l_buffer + 1, ft_strlen(buffer));
+		temp = ft_strndup(buffer, vars->new_l_buffer + 1, ft_strlen_new(buffer));
 	free(buffer);
 	return (temp);
 }

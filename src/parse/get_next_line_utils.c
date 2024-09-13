@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 18:33:39 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/09/13 14:22:08 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/09/13 14:53:35 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*ft_strjoin_new(char *s1, char *s2)
 			return (NULL);
 		s1[0] = '\0';
 	}
-	size = ft_strlen(s1) + ft_strlen(s2) + 1;
+	size = ft_strlen_new(s1) + ft_strlen_new(s2) + 1;
 	result = (char *)malloc(size * sizeof(char));
 	if (!result)
 		return (NULL);
@@ -91,7 +91,7 @@ t_struct	*get_t_struct(int new_fd)
 	return (i);
 }
 
-size_t	ft_strlen(const char *s)
+size_t	ft_strlen_new(const char *s)
 {
 	int	i;
 	int	counter;
