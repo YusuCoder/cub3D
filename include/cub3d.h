@@ -22,6 +22,7 @@
 #include <fcntl.h>
 # include "../libft/libft.h"
 # include "../MLX42/include/MLX42/MLX42.h"
+# include "get_next_line.h"
 
 /*----------------*/
 /*  Window sizes  */
@@ -104,7 +105,8 @@ void	free_exit(t_data *data);
 
 
 /*-----------PARSING------------*/
-int	error_msg(char *str, char *msg, int e_code);
-int	parse(t_data *data, char **argv);
+int		error_msg(char *str, char *msg, int e_code);
+int		parse(t_data *data, char **argv);
+void	validate_map(char *file, t_data *data);
 
 #endif

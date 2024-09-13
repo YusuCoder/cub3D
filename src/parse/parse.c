@@ -6,11 +6,11 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 11:21:11 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/09/11 13:28:35 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/09/13 14:24:05 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../../include/cub3d.h"
 
 int	is_cub_file(char *str)
 {
@@ -55,11 +55,12 @@ int	check_file(char	*arg, int cub)
 
 int	parse(t_data *data, char **argv)
 {
+	(void)data;
 	if (check_file(argv[1], 1) == FAIL)
 		exit(FAIL);
 		// clean_exit(data, FAIL);
-	parse_data(argv[1], data);
-	if (file_data(data, data->map_info.file) == FAIL)
-		return(free_data(data));
+	// validate_map(argv[1], data);
+	// if (file_data(data, data->map_info.file) == FAIL)
+	// 	return(free_data(data));
 	return (0);
 }
