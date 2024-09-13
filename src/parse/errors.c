@@ -6,11 +6,11 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 11:03:03 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/09/11 13:28:09 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/09/13 12:24:06 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../../include/cub3d.h"
 
 int	error_msg(char *str, char *msg, int e_code)
 {
