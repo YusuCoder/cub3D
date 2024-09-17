@@ -80,6 +80,21 @@ typedef struct s_player
 	t_point_int	pos;
 }	t_player;
 
+/*-------------------*/
+/*  Textures struct  */
+/*-------------------*/
+typedef struct s_texture
+{
+	int				*floor;
+	int				*cell;
+	unsigned long	floor_color;
+	unsigned long	cell_color;
+	char			*north;
+	char			*south;
+	char			*west;
+	char			*east;
+	t_point_double	pos;
+}		t_texture;
 /*---------------*/
 /*  Data struct  */
 /*---------------*/
@@ -90,7 +105,7 @@ typedef struct s_data
 	void		*window;
 	t_map		map_info;
 	mlx_t		*mlx;
-
+	t_texture	tex_info;
 	mlx_image_t	*img;
 }	t_data;
 
@@ -102,10 +117,11 @@ void	ft_perror(char *error_msg);
 void	error_exit(t_data *data);
 void	free_exit(t_data *data);
 
-
 /*-----------PARSING------------*/
 int		error_msg(char *str, char *msg, int e_code);
 int		parse(t_data *data, char **argv);
 void	validate_map(char *file, t_data *data);
+int		map_data(t_data *data, char **map);
+void	free_it(void **data);
 
 #endif

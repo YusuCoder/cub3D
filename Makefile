@@ -30,6 +30,7 @@ SRC_FILES	:= $(SRC_PATH)/init_data.c \
 				$(SRC_PATH)/parse/get_next_line.c \
 				$(SRC_PATH)/parse/get_next_line_utils.c \
 				$(SRC_PATH)/parse/map_validation.c \
+				$(SRC_PATH)/parse/map_data_check.c \
 
 OBJS		:= $(patsubst %, $(OBJ_PATH)/%, $(SRC_FILES:.c=.o))
 MAIN_OBJ	:= $(OBJ_PATH)/main.o

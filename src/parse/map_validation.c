@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 12:25:06 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/09/13 16:47:45 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/09/14 14:07:34 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,8 @@ void	validate_map(char *file, t_data *data)
 	if (data->map_info.fd < 0)
 		error_msg(file, "Open error!\n", FAIL);
 	else
+	{
 		copy_map(row, column, i, data);
+		close (data->map_info.fd);
+	}
 }

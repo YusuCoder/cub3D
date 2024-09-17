@@ -3,14 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   free_exit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:49:19 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/09/10 18:52:40 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/09/17 12:33:19 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+
+void	free_it(void **data)
+{
+	size_t	i;
+
+	i = 0;
+	while (data[i])
+	{
+		free(data[i]);
+		i++;
+	}
+	if (data)
+	{
+		free(data);
+		data = NULL;
+	}
+}
 
 void	free_exit(t_data *data)
 {

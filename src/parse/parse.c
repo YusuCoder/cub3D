@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 11:21:11 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/09/13 16:47:14 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/09/17 13:52:46 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,21 +60,24 @@ int	parse(t_data *data, char **argv)
 		exit(FAIL);
 		// clean_exit(data, FAIL);
 	validate_map(argv[1], data);
-
-	int i, j;
-	i = 0;
-	j = 0;
-	while (data->map_info.map[i] != NULL)
-	{
-		j = 0;
-		while (data->map_info.map[i][j] != '\0')
-		{
-			printf("%c", data->map_info.map[i][j]);
-			j++;
-		}
-		i++;
-	}
-	// if (file_data(data, data->map_info.map) == FAIL)
-	// 	return(free_data(data));
+	// int i, j;
+	// i = 0;
+	// j = 0;
+	// while (data->map_info.map[i] != NULL)
+	// {
+	// 	j = 0;
+	// 	while (data->map_info.map[i][j] != '\0')
+	// 	{
+	// 		printf("%c", data->map_info.map[i][j]);
+	// 		j++;
+	// 	}
+	// 	i++;
+	// }
+	if (map_data(data, data->map_info.map) == FAIL)
+		exit(EXIT_FAILURE);							//NEED TO REPLACE WITH FREE FUNCTION
+	printf("%s\n", data->tex_info.south);
+	printf("%s\n", data->tex_info.north);
+	printf("%s\n", data->tex_info.west);
+	printf("%s\n", data->tex_info.east); 							
 	return (0);
 }
