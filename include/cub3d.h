@@ -22,11 +22,13 @@
 # include "../libft/libft.h"
 # include "../MLX42/include/MLX42/MLX42.h"
 
-/*----------------*/
-/*  Window sizes  */
-/*----------------*/
+/*-------------------*/
+/*  Constant values  */
+/*-------------------*/
 # define WIDTH 800
 # define HEIGHT 600
+# define VIEW 60
+# define GRIDSIZE 64
 
 /*----------------------*/
 /*  Point struct (int)  */
@@ -51,7 +53,9 @@ typedef struct s_point_double
 /*--------------*/
 typedef struct s_map
 {
-	char	**map;
+	char		**map2d;
+	char		player_direction;
+	t_point_int	player_position;
 }	t_map;
 
 /*-----------------*/
@@ -60,6 +64,8 @@ typedef struct s_map
 typedef struct s_player
 {
 	t_point_int	pos;
+	int			pov;
+	double		fov;
 }	t_player;
 
 /*---------------*/
@@ -69,6 +75,8 @@ typedef struct s_data
 {
 	int			width;
 	int			height;
+	t_map		map;
+	t_player	player;
 	mlx_t		*mlx;
 	mlx_image_t	*img;
 }	t_data;
@@ -77,8 +85,13 @@ typedef struct s_data
 /*  Functions  */
 /*-------------*/
 void	init_data(t_data *data);
+void	init_map(t_map *map);
+void	init_player(t_player *player, t_map *map);
+void	run_simulation(t_data *data);
+double	radian(int degree);
 void	ft_perror(char *error_msg);
 void	error_exit(t_data *data);
+void	free_array(char **array);
 void	free_exit(t_data *data);
 
 #endif

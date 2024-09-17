@@ -23,7 +23,8 @@ OBJ_PATH	:= ./obj
 SRC_PATH	:= ./src
 MAIN		:= main.c
 SRC_FILES	:= $(SRC_PATH)/init_data.c \
-				$(SRC_PATH)/free_exit.c \
+				$(SRC_PATH)/run_simulation.c \
+				$(SRC_PATH)/free.c \
 				$(SRC_PATH)/error_handler.c
 
 OBJS		:= $(patsubst %, $(OBJ_PATH)/%, $(SRC_FILES:.c=.o))
