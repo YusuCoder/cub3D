@@ -25,10 +25,10 @@
 /*-------------------*/
 /*  Constant values  */
 /*-------------------*/
-# define WIDTH 800
-# define HEIGHT 600
+# define WIDTH 1920
+# define HEIGHT 1080
 # define VIEW 60
-# define GRIDSIZE 64
+# define GRID 64
 
 /*----------------------*/
 /*  Point struct (int)  */
@@ -48,6 +48,26 @@ typedef struct s_point_double
 	double	y;
 }	t_point_double;
 
+/*-------------------------*/
+/*  Point struct (double)  */
+/*-------------------------*/
+typedef struct s_ray
+{
+	double			angle;
+	t_point_double	direction;
+	t_point_int		map;
+	t_point_double	delta_dist;
+	t_point_int		step;
+	t_point_double	side_dist;
+	int				hit;
+	int				side;
+	double			plane_dist;
+	int				line_height;
+	int				draw_start;
+	int				draw_end;
+	int				wall_color;
+}	t_ray;
+
 /*--------------*/
 /*  Map struct  */
 /*--------------*/
@@ -63,9 +83,9 @@ typedef struct s_map
 /*-----------------*/
 typedef struct s_player
 {
-	t_point_int	pos;
-	int			pov;
-	double		fov;
+	t_point_double	pos;
+	double			pov;
+	double			fov;
 }	t_player;
 
 /*---------------*/
@@ -73,10 +93,11 @@ typedef struct s_player
 /*---------------*/
 typedef struct s_data
 {
-	int			width;
-	int			height;
+	int32_t		width;
+	int32_t		height;
 	t_map		map;
 	t_player	player;
+	t_ray		ray;
 	mlx_t		*mlx;
 	mlx_image_t	*img;
 }	t_data;
@@ -84,14 +105,15 @@ typedef struct s_data
 /*-------------*/
 /*  Functions  */
 /*-------------*/
-void	init_data(t_data *data);
-void	init_map(t_map *map);
-void	init_player(t_player *player, t_map *map);
-void	run_simulation(t_data *data);
-double	radian(int degree);
-void	ft_perror(char *error_msg);
-void	error_exit(t_data *data);
-void	free_array(char **array);
-void	free_exit(t_data *data);
+void		init_data(t_data *data);
+void		init_map(t_data *data);
+void		init_player(t_data *data);
+void		render(void *param);
+void		run_simulation(t_data *data);
+double		radian(int degree);
+void		free_array(char **array);
+void		free_exit(t_data *data, int exit_status);
+void		ft_perror(char *error_msg);
+void		error_free_exit(t_data *data, char *error_msg);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:52:54 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/09/11 20:26:59 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/09/18 16:27:04 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,5 @@ int	main(int argc, char **argv)
 	// parse_map();
 	init_data(&data);
 	run_simulation(&data);
-	free_exit(&data);
+	free_exit(&data, EXIT_SUCCESS);
 }
