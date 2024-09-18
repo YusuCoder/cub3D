@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 10:47:13 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/09/17 14:09:50 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/09/18 13:06:51 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,12 @@ char	*get_texture(char *map, int j)
 	return (path);
 }
 
-int	*cp_color(char	**rgb, int *color)
+int	*cp_color(char **rgb, int *color)
 {
 	int	i;
 
 	i = 0;
-	while(rgb[i])
+	while (rgb[i])
 	{
 		color[i] = ft_atoi(rgb[i]);
 		if (color[i] == -1 || is_not_digit(rgb[i]) == 1)
@@ -75,6 +75,32 @@ int	*cp_color(char	**rgb, int *color)
 	return (color);
 }
 
+// int	*set_color(char *map)
+// {
+// 	int		*color;
+// 	int		i;
+// 	char	**rgb_code;
+
+// 	rgb_code = ft_split(map, ',');
+// 	if (!rgb_code)
+// 	{
+// 		free_it((void **)rgb_code);
+// 		return (0);
+// 	}
+// 	i = 0;
+// 	while (rgb_code[i])
+// 		i++;
+// 	if (i != 3)
+// 	{
+// 		free_it((void **)rgb_code);
+// 		return (0);
+// 	}
+// 	color = malloc(sizeof(int) * 3);
+// 	if (!color)
+// 		return (0);
+// 	return (cp_color(rgb_code, color));
+// }
+
 int	*set_color(char *map)
 {
 	int		*color;
@@ -82,6 +108,8 @@ int	*set_color(char *map)
 	char	**rgb_code;
 
 	rgb_code = ft_split(map, ',');
+	if (!rgb_code)
+		return (0);
 	i = 0;
 	while (rgb_code[i])
 		i++;
@@ -92,14 +120,25 @@ int	*set_color(char *map)
 	}
 	color = malloc(sizeof(int) * 3);
 	if (!color)
+	{
+		free_it((void **)rgb_code);
 		return (0);
-	return (cp_color(rgb_code, color));
+	}
+	if (!cp_color(rgb_code, color))
+	{
+		free(color);
+		free_it((void **)rgb_code);
+		return (0);
+	}
+	free_it((void **)rgb_code);
+	return (color);
 }
 
 int	color_txtures(t_data *data, t_texture *tex_info, char *map, int j)
 {
-	if (map[j + 1] && ft_isprint(map[j + 1]))
-		return (error_msg(data->map_info.path, "no such file or directory.", ERROR));
+	if (map[j + 1] && !ft_isprint(map[j + 1]))
+		return (error_msg(data->map_info.path, "no such file or directory.",
+				ERROR));
 	if (!tex_info->cell && map[j] == 'C')
 	{
 		tex_info->cell = set_color(map + j + 1);
@@ -113,24 +152,24 @@ int	color_txtures(t_data *data, t_texture *tex_info, char *map, int j)
 			return (error_msg(data->map_info.path, "rgb color error.", ERROR));
 	}
 	else
-		return(error_msg(data->map_info.path, "Error!", ERROR));
+		return (error_msg(data->map_info.path, "Error!", ERROR));
 	return (0);
 }
 
 int	set_texture_path(t_texture *tex_info, char *map, int j)
 {
-	if (map[j + 2] && ft_isprint(map[j + 2]))
-		return (1);
-	else if (map[j] == 'N' && map[j + 1] == '0' && !(tex_info->north))
+	// if (map[j + 2] && ft_isprint(map[j + 2]))
+	// 	return (1);
+	if (map[j] == 'N' && map[j + 1] == 'O' && !(tex_info->north))
 		tex_info->north = get_texture(map, j + 2);
-	else if (map[j] == 'S' && map[j + 1] == '0' && !(tex_info->south))
+	else if (map[j] == 'S' && map[j + 1] == 'O' && !(tex_info->south))
 		tex_info->south = get_texture(map, j + 2);
-	else if (map[j] == 'W' && map[j + 1] == '0' && !(tex_info->north))
-		tex_info->west = get_texture(map, j + 2);
-	else if (map[j] == 'E' && map[j + 1] == '0' && !(tex_info->east))
+	else if (map[j] == 'E' && map[j + 1] == 'A' && !(tex_info->east))
 		tex_info->east = get_texture(map, j + 2);
+	else if (map[j] == 'W' && map[j + 1] == 'E' && !(tex_info->west))
+		tex_info->west = get_texture(map, j + 2);
 	else
-		return(1);
+		return (1);
 	return (0);
 }
 
@@ -140,10 +179,11 @@ int	map_check(t_data *data, char **map, int i, int j)
 		j++;
 	if (ft_isprint(map[i][j]) && !ft_isdigit(map[i][j]))
 	{
-		if (map[i][j + 1] && ft_isprint(map[i][j + 1]) && !ft_isdigit(map[i][j]))
+		if (map[i][j + 1] && ft_isprint(map[i][j + 1]) && !ft_isdigit(map[i][j])
+			&& map[i][j + 1] != ' ')
 		{
 			if (set_texture_path(&data->tex_info, map[i], j) == 1)
-				return(error_msg(data->map_info.path, "invalid texture!", 1));
+				return (error_msg(data->map_info.path, "invalid texture!", 1));
 			return (2);
 		}
 		else
@@ -153,12 +193,6 @@ int	map_check(t_data *data, char **map, int i, int j)
 			return (2);
 		}
 	}
-	// else if (ft_isdigit(map[i][j]))
-	// {
-	// 	if (create_map(data, map, i) == FAIL)
-	// 		return (error_msg(data->map_info.path, "Failed to create a map!", FAIL));
-	// 	return(0);
-	// }
 	return (4);
 }
 
