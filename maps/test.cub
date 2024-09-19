@@ -3,7 +3,7 @@ SO ./images/walls/wall1.xpm42
 EA ./images/walls/wall1.xpm42
 WE ./images/walls/wall4.xpm42
 
-F 255,255,255
+F 252,251,253
 C 0,0,0
 
 111111111111111111111111111111111

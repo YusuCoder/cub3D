@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 10:47:13 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/09/18 13:06:51 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/09/19 13:57:42 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,42 +64,18 @@ int	*cp_color(char **rgb, int *color)
 	while (rgb[i])
 	{
 		color[i] = ft_atoi(rgb[i]);
+		// printf("%d\n", color[i]);
 		if (color[i] == -1 || is_not_digit(rgb[i]) == 1)
 		{
 			free_it((void **)rgb);
 			free(color);
 			return (0);
 		}
+		i++;
 	}
-	free_it((void **)rgb);
+	// free_it((void **)rgb);
 	return (color);
 }
-
-// int	*set_color(char *map)
-// {
-// 	int		*color;
-// 	int		i;
-// 	char	**rgb_code;
-
-// 	rgb_code = ft_split(map, ',');
-// 	if (!rgb_code)
-// 	{
-// 		free_it((void **)rgb_code);
-// 		return (0);
-// 	}
-// 	i = 0;
-// 	while (rgb_code[i])
-// 		i++;
-// 	if (i != 3)
-// 	{
-// 		free_it((void **)rgb_code);
-// 		return (0);
-// 	}
-// 	color = malloc(sizeof(int) * 3);
-// 	if (!color)
-// 		return (0);
-// 	return (cp_color(rgb_code, color));
-// }
 
 int	*set_color(char *map)
 {
@@ -119,11 +95,6 @@ int	*set_color(char *map)
 		return (0);
 	}
 	color = malloc(sizeof(int) * 3);
-	if (!color)
-	{
-		free_it((void **)rgb_code);
-		return (0);
-	}
 	if (!cp_color(rgb_code, color))
 	{
 		free(color);
@@ -139,7 +110,7 @@ int	color_txtures(t_data *data, t_texture *tex_info, char *map, int j)
 	if (map[j + 1] && !ft_isprint(map[j + 1]))
 		return (error_msg(data->map_info.path, "no such file or directory.",
 				ERROR));
-	if (!tex_info->cell && map[j] == 'C')
+	if (map[j] == 'C')					//NEEDS TO BE CHECKED WITH MORE COLORS
 	{
 		tex_info->cell = set_color(map + j + 1);
 		if (tex_info->cell == 0)
