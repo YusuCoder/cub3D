@@ -29,6 +29,8 @@
 # define HEIGHT 1080
 # define VIEW 60
 # define GRID 64
+# define MOVE 0.02
+# define ROTATE 0.02
 
 /*----------------------*/
 /*  Point struct (int)  */
@@ -76,6 +78,12 @@ typedef struct s_map
 	char		**map2d;
 	char		player_direction;
 	t_point_int	player_position;
+	int			color_floor;
+	int			color_ceiling;
+	char		*path_texture_north;
+	char		*path_texture_south;
+	char		*path_texture_east;
+	char		*path_texture_west;
 }	t_map;
 
 /*-----------------*/
@@ -88,32 +96,46 @@ typedef struct s_player
 	double			fov;
 }	t_player;
 
+/*------------------*/
+/*  Texture struct  */
+/*------------------*/
+typedef struct s_texture
+{
+	mlx_texture_t	*north;
+	mlx_texture_t	*south;
+	mlx_texture_t	*east;
+	mlx_texture_t	*west;
+	int				ceiling;
+	int				floor;
+}	t_texture;
+
 /*---------------*/
 /*  Data struct  */
 /*---------------*/
 typedef struct s_data
 {
-	int32_t		width;
-	int32_t		height;
+	int			width;
+	int			height;
 	t_map		map;
 	t_player	player;
 	t_ray		ray;
+	t_texture	texture;
 	mlx_t		*mlx;
 	mlx_image_t	*img;
+	mlx_image_t	*buf;
 }	t_data;
 
 /*-------------*/
 /*  Functions  */
 /*-------------*/
-void		init_data(t_data *data);
-void		init_map(t_data *data);
-void		init_player(t_data *data);
-void		render(void *param);
-void		run_simulation(t_data *data);
-double		radian(int degree);
-void		free_array(char **array);
-void		free_exit(t_data *data, int exit_status);
-void		ft_perror(char *error_msg);
-void		error_free_exit(t_data *data, char *error_msg);
+void	init_data(t_data *data);
+void	init_map(t_data *data);
+void	init_player(t_data *data);
+void	rendering(void *param);
+double	radian(int degree);
+void	free_array(char **array);
+void	free_exit(t_data *data, int exit_status);
+void	ft_perror(char *error_msg);
+void	error_free_exit(t_data *data, char *error_msg);
 
 #endif

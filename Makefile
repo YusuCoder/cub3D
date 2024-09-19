@@ -22,10 +22,10 @@ LIBS		:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 OBJ_PATH	:= ./obj
 SRC_PATH	:= ./src
 MAIN		:= main.c
-SRC_FILES	:= $(SRC_PATH)/init_data.c \
-				$(SRC_PATH)/run_simulation.c \
+SRC_FILES	:= $(SRC_PATH)/initializing.c \
+				$(SRC_PATH)/rendering.c \
 				$(SRC_PATH)/free.c \
-				$(SRC_PATH)/error_handler.c
+				$(SRC_PATH)/error.c
 
 OBJS		:= $(patsubst %, $(OBJ_PATH)/%, $(SRC_FILES:.c=.o))
 MAIN_OBJ	:= $(OBJ_PATH)/main.o
