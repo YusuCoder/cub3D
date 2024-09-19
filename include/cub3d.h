@@ -123,5 +123,6 @@ int		parse(t_data *data, char **argv);
 void	validate_map(char *file, t_data *data);
 int		map_data(t_data *data, char **map);
 void	free_it(void **data);
+void	check_map_contents(t_data *data, char **map);
 
 #endif
