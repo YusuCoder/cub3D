@@ -23,6 +23,8 @@ OBJ_PATH	:= ./obj
 SRC_PATH	:= ./src
 MAIN		:= main.c
 SRC_FILES	:= $(SRC_PATH)/initializing.c \
+				$(SRC_PATH)/simulation.c \
+				$(SRC_PATH)/ray_casting.c \
 				$(SRC_PATH)/rendering.c \
 				$(SRC_PATH)/free.c \
 				$(SRC_PATH)/error.c

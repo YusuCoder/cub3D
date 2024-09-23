@@ -51,24 +51,13 @@ typedef struct s_point_double
 }	t_point_double;
 
 /*-------------------------*/
-/*  Point struct (double)  */
+/*  Table struct (double)  */
 /*-------------------------*/
-typedef struct s_ray
+typedef struct s_table
 {
-	double			angle;
-	t_point_double	direction;
-	t_point_int		map;
-	t_point_double	delta_dist;
-	t_point_int		step;
-	t_point_double	side_dist;
-	int				hit;
-	int				side;
-	double			plane_dist;
-	int				line_height;
-	int				draw_start;
-	int				draw_end;
-	int				wall_color;
-}	t_ray;
+	int	row;
+	int	column;
+}	t_table;
 
 /*--------------*/
 /*  Map struct  */
@@ -96,6 +85,25 @@ typedef struct s_player
 	double			fov;
 }	t_player;
 
+/*--------------*/
+/*  Ray struct  */
+/*--------------*/
+typedef struct s_ray
+{
+	double			angle;
+	t_point_double	direction;
+	t_table			map;
+	t_point_double	delta_dist;
+	t_point_int		step;
+	t_point_double	side_dist;
+	int				side;
+	double			plane_dist;
+	int				line_height;
+	int				draw_start;
+	int				draw_end;
+	int				wall_color;
+}	t_ray;
+
 /*------------------*/
 /*  Texture struct  */
 /*------------------*/
@@ -118,7 +126,6 @@ typedef struct s_data
 	int			height;
 	t_map		map;
 	t_player	player;
-	t_ray		ray;
 	t_texture	texture;
 	mlx_t		*mlx;
 	mlx_image_t	*img;
@@ -131,8 +138,18 @@ typedef struct s_data
 void	init_data(t_data *data);
 void	init_map(t_data *data);
 void	init_player(t_data *data);
-void	rendering(void *param);
+void	simulation(void *param);
 double	radian(int degree);
+void	action_handling(t_data *data);
+void	move_player(t_data *data, double move_x, double move_y);
+void	ray_casting(t_data *data);
+void	define_ray_values(t_data *data, t_ray *ray, int x);
+void	define_step_direction(t_ray *ray, t_player *player);
+void	define_wall_collision(t_data *data, t_ray *ray);
+void	define_plane_distance(t_ray *ray, t_player *player);
+void	rendering(t_data *data, t_ray *ray, int x);
+void	set_ceiling_floor_colors(t_data *data, t_ray *ray, int x);
+void	set_wall_textures(t_data *data, t_ray *ray, int x);
 void	free_array(char **array);
 void	free_exit(t_data *data, int exit_status);
 void	ft_perror(char *error_msg);

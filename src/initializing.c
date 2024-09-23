@@ -6,7 +6,7 @@
 /*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 17:25:42 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/09/19 17:40:27 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/09/23 21:38:44 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,15 @@ void	init_map(t_data *data)
 		error_free_exit(data, "malloc");
 	map->map2d[0] = ft_strdup(" 111111 ");
 	map->map2d[1] = ft_strdup("10000101");
-	map->map2d[2] = ft_strdup("10000101");
+	map->map2d[2] = ft_strdup("1000N101");
 	map->map2d[3] = ft_strdup("10000101");
 	map->map2d[4] = ft_strdup("10000001");
-	map->map2d[5] = ft_strdup("10000N01");
+	map->map2d[5] = ft_strdup("10000001");
 	map->map2d[6] = ft_strdup(" 111111 ");
 	map->map2d[7] = NULL;
-	map->player_direction = 'W';
-	map->player_position.x = 5;
-	map->player_position.y = 5;
+	map->player_direction = 'N';
+	map->player_position.x = 4;
+	map->player_position.y = 2;
 	map->color_ceiling = 0x87CEEB;
 	map->color_floor = 0x6B8E23;
 	map->path_texture_north = "textures/water.png";
