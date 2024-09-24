@@ -64,6 +64,7 @@ typedef struct s_point_double
 typedef struct s_map
 {
 	char	**map;
+	char	**map2d;
 	int		fd;
 	int		line_count;
 	char	*path;
@@ -77,6 +78,7 @@ typedef struct s_map
 /*-----------------*/
 typedef struct s_player
 {
+	char		c;
 	t_point_int	pos;
 }	t_player;
 
@@ -107,6 +109,7 @@ typedef struct s_data
 	mlx_t		*mlx;
 	t_texture	tex_info;
 	mlx_image_t	*img;
+	t_player	player;
 }	t_data;
 
 /*-------------*/
