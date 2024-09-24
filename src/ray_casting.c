@@ -6,7 +6,7 @@
 /*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 18:06:03 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/09/23 21:51:31 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/09/24 16:22:25 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,26 @@ void	define_step_direction(t_ray *ray, t_player *player)
 	if (ray->direction.x < 0)
 	{
 		ray->step.x = -1;
-		ray->side_dist.x = (player->pos.x - ray->map.column) * ray->delta_dist.x;
+		ray->side_dist.x = (player->pos.x - ray->map.column) \
+							* ray->delta_dist.x;
 	}
 	else
 	{
 		ray->step.x = 1;
-		ray->side_dist.x = (ray->map.column + 1.0 - player->pos.x) * ray->delta_dist.x;
+		ray->side_dist.x = (ray->map.column + 1.0 - player->pos.x) \
+							* ray->delta_dist.x;
 	}
 	if (ray->direction.y < 0)
 	{
 		ray->step.y = -1;
-		ray->side_dist.y = (player->pos.y - ray->map.row) * ray->delta_dist.y;
+		ray->side_dist.y = (player->pos.y - ray->map.row) \
+							* ray->delta_dist.y;
 	}
 	else
 	{
 		ray->step.y = 1;
-		ray->side_dist.y = (ray->map.row + 1.0 - player->pos.y) * ray->delta_dist.y;
+		ray->side_dist.y = (ray->map.row + 1.0 - player->pos.y) \
+							* ray->delta_dist.y;
 	}
 }
 
@@ -41,15 +45,18 @@ void	define_ray_values(t_data *data, t_ray *ray, int x)
 	t_player	*player;
 
 	player = &data->player;
+	// ray->angle = player->angle + atan((x - (data->width / 2.0)) \
+	// 				/ (data->width / 2.0));
 	// ray->angle = player->pov - (player->fov / 2) \
 	// 	+ ((data->width - x) / (double)data->width * player->fov);
-	ray->angle = player->pov - (player->fov / 2) \
+	ray->angle = player->angle - (player->fov / 2) \
 		+ (x / (double)data->width * player->fov);
 	// ray->angle = player->pov + (player->fov / 2) - (x / (double)data->width * player->fov);
-	// int xx = (int)data->player.pos.x;
-	// int yy = (int)data->player.pos.y;
-	// printf("player angle = %f\n", player->pov * 180 / M_PI);
-	// printf("player[x = %d][y = %d]\n", xx, yy);
+	// printf("x = %d\n", x);
+	int xx = (int)data->player.pos.x;
+	int yy = (int)data->player.pos.y;
+	printf("player[x = %d][y = %d]\n", xx, yy);
+	printf("player angle = %f\n", player->angle * 180 / M_PI);
 	// while (data->map.map2d[xx][yy])
 	// {
 	// 	printf("[%d]%c\n", yy, (int)data->map.map2d[xx][yy]);
@@ -72,7 +79,7 @@ void	define_plane_distance(t_ray *ray, t_player *player)
 {
 	double	angle_difference;
 
-	if (ray->side == 0)
+	if (ray->side == VERTICAL)
 	{
 		ray->plane_dist = (ray->map.column - player->pos.x + (1 - ray->step.x) / 2) \
 			/ ray->direction.x;
@@ -82,8 +89,26 @@ void	define_plane_distance(t_ray *ray, t_player *player)
 		ray->plane_dist = (ray->map.row - player->pos.y + (1 - ray->step.y) / 2) \
 			/ ray->direction.y;
 	}
-	angle_difference = ray->angle - player->pov;
+	angle_difference = ray->angle - player->angle;
 	ray->plane_dist *= cos(angle_difference);
+}
+
+void	define_wall_side(t_ray *ray)
+{
+	if (ray->side == VERTICAL)
+	{
+		if (ray->step.x > 0)
+			ray->wall = EAST;
+		else
+			ray->wall = WEST;
+	}
+	else if (ray->side == HORIZONTAL)
+	{
+		if (ray->step.y > 0)
+			ray->wall = SOUTH;
+		else
+			ray->wall = NORTH;
+	}
 }
 
 void	define_wall_collision(t_data *data, t_ray *ray)
@@ -97,18 +122,19 @@ void	define_wall_collision(t_data *data, t_ray *ray)
 		{
 			ray->side_dist.x += ray->delta_dist.x;
 			ray->map.column += ray->step.x;
-			ray->side = 0;
+			ray->side = VERTICAL;
 		}
 		else
 		{
 			ray->side_dist.y += ray->delta_dist.y;
 			ray->map.row += ray->step.y;
-			ray->side = 1;
+			ray->side = HORIZONTAL;
 		}
 		if (data->map.map2d[ray->map.row][ray->map.column] == '1')
 			wall_hit = 1;
 	}
 	define_plane_distance(ray, &data->player);
+	define_wall_side(ray);
 }
 
 void	ray_casting(t_data *data)

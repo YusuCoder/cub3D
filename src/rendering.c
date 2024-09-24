@@ -6,7 +6,7 @@
 /*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 14:41:30 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/09/23 15:44:48 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/09/24 13:37:31 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,14 @@ void	set_wall_textures(t_data *data, t_ray *ray, int x)
 	int	y;
 	int	wall_color;
 
-	if (ray->side == 1)
-		wall_color = 0xFF8800FF;
-	else
-		wall_color = 0xFFFF00FF;
+	if (ray->wall == NORTH)
+		wall_color = 0x00008BFF;
+	else if (ray->wall == SOUTH)
+		wall_color = 0x8B0000FF;
+	else if (ray->wall == EAST)
+		wall_color = 0x8B8B00FF;
+	else if (ray->wall == WEST)
+		wall_color = 0x006400FF;
 	y = ray->draw_start;
 	while (y < ray->draw_end)
 	{

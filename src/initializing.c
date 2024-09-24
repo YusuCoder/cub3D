@@ -6,7 +6,7 @@
 /*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 17:25:42 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/09/23 21:38:44 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/09/24 14:58:21 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,18 @@ void	init_texture(t_data *data)
 		error_free_exit(data, "Failed to create mlx texture");
 }
 
+void	invert_view(t_player *player)
+{
+	if (player->pov == NORTH)
+		player->angle = radian(270);
+	else if (player->pov == SOUTH)
+		player->angle = radian(90);
+	else if (player->pov == EAST)
+		player->angle = radian(180);
+	else if (player->pov == WEST)
+		player->angle = radian(0);
+}
+
 void	init_player(t_data *data)
 {
 	t_player	*player;
@@ -41,13 +53,14 @@ void	init_player(t_data *data)
 	player->pos.x = map->player_position.x + 0.5;
 	player->pos.y = map->player_position.y + 0.5;
 	if (map->player_direction == 'N')
-		player->pov = radian(90);
+		player->pov = NORTH;
 	else if (map->player_direction == 'S')
-		player->pov = radian(270);
+		player->pov = SOUTH;
 	else if (map->player_direction == 'E')
-		player->pov = radian(0);
+		player->pov = EAST;
 	else if (map->player_direction == 'W')
-		player->pov = radian(180);
+		player->pov = WEST;
+	invert_view(player);
 }
 
 void	init_map(t_data *data)

@@ -32,6 +32,28 @@
 # define MOVE 0.02
 # define ROTATE 0.02
 
+/*-------------*/
+/*  Side enum  */
+/*-------------*/
+typedef enum s_side
+{
+	NORTH,
+	SOUTH,
+	EAST,
+	WEST,
+	VERTICAL,
+	HORIZONTAL,
+}	t_side;
+
+/*----------------*/
+/*  Table struct  */
+/*----------------*/
+typedef struct s_table
+{
+	int	row;
+	int	column;
+}	t_table;
+
 /*----------------------*/
 /*  Point struct (int)  */
 /*----------------------*/
@@ -49,15 +71,6 @@ typedef struct s_point_double
 	double	x;
 	double	y;
 }	t_point_double;
-
-/*-------------------------*/
-/*  Table struct (double)  */
-/*-------------------------*/
-typedef struct s_table
-{
-	int	row;
-	int	column;
-}	t_table;
 
 /*--------------*/
 /*  Map struct  */
@@ -80,9 +93,10 @@ typedef struct s_map
 /*-----------------*/
 typedef struct s_player
 {
-	t_point_double	pos;
-	double			pov;
+	double			angle;
 	double			fov;
+	t_side			pov;
+	t_point_double	pos;
 }	t_player;
 
 /*--------------*/
@@ -96,12 +110,12 @@ typedef struct s_ray
 	t_point_double	delta_dist;
 	t_point_int		step;
 	t_point_double	side_dist;
-	int				side;
+	t_side			side;
+	t_side			wall;
 	double			plane_dist;
 	int				line_height;
 	int				draw_start;
 	int				draw_end;
-	int				wall_color;
 }	t_ray;
 
 /*------------------*/
@@ -138,10 +152,11 @@ typedef struct s_data
 void	init_data(t_data *data);
 void	init_map(t_data *data);
 void	init_player(t_data *data);
+void	invert_view(t_player *player);
 void	simulation(void *param);
 double	radian(int degree);
 void	action_handling(t_data *data);
-void	move_player(t_data *data, double move_x, double move_y);
+void	move_player(t_data *data, double move_column, double move_row);
 void	ray_casting(t_data *data);
 void	define_ray_values(t_data *data, t_ray *ray, int x);
 void	define_step_direction(t_ray *ray, t_player *player);

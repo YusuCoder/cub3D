@@ -6,7 +6,7 @@
 /*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 20:21:15 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/09/23 21:11:20 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/09/24 15:21:50 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,7 @@
 
 double	radian(int degree)
 {
-	double	result;
-
-	result = degree * (M_PI / 180);
-	return (result);
+	return (degree * (M_PI / 180));
 }
 
 void	move_player(t_data *data, double move_column, double move_row)
@@ -39,28 +36,28 @@ void	move_player(t_data *data, double move_column, double move_row)
 
 void	action_handling(t_data *data)
 {
-	t_player	*player;
+	double	*angle;
 
-	player = &data->player;
+	angle = &data->player.angle;
 	if (mlx_is_key_down(data->mlx, MLX_KEY_W))
-		move_player(data, cos(player->pov) * MOVE, sin(player->pov) * MOVE);
+		move_player(data, cos(*angle) * MOVE, sin(*angle) * MOVE);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_S))
-		move_player(data, -cos(player->pov) * MOVE, -sin(player->pov) * MOVE);
+		move_player(data, -cos(*angle) * MOVE, -sin(*angle) * MOVE);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_A))
-		move_player(data, sin(player->pov) * MOVE, -cos(player->pov) * MOVE);
+		move_player(data, sin(*angle) * MOVE, -cos(*angle) * MOVE);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_D))
-		move_player(data, -sin(player->pov) * MOVE, cos(player->pov) * MOVE);
+		move_player(data, -sin(*angle) * MOVE, cos(*angle) * MOVE);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_LEFT))
 	{
-		data->player.pov -= ROTATE;
-		if (data->player.pov < 0)
-			data->player.pov += radian(360);
+		*angle -= ROTATE;
+		if (*angle < 0)
+			*angle += radian(360);
 	}
 	if (mlx_is_key_down(data->mlx, MLX_KEY_RIGHT))
 	{
-		data->player.pov += ROTATE;
-		if (data->player.pov > radian(360))
-			data->player.pov -= radian(360);
+		*angle += ROTATE;
+		if (*angle > radian(360))
+			*angle -= radian(360);
 	}
 }
 
