@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 14:51:43 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/09/24 17:43:54 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/09/27 16:54:57 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,9 @@ int	bottom_top_walls(char **map, int i, int j)
         j++;
     while (map[i][j])
     {
-		printf("%c", map[i][j]);
+		while(map[i][j] == ' ' || map[i][j] == '\t')
+			j++;
+		// printf("%c", map[i][j]);
 		if (map[i][j + 1] == '\n' || map[i][j + 1] == '\0')
 			break ;
         if (map[i][j] != '1')
@@ -56,35 +58,42 @@ int	bottom_top_walls(char **map, int i, int j)
     return (0);
 }
 
+int	find_height(char **map)
+{
+	int	i;
 
-// void	side_walls(t_map *data, char **map)
-// {
-// 	int	i;
-// 	int	j;
-// 	i = 0;
-// 	if (bottom_top_walls(map, 0, 0) == 1)
-// 	{
-// 		printf("fail1\n");
-// 		exit(EXIT_FAILURE);
-// 	}
-// 	i = 1;
-// 	while (i < (data->height))
-// 	{
-// 		j = ft_strlen(map[i]) - 1;
-// 		if (map[i][0] != '1' || map[i][j] != '1')
-// 		{
-// 			printf("fail2\n");
-// 			exit(EXIT_FAILURE);
-// 		}
-// 		i++;
-// 	}
-// 	if (bottom_top_walls(map, i, 0) == 1)
-// 	{
-// 		printf("fail3\n");
-// 		exit(EXIT_FAILURE);
-// 	}
-// }
+	i = 0;
+	while (map[i])
+	{
+		if (map[i +  1] == NULL)
+			break ;
+		i++;
+	}
+	return (i);
+}
 
+int	middle_columns(char **map, int i, int j)
+{
+	while (map[i + 2] != NULL)
+	{
+		j = 0;
+		if (map[i][j] == '1')
+		{
+			while (map[i][j])
+			{
+				if (map[i][j + 1] == '\n')
+				{
+					// printf("hello\n");
+					if (map[i][j] != '1')
+						return (1);
+				}
+				j++;
+			}
+		}
+		i++;
+	}
+	return (0);
+}
 
 void	side_walls(t_map *data, char **map)
 {
@@ -98,19 +107,11 @@ void	side_walls(t_map *data, char **map)
 		printf("fail1\n");
 		exit(EXIT_FAILURE);
 	}
+	data->height = find_height(map);
 	i = 1;
-	printf("[%d]\n", data->height);
-	while (i < (data->height - 1))
-	{
-		j = ft_strlen(map[i]) - 1;
-		if (map[i][j] != '1')
-		{
-			printf("fail1\n");
-			exit(EXIT_FAILURE);
-		}
-		i++;
-	}
-	if (bottom_top_walls(map, i, 0) == 1)
+	if (middle_columns(map, i, 0) == 1)
+		exit(EXIT_FAILURE);
+	if (bottom_top_walls(map, data->height, 0) == 1)
 		exit(EXIT_FAILURE);
 }
 

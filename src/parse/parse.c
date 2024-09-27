@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 11:21:11 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/09/24 15:00:45 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/09/27 16:38:14 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,17 @@ int	check_file(char *arg, int cub)
 	return (SUCCESS);
 }
 
+void	init_map(t_data *data)
+{
+	data->tex_info.north = NULL;
+	data->tex_info.south = NULL;
+	data->tex_info.west = NULL;
+	data->tex_info.east = NULL;
+}
+
 int	parse(t_data *data, char **argv)
 {
+	init_map(data);
 	if (check_file(argv[1], 1) == FAIL)
 		exit(FAIL);
 	// clean_exit(data, FAIL);

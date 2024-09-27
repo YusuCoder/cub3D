@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 10:47:13 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/09/19 13:57:42 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/09/27 17:03:05 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,6 +179,7 @@ int	map_data(t_data *data, char **map)
 		j = 0;
 		while (map[i][j])
 		{
+			printf("%d\n", i);
 			res = map_check(data, map, i, j);
 			if (res == 2)
 				break ;
