@@ -6,7 +6,7 @@
 /*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 17:25:42 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/09/24 14:58:21 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/09/28 21:25:11 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,32 +68,35 @@ void	init_map(t_data *data)
 	t_map	*map;
 
 	map = &data->map;
-	map->map2d = (char **)malloc(8 * sizeof(char *));
+	map->map2d = (char **)malloc(10 * sizeof(char *));
 	if (map->map2d == NULL)
 		error_free_exit(data, "malloc");
-	map->map2d[0] = ft_strdup(" 111111 ");
-	map->map2d[1] = ft_strdup("10000101");
-	map->map2d[2] = ft_strdup("1000N101");
-	map->map2d[3] = ft_strdup("10000101");
-	map->map2d[4] = ft_strdup("10000001");
-	map->map2d[5] = ft_strdup("10000001");
-	map->map2d[6] = ft_strdup(" 111111 ");
-	map->map2d[7] = NULL;
+	map->map2d[0] = ft_strdup(" 1111111111111111111111111111111111111111111 ");
+	map->map2d[1] = ft_strdup("100001000000000000000010000000000000010000001");
+	map->map2d[2] = ft_strdup("100001000000000000000010000000000000010000001");
+	map->map2d[3] = ft_strdup("100001000000000000000010000000000000010000001");
+	map->map2d[4] = ft_strdup("100000000001111111111110000000000000000000001");
+	map->map2d[5] = ft_strdup("100000000000000000000000000000011111111111111");
+	map->map2d[6] = ft_strdup("100000000000000000000000000000000000000000001");
+	map->map2d[7] = ft_strdup("1000N0000000000000000000000000000000000000001");
+	map->map2d[8] = ft_strdup(" 1111111111111111111111111111111111111111111 ");
+	map->map2d[9] = NULL;
 	map->player_direction = 'N';
 	map->player_position.x = 4;
-	map->player_position.y = 2;
+	map->player_position.y = 7;
 	map->color_ceiling = 0x87CEEB;
 	map->color_floor = 0x6B8E23;
-	map->path_texture_north = "textures/water.png";
-	map->path_texture_south = "textures/fire.png";
-	map->path_texture_east = "textures/wood1.png";
-	map->path_texture_west = "textures/stone1.png";
+	map->path_texture_north = "textures/bricks_grey.png";
+	map->path_texture_south = "textures/bricks_red.png";
+	map->path_texture_east = "textures/hexagon1.png";
+	map->path_texture_west = "textures/hexagon2.png";
 }
 
 void	init_data(t_data *data)
 {
 	data->width = WIDTH;
 	data->height = HEIGHT;
+	data->buf = NULL;
 	data->mlx = mlx_init(data->width, data->height, "cub3D", true);
 	if (data->mlx == NULL)
 		error_free_exit(data, "Failed to create mlx");

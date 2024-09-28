@@ -6,16 +6,11 @@
 /*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 20:21:15 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/09/24 15:21:50 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/09/28 19:15:47 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
-
-double	radian(int degree)
-{
-	return (degree * (M_PI / 180));
-}
 
 void	move_player(t_data *data, double move_column, double move_row)
 {
@@ -34,7 +29,7 @@ void	move_player(t_data *data, double move_column, double move_row)
 		player->pos.x = column;
 }
 
-void	action_handling(t_data *data)
+void	movement_hook(t_data *data)
 {
 	double	*angle;
 
@@ -63,7 +58,7 @@ void	action_handling(t_data *data)
 
 void	simulation(void *param)
 {
-	t_data *data;
+	t_data	*data;
 
 	data = param;
 	if (data->img != NULL)
@@ -71,7 +66,7 @@ void	simulation(void *param)
 	data->img = mlx_new_image(data->mlx, data->width, data->height);
 	if (data->img == NULL)
 		error_free_exit(data, "Failed to create mlx image");
-	action_handling(data);
+	movement_hook(data);
 	ray_casting(data);
 	if (mlx_image_to_window(data->mlx, data->img, 0, 0) < 0)
 		error_free_exit(data, "Failed to display mlx image");

@@ -6,7 +6,7 @@
 /*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:49:19 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/09/18 16:53:08 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/09/28 21:35:11 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,16 @@ void	free_exit(t_data *data, int exit_status)
 	mlx_close_window(data->mlx);
 	if (data->img != NULL)
 		mlx_delete_image(data->mlx, data->img);
+	if (data->buf != NULL)
+		mlx_delete_image(data->mlx, data->buf);
+	if (data->texture.north != NULL)
+		mlx_delete_texture(data->texture.north);
+	if (data->texture.south != NULL)
+		mlx_delete_texture(data->texture.south);
+	if (data->texture.east != NULL)
+		mlx_delete_texture(data->texture.east);
+	if (data->texture.west != NULL)
+		mlx_delete_texture(data->texture.west);
 	if (data->mlx != NULL)
 		mlx_terminate(data->mlx);
 	if (data != NULL)

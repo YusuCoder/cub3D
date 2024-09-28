@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/28 19:18:42 by tkubanyc          #+#    #+#             */
+/*   Updated: 2024/09/28 19:26:15 by tkubanyc         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
@@ -25,12 +36,14 @@
 /*-------------------*/
 /*  Constant values  */
 /*-------------------*/
-# define WIDTH 1920
-# define HEIGHT 1080
-# define VIEW 60
+# define WIDTH 1600
+# define HEIGHT 1200
+# define MIN_WIDTH 320
+# define MIN_HEIGHT 240
+# define VIEW 66
 # define GRID 64
-# define MOVE 0.02
-# define ROTATE 0.02
+# define MOVE 0.07
+# define ROTATE 0.05
 
 /*-------------*/
 /*  Side enum  */
@@ -149,22 +162,27 @@ typedef struct s_data
 /*-------------*/
 /*  Functions  */
 /*-------------*/
+double	radian(int degree);
 void	init_data(t_data *data);
 void	init_map(t_data *data);
 void	init_player(t_data *data);
 void	invert_view(t_player *player);
 void	simulation(void *param);
-double	radian(int degree);
-void	action_handling(t_data *data);
+void	close_hook(void *param);
+void	resize_hook(int32_t new_width, int32_t new_height, void *param);
+void	key_hook(mlx_key_data_t keydata, void *param);
+void	movement_hook(t_data *data);
 void	move_player(t_data *data, double move_column, double move_row);
 void	ray_casting(t_data *data);
-void	define_ray_values(t_data *data, t_ray *ray, int x);
 void	define_step_direction(t_ray *ray, t_player *player);
 void	define_wall_collision(t_data *data, t_ray *ray);
 void	define_plane_distance(t_ray *ray, t_player *player);
 void	rendering(t_data *data, t_ray *ray, int x);
-void	set_ceiling_floor_colors(t_data *data, t_ray *ray, int x);
-void	set_wall_textures(t_data *data, t_ray *ray, int x);
+void	draw_ceiling_floor(t_data *data, t_ray *ray, int x);
+void	draw_walls(t_data *data, t_ray *ray, int x, int y);
+void	define_texture_values(t_data *data, t_ray *ray, \
+								mlx_texture_t **texture, double *wall_x);
+int		get_pixel(mlx_texture_t *texture, int x, int y);
 void	free_array(char **array);
 void	free_exit(t_data *data, int exit_status);
 void	ft_perror(char *error_msg);
