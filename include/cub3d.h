@@ -29,7 +29,6 @@
 /*----------------*/
 # define WIDTH 800
 # define HEIGHT 600
-
 /*------------------*/
 /* enums for status */
 /*------------------*/
@@ -65,6 +64,7 @@ typedef struct s_map
 {
 	char	**map;
 	char	**map2d;
+	char	*colors;
 	int		fd;
 	int		line_count;
 	char	*path;
@@ -95,6 +95,7 @@ typedef struct s_texture
 	char			*south;
 	char			*west;
 	char			*east;
+	char			**tex_path;
 	t_point_double	pos;
 }		t_texture;
 /*---------------*/

@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 14:51:43 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/09/27 16:54:57 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/09/29 17:29:55 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,18 @@ int	bottom_top_walls(char **map, int i, int j)
     {
 		while(map[i][j] == ' ' || map[i][j] == '\t')
 			j++;
-		// printf("%c", map[i][j]);
 		if (map[i][j + 1] == '\n' || map[i][j + 1] == '\0')
-			break ;
-        if (map[i][j] != '1')
-            return (1);
-        j++;
-    }
-    return (0);
+		{
+			if (map[i][j] == '1')
+				break ;
+			else
+				return (1);
+		}
+		if (map[i][j] != '1')
+			return (1);
+		j++;
+	}
+	return (0);
 }
 
 int	find_height(char **map)
@@ -81,6 +85,13 @@ int	middle_columns(char **map, int i, int j)
 		{
 			while (map[i][j])
 			{
+				if (map[i][j] == '0'
+				&& ((map[i - 1][j] != '1' && map[i - 1][j] != '0')
+				|| (map[i + 1][j] != '1' && map[i + 1][j] != '0'))) //not workig properly
+				{
+					printf("unclosed way: [%d][%d]\n", i, j);
+					return (1);
+				}
 				if (map[i][j + 1] == '\n')
 				{
 					// printf("hello\n");
