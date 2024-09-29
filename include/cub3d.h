@@ -64,7 +64,6 @@ typedef struct s_map
 {
 	char	**map;
 	char	**map2d;
-	char	*colors;
 	int		fd;
 	int		line_count;
 	char	*path;
@@ -96,6 +95,7 @@ typedef struct s_texture
 	char			*west;
 	char			*east;
 	char			**tex_path;
+	char			**rgb_codes;
 	t_point_double	pos;
 }		t_texture;
 /*---------------*/
@@ -125,7 +125,7 @@ void	free_exit(t_data *data);
 int		error_msg(char *str, char *msg, int e_code);
 int		parse(t_data *data, char **argv);
 void	validate_map(char *file, t_data *data);
-int		map_data(t_data *data, char **map);
+int		map_data(t_data *data);
 void	free_it(void **data);
 void	check_map_contents(t_data *data, char **map);
 

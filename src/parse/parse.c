@@ -6,17 +6,49 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 11:21:11 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/09/29 18:14:52 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/09/29 20:33:22 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-void extract_path_color(t_data *data)
+void	extract_color(t_data *data)
 {
-	int i = 0;
-	int j = 0;
+	int	i;
+	int	j;
 
+	i = 0;
+	j = 0;
+	data->tex_info.rgb_codes = (char **)malloc(sizeof(char *) * 3);
+	if (!data->tex_info.rgb_codes)
+		exit(EXIT_FAILURE);
+	while (data->map_info.map[i])
+	{
+		if (ft_strncmp(data->map_info.map[i], "F", 1) == 0 ||
+			ft_strncmp(data->map_info.map[i], "C", 1) == 0)
+		{
+			data->tex_info.rgb_codes[j] = ft_strdup(data->map_info.map[i]);
+			if (!data->tex_info.rgb_codes[j])
+			{
+				while (--j)
+					free(data->tex_info.rgb_codes[j]);
+				free(data->tex_info.rgb_codes);
+				exit(EXIT_FAILURE);
+			}
+			j++;
+		}
+		i++;
+	}
+	data->tex_info.rgb_codes[j] = NULL;
+}
+
+void	extract_path(t_data *data)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
 	data->tex_info.tex_path = (char **)malloc(sizeof(char *) * 5);
 	if (!data->tex_info.tex_path)
 		exit(EXIT_FAILURE);
@@ -120,6 +152,8 @@ void init_map(t_data *data)
 	data->tex_info.south = NULL;
 	data->tex_info.west = NULL;
 	data->tex_info.east = NULL;
+	data->tex_info.cell = NULL;
+	data->tex_info.floor = NULL;
 }
 
 int parse(t_data *data, char **argv)
@@ -129,8 +163,9 @@ int parse(t_data *data, char **argv)
 		exit(FAIL);
 	// clean_exit(data, FAIL);
 	validate_map(argv[1], data);
-	extract_path_color(data);
-	if (map_data(data, data->map_info.map) == FAIL)
+	extract_path(data);
+	extract_color(data);
+	if (map_data(data) == FAIL)
 		exit(EXIT_FAILURE);
 	extract_map(data);
 	check_map_contents(data, data->map_info.map2d);

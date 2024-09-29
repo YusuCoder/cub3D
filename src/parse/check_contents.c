@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 14:51:43 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/09/29 17:29:55 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/09/29 20:37:50 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,13 +85,13 @@ int	middle_columns(char **map, int i, int j)
 		{
 			while (map[i][j])
 			{
-				if (map[i][j] == '0'
-				&& ((map[i - 1][j] != '1' && map[i - 1][j] != '0')
-				|| (map[i + 1][j] != '1' && map[i + 1][j] != '0'))) //not workig properly
-				{
-					printf("unclosed way: [%d][%d]\n", i, j);
-					return (1);
-				}
+				// if (map[i][j] == '0'
+				// && ((map[i - 1][j] != '1' && map[i - 1][j] != '0')
+				// || (map[i + 1][j] != '1' && map[i + 1][j] != '0'))) //not workig properly
+				// {
+				// 	printf("unclosed way: [%d][%d]\n", i, j);
+				// 	return (1);
+				// }
 				if (map[i][j + 1] == '\n')
 				{
 					// printf("hello\n");
