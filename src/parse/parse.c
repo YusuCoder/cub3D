@@ -6,19 +6,85 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 11:21:11 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/09/27 16:38:14 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/09/29 20:33:22 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-void	extract_map(t_data *data)
+void	extract_color(t_data *data)
 {
 	int	i;
-	int	k;
+	int	j;
 
 	i = 0;
-	while (data->map_info.map[i][0] != '1' && data->map_info.map[i][0] != '0')
+	j = 0;
+	data->tex_info.rgb_codes = (char **)malloc(sizeof(char *) * 3);
+	if (!data->tex_info.rgb_codes)
+		exit(EXIT_FAILURE);
+	while (data->map_info.map[i])
+	{
+		if (ft_strncmp(data->map_info.map[i], "F", 1) == 0 ||
+			ft_strncmp(data->map_info.map[i], "C", 1) == 0)
+		{
+			data->tex_info.rgb_codes[j] = ft_strdup(data->map_info.map[i]);
+			if (!data->tex_info.rgb_codes[j])
+			{
+				while (--j)
+					free(data->tex_info.rgb_codes[j]);
+				free(data->tex_info.rgb_codes);
+				exit(EXIT_FAILURE);
+			}
+			j++;
+		}
+		i++;
+	}
+	data->tex_info.rgb_codes[j] = NULL;
+}
+
+void	extract_path(t_data *data)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	data->tex_info.tex_path = (char **)malloc(sizeof(char *) * 5);
+	if (!data->tex_info.tex_path)
+		exit(EXIT_FAILURE);
+
+	while (data->map_info.map[i])
+	{
+		if (ft_strncmp(data->map_info.map[i], "NO", 2) == 0 ||
+			ft_strncmp(data->map_info.map[i], "SO", 2) == 0 ||
+			ft_strncmp(data->map_info.map[i], "EA", 2) == 0 ||
+			ft_strncmp(data->map_info.map[i], "WE", 2) == 0)
+		{
+			data->tex_info.tex_path[j] = ft_strdup(data->map_info.map[i]);
+			if (!data->tex_info.tex_path[j])
+			{
+				while (--j >= 0)
+					free(data->tex_info.tex_path[j]);
+				free(data->tex_info.tex_path);
+				exit(EXIT_FAILURE);
+			}
+			j++;
+		}
+		i++;
+		if (j == 4)
+			break;
+	}
+	data->tex_info.tex_path[j] = NULL;
+}
+
+void extract_map(t_data *data)
+{
+	int i;
+	int k;
+
+	i = 0;
+	k = 0;
+	while (data->map_info.map[i][k] != '1' && data->map_info.map[i][k] != '0')
 		i++;
 	data->map_info.map2d = (char **)malloc(sizeof(char *) * (data->height + 1));
 	if (!data->map_info.map2d)
@@ -40,21 +106,20 @@ void	extract_map(t_data *data)
 	data->map_info.map2d[k] = NULL;
 }
 
-int	is_cub_file(char *str)
+int is_cub_file(char *str)
 {
-	size_t	length;
+	size_t length;
 
 	length = ft_strlen(str);
-	if ((str[length - 4] != '.' || str[length - 3] != 'c' || str[length
-			- 2] != 'u' || str[length - 1] != 'b'))
+	if ((str[length - 4] != '.' || str[length - 3] != 'c' || str[length - 2] != 'u' || str[length - 1] != 'b'))
 		return (0);
 	return (1);
 }
 
-int	is_dir(char *str)
+int is_dir(char *str)
 {
-	int	fd;
-	int	res;
+	int fd;
+	int res;
 
 	res = 0;
 	fd = open(str, O_DIRECTORY);
@@ -66,9 +131,9 @@ int	is_dir(char *str)
 	return (res);
 }
 
-int	check_file(char *arg, int cub)
+int check_file(char *arg, int cub)
 {
-	int	fd;
+	int fd;
 
 	if (is_dir(arg))
 		return (error_msg(arg, "is directory", FAIL));
@@ -81,37 +146,29 @@ int	check_file(char *arg, int cub)
 	return (SUCCESS);
 }
 
-void	init_map(t_data *data)
+void init_map(t_data *data)
 {
 	data->tex_info.north = NULL;
 	data->tex_info.south = NULL;
 	data->tex_info.west = NULL;
 	data->tex_info.east = NULL;
+	data->tex_info.cell = NULL;
+	data->tex_info.floor = NULL;
 }
 
-int	parse(t_data *data, char **argv)
+int parse(t_data *data, char **argv)
 {
 	init_map(data);
 	if (check_file(argv[1], 1) == FAIL)
 		exit(FAIL);
 	// clean_exit(data, FAIL);
 	validate_map(argv[1], data);
-	if (map_data(data, data->map_info.map) == FAIL)
+	extract_path(data);
+	extract_color(data);
+	if (map_data(data) == FAIL)
 		exit(EXIT_FAILURE);
 	extract_map(data);
-	// int i, j;
-	// i = 0;
-	// while (data->map_info.map2d[i])
-	// {
-	// 	j = 0;
-	// 	while (data->map_info.map2d[i][j])
-	// 	{
-	// 		printf("[%c]", data->map_info.map2d[i][j]);
-	// 		j++;
-	// 	}
-	// 	i++;
-	// }
 	check_map_contents(data, data->map_info.map2d);
-		//NEED TO REPLACE WITH FREE FUNCTION
+	// NEED TO REPLACE WITH FREE FUNCTION
 	return (0);
 }

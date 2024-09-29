@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 10:47:13 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/09/27 17:03:05 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/09/29 21:08:29 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,96 @@ int	is_not_digit(char *str)
 	}
 	return (check);
 }
+
+int	*cp_color(char **rgb, int *color)
+{
+	int	i;
+
+	i = 0;
+	while (i < 3)
+	{
+		if (is_not_digit(rgb[i]) == 1)
+		{
+			printf("Invalid RGB format!.\n");
+			free_it((void **)rgb);
+			free(color);
+			exit(EXIT_FAILURE);
+		}
+
+		color[i] = ft_atoi(rgb[i]);
+		if (color[i] < 0 || color[i] > 255)
+		{
+			printf("Invalid RGB value: %d\n", color[i]);
+			free_it((void **)rgb);
+			free(color);
+			exit(EXIT_FAILURE);
+		}
+		i++;
+	}
+	return (color);
+}
+
+int	*set_color(char *map)
+{
+	int		*color;
+	int		i;
+	char	**rgb_code;
+
+	rgb_code = ft_split(map, ',');
+	if (!rgb_code)
+		return (0);
+	i = 0;
+	while (rgb_code[i])
+		i++;
+	if (i != 3)
+	{
+		printf("Invalid number of RGB components!\n");
+		free_it((void **)rgb_code);
+		exit(EXIT_FAILURE);
+	}
+	color = malloc(sizeof(int) * 3);
+	if (!color)
+	{
+		free_it((void **)rgb_code);
+		return (0);
+	}
+	if (!cp_color(rgb_code, color))
+	{
+		free(color);
+		free_it((void **)rgb_code);
+		return (0);
+	}
+	// free_it((void **)rgb_code);
+	return (color);
+}
+
+int	color_txtures(t_data *data, char **rgb)
+{
+	int i;
+
+	i = 0;
+	while (rgb[i])
+	{
+		if (rgb[i][0] == 'C')
+		{
+			data->tex_info.cell = set_color(rgb[i] + 1);
+			if (data->tex_info.cell == 0)
+				return (error_msg(data->map_info.path, "rgb color error.", ERROR));
+		}
+		else if (!data->tex_info.floor && rgb[i][0] == 'F')
+		{
+			data->tex_info.floor = set_color(rgb[i] + 1);
+			if (data->tex_info.floor == 0)
+				return (error_msg(data->map_info.path, "rgb color error.", ERROR));
+		}
+		else
+			return (error_msg(data->map_info.path, "Error!", ERROR));
+
+		i++;
+	}
+	return (0);
+}
+
 
 char	*get_texture(char *map, int j)
 {
@@ -56,140 +146,38 @@ char	*get_texture(char *map, int j)
 	return (path);
 }
 
-int	*cp_color(char **rgb, int *color)
+int	set_texture_path(t_texture *tex_info, char **map)
 {
 	int	i;
-
-	i = 0;
-	while (rgb[i])
-	{
-		color[i] = ft_atoi(rgb[i]);
-		// printf("%d\n", color[i]);
-		if (color[i] == -1 || is_not_digit(rgb[i]) == 1)
-		{
-			free_it((void **)rgb);
-			free(color);
-			return (0);
-		}
-		i++;
-	}
-	// free_it((void **)rgb);
-	return (color);
-}
-
-int	*set_color(char *map)
-{
-	int		*color;
-	int		i;
-	char	**rgb_code;
-
-	rgb_code = ft_split(map, ',');
-	if (!rgb_code)
-		return (0);
-	i = 0;
-	while (rgb_code[i])
-		i++;
-	if (i != 3)
-	{
-		free_it((void **)rgb_code);
-		return (0);
-	}
-	color = malloc(sizeof(int) * 3);
-	if (!cp_color(rgb_code, color))
-	{
-		free(color);
-		free_it((void **)rgb_code);
-		return (0);
-	}
-	free_it((void **)rgb_code);
-	return (color);
-}
-
-int	color_txtures(t_data *data, t_texture *tex_info, char *map, int j)
-{
-	if (map[j + 1] && !ft_isprint(map[j + 1]))
-		return (error_msg(data->map_info.path, "no such file or directory.",
-				ERROR));
-	if (map[j] == 'C')					//NEEDS TO BE CHECKED WITH MORE COLORS
-	{
-		tex_info->cell = set_color(map + j + 1);
-		if (tex_info->cell == 0)
-			return (error_msg(data->map_info.path, "rgb color error.", ERROR));
-	}
-	else if (!tex_info->floor && map[j] == 'F')
-	{
-		tex_info->floor = set_color(map + j + 1);
-		if (tex_info->floor == 0)
-			return (error_msg(data->map_info.path, "rgb color error.", ERROR));
-	}
-	else
-		return (error_msg(data->map_info.path, "Error!", ERROR));
-	return (0);
-}
-
-int	set_texture_path(t_texture *tex_info, char *map, int j)
-{
-	// if (map[j + 2] && ft_isprint(map[j + 2]))
-	// 	return (1);
-	if (map[j] == 'N' && map[j + 1] == 'O' && !(tex_info->north))
-		tex_info->north = get_texture(map, j + 2);
-	else if (map[j] == 'S' && map[j + 1] == 'O' && !(tex_info->south))
-		tex_info->south = get_texture(map, j + 2);
-	else if (map[j] == 'E' && map[j + 1] == 'A' && !(tex_info->east))
-		tex_info->east = get_texture(map, j + 2);
-	else if (map[j] == 'W' && map[j + 1] == 'E' && !(tex_info->west))
-		tex_info->west = get_texture(map, j + 2);
-	else
-		return (1);
-	return (0);
-}
-
-int	map_check(t_data *data, char **map, int i, int j)
-{
-	while (map[i][j] == ' ' || map[i][j] == '\t' || map[i][j] == '\n')
-		j++;
-	if (ft_isprint(map[i][j]) && !ft_isdigit(map[i][j]))
-	{
-		if (map[i][j + 1] && ft_isprint(map[i][j + 1]) && !ft_isdigit(map[i][j])
-			&& map[i][j + 1] != ' ')
-		{
-			if (set_texture_path(&data->tex_info, map[i], j) == 1)
-				return (error_msg(data->map_info.path, "invalid texture!", 1));
-			return (2);
-		}
-		else
-		{
-			if (color_txtures(data, &data->tex_info, map[i], j) == ERROR)
-				return (FAIL);
-			return (2);
-		}
-	}
-	return (4);
-}
-
-int	map_data(t_data *data, char **map)
-{
-	int	i;
-	int	j;
-	int	res;
 
 	i = 0;
 	while (map[i])
 	{
-		j = 0;
-		while (map[i][j])
-		{
-			printf("%d\n", i);
-			res = map_check(data, map, i, j);
-			if (res == 2)
-				break ;
-			else if (res == 1)
-				return (1);
-			else if (res == 0)
-				return (0);
-			j++;
-		}
+		if (map[i][0] == 'W' && map[i][1] == 'E')
+			tex_info->north = get_texture(map[i], 2);
+		else if (map[i][0] == 'S' && map[i][1] == 'O')
+			tex_info->south = get_texture(map[i], 2);
+		else if (map[i][0] == 'E' && map[i][1] == 'A')
+			tex_info->east = get_texture(map[i], 2);
+		else if (map[i][0] == 'N' && map[i][1] == 'O')
+			tex_info->west = get_texture(map[i], 2);
+		else
+			return (1);
 		i++;
 	}
+	if (!tex_info->north || !tex_info->south || !tex_info->east || !tex_info->west)
+		return (1);
+	return (0);
+}
+
+int	map_data(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	if (set_texture_path(&data->tex_info, data->tex_info.tex_path) == 1)
+		return (error_msg(data->map_info.path, "invalid texture!", 1));
+	if (color_txtures(data, data->tex_info.rgb_codes) == 1)
+		return (error_msg(data->map_info.path, "invalid rgb_code!", 1));
 	return (0);
 }
