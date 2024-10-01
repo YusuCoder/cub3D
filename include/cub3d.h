@@ -128,5 +128,6 @@ void	validate_map(char *file, t_data *data);
 int		map_data(t_data *data);
 void	free_it(void **data);
 void	check_map_contents(t_data *data, char **map);
+void 	extract_map(t_map *data);
 
 #endif
