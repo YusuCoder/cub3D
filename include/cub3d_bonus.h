@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/28 19:18:42 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/01 19:53:27 by tkubanyc         ###   ########.fr       */
+/*   Created: 2024/09/29 14:37:53 by tkubanyc          #+#    #+#             */
+/*   Updated: 2024/10/01 19:50:56 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef CUB3D_BONUS_H
+# define CUB3D_BONUS_H
 
 /*---------------*/
 /*  Text colors  */
@@ -38,12 +38,18 @@
 /*-------------------*/
 # define WIDTH 1600
 # define HEIGHT 1200
-# define MIN_WIDTH 320
-# define MIN_HEIGHT 240
+# define MIN_WIDTH 1024
+# define MIN_HEIGHT 768
 # define VIEW 66
 # define GRID 64
 # define MOVE 0.07
 # define ROTATE 0.05
+# define MINIMAP_W 320
+# define MINIMAP_H 240
+# define MINIMAP_TILE 10
+# define MINIMAP_PLAYER 0xFF0000FF
+# define MINIMAP_EMPTY 0x000000FF
+# define MINIMAP_WALL 0xFFFFFFFF
 
 /*-------------*/
 /*  Side enum  */
@@ -66,6 +72,15 @@ typedef struct s_table
 	int	row;
 	int	column;
 }	t_table;
+
+/*---------------------------*/
+/*  Point struct (uint32_t)  */
+/*---------------------------*/
+typedef struct s_point_uint
+{
+	uint32_t	x;
+	uint32_t	y;
+}	t_point_uint;
 
 /*----------------------*/
 /*  Point struct (int)  */
@@ -99,6 +114,8 @@ typedef struct s_map
 	char		*path_texture_south;
 	char		*path_texture_east;
 	char		*path_texture_west;
+	int			width;
+	int			height;
 }	t_map;
 
 /*-----------------*/
@@ -144,6 +161,15 @@ typedef struct s_texture
 	int				floor;
 }	t_texture;
 
+/*-----------------*/
+/*  Sprite struct  */
+/*-----------------*/
+typedef struct s_sprite
+{
+	mlx_image_t	*aim;
+	mlx_image_t	*rifle;
+}	t_sprite;
+
 /*---------------*/
 /*  Data struct  */
 /*---------------*/
@@ -154,9 +180,11 @@ typedef struct s_data
 	t_map		map;
 	t_player	player;
 	t_texture	texture;
+	t_sprite	sprite;
 	mlx_t		*mlx;
 	mlx_image_t	*img;
 	mlx_image_t	*buf;
+	bool		is_minimap;
 }	t_data;
 
 /*-------------*/
@@ -166,6 +194,8 @@ double	radian(int degree);
 void	init_data(t_data *data);
 void	init_map(t_data *data);
 void	init_player(t_data *data);
+void	init_texture(t_data *data);
+void	init_sprites(t_data *data);
 void	invert_view(t_player *player);
 void	simulation(void *param);
 void	close_hook(void *param);
@@ -187,5 +217,11 @@ void	free_array(char **array);
 void	free_exit(t_data *data, int exit_status);
 void	ft_perror(char *error_msg);
 void	error_free_exit(t_data *data, char *error_msg);
+void	draw_sprite(mlx_image_t *img, mlx_image_t *spr, int start_x, \
+					int start_y);
+void	draw_minimap(t_data *data);
+void	draw_minimap_tiles(t_map *map, t_point_int offset, mlx_image_t *img);
+int		set_color(char **map, uint32_t *color, t_point_int pos, char symbol);
+void	set_tile_pixel(mlx_image_t *img, int x, int y, uint32_t color);
 
 #endif

@@ -8,7 +8,8 @@ CYAN	:= \033[0;36m
 RESET	:= \033[0m
 
 # Variables
-NAME	:= cub3D
+NAME	:= cub3d
+BONUS	:= cub3d_bonus
 CC		:= cc
 CFLAGS	:= -Wall -Wextra -Werror -Ofast -g -fsanitize=address
 RM		:= rm -rf
@@ -21,25 +22,46 @@ LIBS		:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 # Mandatory Source and Object files
 OBJ_PATH	:= ./obj
 SRC_PATH	:= ./src
-MAIN		:= main.c
-SRC_FILES	:= $(SRC_PATH)/initializing.c \
-				$(SRC_PATH)/simulation.c \
-				$(SRC_PATH)/event_hooks.c \
-				$(SRC_PATH)/ray_casting.c \
-				$(SRC_PATH)/rendering.c \
-				$(SRC_PATH)/utils.c \
-				$(SRC_PATH)/free.c \
-				$(SRC_PATH)/error.c
+SRC_FILES	:= main.c \
+				initializing.c \
+				simulation.c \
+				event_hooks.c \
+				ray_casting.c \
+				rendering.c \
+				utils.c \
+				free.c \
+				error.c
 
+# Bonus Source and Object files
+BONUS_OBJ_PATH	:= ./obj_bonus
+BONUS_SRC_PATH	:= ./src_bonus
+BONUS_SRC		:= main_bonus.c \
+				initializing_bonus/init_data_bonus.c \
+				initializing_bonus/init_map_bonus.c \
+				initializing_bonus/init_player_bonus.c \
+				initializing_bonus/init_texture_bonus.c \
+				initializing_bonus/init_sprites_bonus.c \
+				simulation_bonus.c \
+				event_hooks_bonus.c \
+				ray_casting_bonus.c \
+				rendering_bonus.c \
+				utils_bonus.c \
+				free_bonus.c \
+				error_bonus.c \
+				minimap_bonus.c \
+				sprite_bonus.c
+
+# Add paths to object files
 OBJS		:= $(patsubst %, $(OBJ_PATH)/%, $(SRC_FILES:.c=.o))
-MAIN_OBJ	:= $(OBJ_PATH)/main.o
+BONUS_OBJS	:= $(patsubst %, $(BONUS_OBJ_PATH)/%, $(BONUS_SRC:.c=.o))
 
 # Libft
-LIBFT_PATH  := ./libft
+LIBFT_PATH	:= ./libft
 LIBFT		:= $(LIBFT_PATH)/libft.a
 
 # Headers
-HEADER := include/cub3d.h
+HEADER 			:= include/cub3d.h
+HEADER_BONUS	:= include/cub3d_bonus.h
 
 # Rules
 all: submodule mlx $(LIBFT) $(NAME)
@@ -51,32 +73,38 @@ mlx:
 	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4 > /dev/null 2>&1
 	@echo "$(GREEN)MLX42 connected.$(RESET)"
 
-$(NAME): $(MAIN_OBJ) $(OBJS) $(LIBFT)
+$(NAME): $(OBJS) $(LIBFT)
 	@$(CC) $(CFLAGS) $^ -o $@ $(LIBS)
 	@echo "$(GREEN)cub3D created.$(RESET)"
 
-$(OBJ_PATH)/%.o: %.c
+$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 	@mkdir -p $(@D)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
+$(BONUS_OBJ_PATH)/%.o: $(BONUS_SRC_PATH)/%.c
 	@mkdir -p $(@D)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(LIBFT):
 	@$(MAKE) -C $(LIBFT_PATH)
 
+bonus: submodule mlx $(LIBFT) $(BONUS)
+
+$(BONUS): $(BONUS_OBJS) $(LIBFT)
+	@$(CC) $(CFLAGS) $^ -o $@ $(LIBS)
+	@echo "$(YELLOW)cub3D_bonus created.$(RESET)"
+
 clean:
-	@$(RM) $(OBJ_PATH)
+	@$(RM) $(OBJ_PATH) $(BONUS_OBJ_PATH)
 	@$(MAKE) -C $(LIBFT_PATH) clean > /dev/null 2>&1
 	@echo "$(MAGENTA)object files cleaned.$(RESET)"
 
 fclean: clean
-	@$(RM) $(NAME)
+	@$(RM) $(NAME) $(BONUS)
 	@$(MAKE) -C $(LIBFT_PATH) fclean > /dev/null 2>&1
 	@$(RM) $(LIBMLX)/build
-	@echo "$(MAGENTA)cub3D removed.$(RESET)"
+	@echo "$(MAGENTA)executable files removed.$(RESET)"
 
 re: fclean all
 
-.PHONY: all clean fclean re submodule mlx
+.PHONY: all clean fclean re bonus submodule mlx

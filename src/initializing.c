@@ -6,7 +6,7 @@
 /*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 17:25:42 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/09/28 21:25:11 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/09/29 18:05:48 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,10 @@ void	init_map(t_data *data)
 	map->player_position.y = 7;
 	map->color_ceiling = 0x87CEEB;
 	map->color_floor = 0x6B8E23;
-	map->path_texture_north = "textures/bricks_grey.png";
-	map->path_texture_south = "textures/bricks_red.png";
-	map->path_texture_east = "textures/hexagon1.png";
-	map->path_texture_west = "textures/hexagon2.png";
+	map->path_texture_north = "textures/wall/metal1.png";
+	map->path_texture_south = "textures/wall/metal2.png";
+	map->path_texture_east = "textures/wall/metal3.png";
+	map->path_texture_west = "textures/wall/rock2.png";
 }
 
 void	init_data(t_data *data)
