@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 14:51:43 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/10/01 13:08:44 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/01 20:04:07 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,8 @@ int	middle_columns(char **map, int i, int j)
 {
 	if (map == NULL || map[i] == NULL)
 		return (1);
-	while (map[i][0] == 'N' || map[i][0] == 'S' || map[i][0] == 'E'
-			|| map[i][0] == '\n' || map[i][0] == 'F' || map[i][0] == 'C' || map[i][0] == 'W')
+	while (ft_strchr("NSEWFC", map[i][0]) != NULL
+			|| map[i][0] == '\n')
 		i++;
 	while (map[i + 2] != NULL)
 	{
@@ -120,14 +120,14 @@ int	middle_columns(char **map, int i, int j)
 		{
 			while (map[i][j])
 			{
-				if (map[i][j] == '0'
-				&& ((map[i - 1][j] != '1' && map[i - 1][j] != '0')
-				|| (map[i + 1][j] != '1' && map[i + 1][j] != '0'))) //not workig properly
+				if (ft_strchr("0NSEW", map[i][j]) != NULL
+				&& ((map[i - 1][j] != '1' && map[i - 1][j] != '0' && ft_strchr("NSEW", map[i - 1][j]) == NULL)
+				|| (map[i + 1][j] != '1' && map[i + 1][j] != '0' && ft_strchr("NSEW", map[i + 1][j]) == NULL)))
 				{
 					printf("unclosed way: [%d][%d]\n", i, j);
 					return (1);
 				}
-				if (map[i][j] == '0' && ((map[i][j + 1] == ' ' || map[i][j + 1] == '\t')
+				if (ft_strchr("0NSEW", map[i][j]) != NULL && ((map[i][j + 1] == ' ' || map[i][j + 1] == '\t')
 					|| (map[i][j - 1] == ' ' || map[i][j - 1] == '\t')))
 				{
 					printf("Unclosed way!\n");
