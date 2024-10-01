@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 11:21:11 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/09/29 20:33:22 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/01 12:08:16 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	extract_color(t_data *data)
 	data->tex_info.rgb_codes = (char **)malloc(sizeof(char *) * 3);
 	if (!data->tex_info.rgb_codes)
 		exit(EXIT_FAILURE);
-	while (data->map_info.map[i])
+	while (data->map_info.map[i] && j < 3)
 	{
 		if (ft_strncmp(data->map_info.map[i], "F", 1) == 0 ||
 			ft_strncmp(data->map_info.map[i], "C", 1) == 0)
@@ -30,7 +30,7 @@ void	extract_color(t_data *data)
 			data->tex_info.rgb_codes[j] = ft_strdup(data->map_info.map[i]);
 			if (!data->tex_info.rgb_codes[j])
 			{
-				while (--j)
+				while (--j >= 0)
 					free(data->tex_info.rgb_codes[j]);
 				free(data->tex_info.rgb_codes);
 				exit(EXIT_FAILURE);
@@ -53,7 +53,7 @@ void	extract_path(t_data *data)
 	if (!data->tex_info.tex_path)
 		exit(EXIT_FAILURE);
 
-	while (data->map_info.map[i])
+	while (data->map_info.map[i] && j < 4)
 	{
 		if (ft_strncmp(data->map_info.map[i], "NO", 2) == 0 ||
 			ft_strncmp(data->map_info.map[i], "SO", 2) == 0 ||
@@ -71,40 +71,40 @@ void	extract_path(t_data *data)
 			j++;
 		}
 		i++;
-		if (j == 4)
-			break;
+		// if (j == 4)
+		// 	break;
 	}
 	data->tex_info.tex_path[j] = NULL;
 }
 
-void extract_map(t_data *data)
+void extract_map(t_map *data)
 {
 	int i;
 	int k;
-
 	i = 0;
 	k = 0;
-	while (data->map_info.map[i][k] != '1' && data->map_info.map[i][k] != '0')
+	while (data->map[i] && !strchr(data->map[i], '1') && !strchr(data->map[i], '0'))
 		i++;
-	data->map_info.map2d = (char **)malloc(sizeof(char *) * (data->height + 1));
-	if (!data->map_info.map2d)
+	data->map2d = (char **)malloc(sizeof(char *) * (data->height + 1));
+	if (!data->map2d)
 		exit(EXIT_FAILURE);
 	k = 0;
-	while (data->map_info.map[i])
+	while (data->map[i])
 	{
-		data->map_info.map2d[k] = ft_strdup(data->map_info.map[i]);
-		if (!data->map_info.map2d[k])
+		data->map2d[k] = ft_strdup(data->map[i]);
+		if (!data->map2d[k])
 		{
 			while (--k >= 0)
-				free(data->map_info.map2d[k]);
-			free(data->map_info.map2d);
+				free(data->map2d[k]);
+			free(data->map2d);
 			exit(EXIT_FAILURE);
 		}
 		i++;
 		k++;
 	}
-	data->map_info.map2d[k] = NULL;
+	data->map2d[k] = NULL;
 }
+
 
 int is_cub_file(char *str)
 {
@@ -167,8 +167,6 @@ int parse(t_data *data, char **argv)
 	extract_color(data);
 	if (map_data(data) == FAIL)
 		exit(EXIT_FAILURE);
-	extract_map(data);
 	check_map_contents(data, data->map_info.map2d);
-	// NEED TO REPLACE WITH FREE FUNCTION
 	return (0);
 }
