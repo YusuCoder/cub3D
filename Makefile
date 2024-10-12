@@ -11,7 +11,7 @@ RESET	:= \033[0m
 NAME	:= cub3d
 BONUS	:= cub3d_bonus
 CC		:= cc
-CFLAGS	:= -Wall -Wextra -Werror -Ofast -g -fsanitize=address
+CFLAGS	:= -Wall -Wextra -Werror -Ofast -g
 RM		:= rm -rf
 LIBMLX	:= ./MLX42
 
@@ -23,6 +23,11 @@ LIBS		:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 OBJ_PATH	:= ./obj
 SRC_PATH	:= ./src
 SRC_FILES	:= main.c \
+				./parse/parse.c \
+				./parse/errors.c \
+				./parse/copy_map.c \
+				./parse/get_next_line.c \
+				./parse/get_next_line_utils.c \
 				initializing.c \
 				simulation.c \
 				event_hooks.c \

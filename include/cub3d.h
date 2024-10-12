@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 19:18:42 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/01 19:53:27 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/10/12 17:13:00 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,10 @@
 /*----------------------*/
 # include <stdio.h>
 # include <math.h>
+#include <fcntl.h>
 # include "../libft/libft.h"
 # include "../MLX42/include/MLX42/MLX42.h"
+# include "get_next_line.h"
 
 /*-------------------*/
 /*  Constant values  */
@@ -90,6 +92,9 @@ typedef struct s_point_double
 /*--------------*/
 typedef struct s_map
 {
+	int			fd;
+	char		**map_file;
+	int			line_count;
 	char		**map2d;
 	char		player_direction;
 	t_point_int	player_position;
@@ -142,6 +147,8 @@ typedef struct s_texture
 	mlx_texture_t	*west;
 	int				ceiling;
 	int				floor;
+	char			**tex_path;
+	char			**rgb_codes;
 }	t_texture;
 
 /*---------------*/
@@ -162,6 +169,10 @@ typedef struct s_data
 /*-------------*/
 /*  Functions  */
 /*-------------*/
+int	parse(t_data *data, char **argv);
+int	error_msg(char *msg, int exit_code);
+void	copy_map(int row, int column, int i, t_data *data);
+
 double	radian(int degree);
 void	init_data(t_data *data);
 void	init_map(t_data *data);
