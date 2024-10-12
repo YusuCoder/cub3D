@@ -28,6 +28,8 @@ SRC_FILES	:= main.c \
 				./parse/copy_map.c \
 				./parse/get_next_line.c \
 				./parse/get_next_line_utils.c \
+				./parse/extracting.c \
+				./parse/map_data.c \
 				initializing.c \
 				simulation.c \
 				event_hooks.c \

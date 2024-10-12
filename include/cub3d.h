@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 19:18:42 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/12 17:13:00 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/12 19:06:53 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,9 +169,12 @@ typedef struct s_data
 /*-------------*/
 /*  Functions  */
 /*-------------*/
-int	parse(t_data *data, char **argv);
-int	error_msg(char *msg, int exit_code);
+int		parse(t_data *data, char **argv);
+int		error_msg(char *msg, int exit_code);
 void	copy_map(int row, int column, int i, t_data *data);
+void	extract_path(t_data *data);
+void	extract_color(t_data *data);
+int		map_data(t_data *data);
 
 double	radian(int degree);
 void	init_data(t_data *data);

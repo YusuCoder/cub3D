@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:52:54 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/12 17:44:37 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/12 18:21:09 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	main(int argc, char **argv)
 	(void)argc;
 	if (parse(&data, argv) == 1)
 		return (-1);
+	else
+		printf("hello\n");
 	// init_data(&data);
 	// mlx_set_window_limit(data.mlx, MIN_WIDTH, MIN_HEIGHT, WIDTH, HEIGHT);
 	// mlx_resize_hook(data.mlx, &resize_hook, &data);
