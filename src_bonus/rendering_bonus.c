@@ -6,7 +6,7 @@
 /*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 14:41:30 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/09/30 12:46:03 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/10/03 10:51:02 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,3 +101,19 @@ void	rendering(t_data *data, t_ray *ray, int x)
 	draw_ceiling_floor(data, ray, x);
 	draw_walls(data, ray, x, ray->draw_start);
 }
+
+// void	rendering(t_data *data, t_ray *ray, int x)
+// {
+// 	double	pitch_offset;
+
+// 	ray->line_height = (int)data->height / ray->plane_dist;
+// 	pitch_offset = data->player.pitch * data->height / 2;
+// 	ray->draw_start = -(ray->line_height) / 2 + data->height / 2 + pitch_offset;
+// 	if (ray->draw_start < 0)
+// 		ray->draw_start = 0;
+// 	ray->draw_end = ray->line_height / 2 + data->height / 2 + pitch_offset;
+// 	if (ray->draw_end >= data->height)
+// 		ray->draw_end = data->height - 1;
+// 	draw_ceiling_floor(data, ray, x);
+// 	draw_walls(data, ray, x, ray->draw_start);
+// }

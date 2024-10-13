@@ -6,7 +6,7 @@
 /*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 11:48:25 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/01 19:17:39 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/10/12 15:45:15 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,14 @@ void	draw_sprite(mlx_image_t *img, mlx_image_t *spr, int start_x, \
 		pos_img.y++;
 		pos_spr.y++;
 	}
+}
+
+void	draw_aim(mlx_image_t *img, mlx_image_t *aim)
+{
+	int	start_x;
+	int	start_y;
+
+	start_x = img->width / 2 - aim->width / 2;
+	start_y = img->height / 2 - aim->height / 2;
+	draw_sprite(img, aim, start_x, start_y);
 }

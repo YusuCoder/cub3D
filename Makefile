@@ -42,14 +42,17 @@ BONUS_SRC		:= main_bonus.c \
 				initializing_bonus/init_texture_bonus.c \
 				initializing_bonus/init_sprites_bonus.c \
 				simulation_bonus.c \
-				event_hooks_bonus.c \
+				hooks_bonus.c \
 				ray_casting_bonus.c \
 				rendering_bonus.c \
 				utils_bonus.c \
 				free_bonus.c \
 				error_bonus.c \
 				minimap_bonus.c \
-				sprite_bonus.c
+				sprite_bonus.c \
+				weapon_bonus.c \
+				weapon_utils_bonus.c \
+				movement_handler_bonus.c
 
 # Add paths to object files
 OBJS		:= $(patsubst %, $(OBJ_PATH)/%, $(SRC_FILES:.c=.o))

@@ -6,7 +6,7 @@
 /*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 14:37:53 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/01 19:50:56 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/10/13 20:13:59 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,15 @@
 # define GRID 64
 # define MOVE 0.07
 # define ROTATE 0.05
+# define PADDING 0.1
 # define MINIMAP_W 320
 # define MINIMAP_H 240
 # define MINIMAP_TILE 10
 # define MINIMAP_PLAYER 0xFF0000FF
 # define MINIMAP_EMPTY 0x000000FF
 # define MINIMAP_WALL 0xFFFFFFFF
+# define MOUSE_SPEED 0.002
+# define ANIMATION_SPEED 6
 
 /*-------------*/
 /*  Side enum  */
@@ -63,6 +66,22 @@ typedef enum s_side
 	VERTICAL,
 	HORIZONTAL,
 }	t_side;
+
+/*-------------*/
+/*  Type enum  */
+/*-------------*/
+typedef enum s_weapon
+{
+	RIFLE,
+	PISTOL,
+	KNIFE,
+}	t_weapon;
+
+typedef enum s_option
+{
+	SHOOT,
+	NOT_SHOOT,
+}	t_option;
 
 /*----------------*/
 /*  Table struct  */
@@ -124,6 +143,7 @@ typedef struct s_map
 typedef struct s_player
 {
 	double			angle;
+	double			pitch;
 	double			fov;
 	t_side			pov;
 	t_point_double	pos;
@@ -167,7 +187,10 @@ typedef struct s_texture
 typedef struct s_sprite
 {
 	mlx_image_t	*aim;
-	mlx_image_t	*rifle;
+	mlx_image_t	*rifle[6];
+	mlx_image_t	*bullet[6];
+	mlx_image_t	*pistol[9];
+	mlx_image_t	*knife[7];
 }	t_sprite;
 
 /*---------------*/
@@ -184,44 +207,59 @@ typedef struct s_data
 	mlx_t		*mlx;
 	mlx_image_t	*img;
 	mlx_image_t	*buf;
+	t_weapon	weapon;
 	bool		is_minimap;
 }	t_data;
 
 /*-------------*/
 /*  Functions  */
 /*-------------*/
-double	radian(int degree);
-void	init_data(t_data *data);
-void	init_map(t_data *data);
-void	init_player(t_data *data);
-void	init_texture(t_data *data);
-void	init_sprites(t_data *data);
-void	invert_view(t_player *player);
-void	simulation(void *param);
-void	close_hook(void *param);
-void	resize_hook(int32_t new_width, int32_t new_height, void *param);
-void	key_hook(mlx_key_data_t keydata, void *param);
-void	movement_hook(t_data *data);
-void	move_player(t_data *data, double move_column, double move_row);
-void	ray_casting(t_data *data);
-void	define_step_direction(t_ray *ray, t_player *player);
-void	define_wall_collision(t_data *data, t_ray *ray);
-void	define_plane_distance(t_ray *ray, t_player *player);
-void	rendering(t_data *data, t_ray *ray, int x);
-void	draw_ceiling_floor(t_data *data, t_ray *ray, int x);
-void	draw_walls(t_data *data, t_ray *ray, int x, int y);
-void	define_texture_values(t_data *data, t_ray *ray, \
+double		radian(int degree);
+void		init_data(t_data *data);
+void		init_map(t_data *data);
+void		init_player(t_data *data);
+void		init_texture(t_data *data);
+void		init_sprites(t_data *data);
+void		init_sprite_rifle(t_data *data, t_sprite *sprite);
+void		init_sprite_pistol(t_data *data, t_sprite *sprite);
+void		init_sprite_knife(t_data *data, t_sprite *sprite);
+void		invert_view(t_player *player);
+void		simulation(void *param);
+void		close_hook(void *param);
+void		resize_hook(int32_t new_width, int32_t new_height, void *param);
+void		key_hook(mlx_key_data_t keydata, void *param);
+void		movement_handler(t_data *data);
+void		move_player(t_data *data, double move_column, double move_row);
+void		movement_mouse(t_data *data);
+void		ray_casting(t_data *data);
+void		define_step_direction(t_ray *ray, t_player *player);
+void		define_wall_collision(t_data *data, t_ray *ray);
+void		define_plane_distance(t_ray *ray, t_player *player);
+void		rendering(t_data *data, t_ray *ray, int x);
+void		draw_ceiling_floor(t_data *data, t_ray *ray, int x);
+void		draw_walls(t_data *data, t_ray *ray, int x, int y);
+void		define_texture_values(t_data *data, t_ray *ray, \
 								mlx_texture_t **texture, double *wall_x);
-int		get_pixel(mlx_texture_t *texture, int x, int y);
-void	free_array(char **array);
-void	free_exit(t_data *data, int exit_status);
-void	ft_perror(char *error_msg);
-void	error_free_exit(t_data *data, char *error_msg);
-void	draw_sprite(mlx_image_t *img, mlx_image_t *spr, int start_x, \
+int			get_pixel(mlx_texture_t *texture, int x, int y);
+void		free_array(char **array);
+void		free_exit(t_data *data, int exit_status);
+void		ft_perror(char *error_msg);
+void		error_free_exit(t_data *data, char *error_msg);
+void		draw_minimap(t_data *data);
+void		draw_minimap_tiles(t_map *map, t_point_int offset, \
+								mlx_image_t *img);
+int			set_color(char **map, uint32_t *color, t_point_int pos, \
+								char symbol);
+void		set_tile_pixel(mlx_image_t *img, int x, int y, uint32_t color);
+void		draw_sprite(mlx_image_t *img, mlx_image_t *spr, int start_x, \
 					int start_y);
-void	draw_minimap(t_data *data);
-void	draw_minimap_tiles(t_map *map, t_point_int offset, mlx_image_t *img);
-int		set_color(char **map, uint32_t *color, t_point_int pos, char symbol);
-void	set_tile_pixel(mlx_image_t *img, int x, int y, uint32_t color);
+void		draw_aim(mlx_image_t *img, mlx_image_t *aim);
+void		draw_weapon(t_data *data, t_sprite *sprite);
+void		draw_weapon_frame(t_data *data, mlx_image_t *curr, int frame);
+void		draw_bullet(mlx_image_t *img, t_sprite *sprite, int frame);
+t_point_int	set_start_point(t_weapon weapon, mlx_image_t *img, \
+							mlx_image_t *curr);
+int			set_frame_limit(t_weapon weapon);
+mlx_image_t	*set_current_frame(t_weapon weapon, t_sprite *sprite, int frame);
 
 #endif
