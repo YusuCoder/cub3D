@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initializing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 17:25:42 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/09/29 18:05:48 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/10/13 13:52:40 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,12 @@ void	init_map(t_data *data)
 	map->player_direction = 'N';
 	map->player_position.x = 4;
 	map->player_position.y = 7;
-	map->color_ceiling = 0x87CEEB;
-	map->color_floor = 0x6B8E23;
-	map->path_texture_north = "textures/wall/metal1.png";
-	map->path_texture_south = "textures/wall/metal2.png";
-	map->path_texture_east = "textures/wall/metal3.png";
-	map->path_texture_west = "textures/wall/rock2.png";
+	map->color_ceiling = get_color(data->texture.rgb_cell[0], data->texture.rgb_cell[1], data->texture.rgb_cell[2], 255);
+	map->color_floor = get_color(data->texture.rgb_floor[0], data->texture.rgb_floor[1], data->texture.rgb_floor[2], 255);
+	// map->path_texture_north = "textures/wall/metal1.png";
+	// map->path_texture_south = "textures/wall/metal2.png";
+	// map->path_texture_east = "textures/wall/metal3.png";
+	// map->path_texture_west = "textures/wall/rock2.png";
 }
 
 void	init_data(t_data *data)

@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 19:18:42 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/12 19:06:53 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/12 19:44:55 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,8 @@ typedef struct s_texture
 	mlx_texture_t	*south;
 	mlx_texture_t	*east;
 	mlx_texture_t	*west;
+	int				*rgb_cell;
+	int				*rgb_floor;
 	int				ceiling;
 	int				floor;
 	char			**tex_path;
@@ -175,6 +177,8 @@ void	copy_map(int row, int column, int i, t_data *data);
 void	extract_path(t_data *data);
 void	extract_color(t_data *data);
 int		map_data(t_data *data);
+void	free_it(void **data);
+int		get_color(int r, int g, int b, int a);
 
 double	radian(int degree);
 void	init_data(t_data *data);

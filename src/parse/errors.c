@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 13:54:22 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/10/12 17:14:06 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/12 19:35:00 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,4 +19,20 @@ int	error_msg( char *msg, int exit_code)
 		ft_putstr_fd(msg, 2);
 	ft_putstr_fd("\n", 2);
 	return (exit_code);
+}
+void	free_it(void **data)
+{
+	size_t	i;
+
+	i = 0;
+	while (data[i])
+	{
+		free(data[i]);
+		i++;
+	}
+	if (data)
+	{
+		free(data);
+		data = NULL;
+	}
 }

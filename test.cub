@@ -1,7 +1,7 @@
-NO ./images/walls/walln.xpm42
-SO ./images/walls/walls.xpm42
-EA ./images/walls/walle.xpm42
-WE ./images/walls/wallw.xpm42
+NO textures/wall/metal1.png
+SO textures/wall/metal2.png
+EA textures/wall/metal3.png
+WE textures/wall/rock2.png
 
 F 255,251,253
 C 1,0,0
