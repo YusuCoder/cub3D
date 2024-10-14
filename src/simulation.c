@@ -6,27 +6,28 @@
 /*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 20:21:15 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/09/28 19:15:47 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/10/14 11:50:29 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void	move_player(t_data *data, double move_column, double move_row)
+void	move_player(t_data *data, double move_x, double move_y)
 {
-	t_map		*map;
-	t_player	*player;
-	double		column;
-	double		row;
+	t_map			*map;
+	t_player		*player;
+	t_point_double	new;
 
 	map = &data->map;
 	player = &data->player;
-	column = player->pos.x + move_column;
-	row = player->pos.y + move_row;
-	if (map->map2d[(int)row][(int)player->pos.x] != '1')
-		player->pos.y = row;
-	if (map->map2d[(int)player->pos.y][(int)column] != '1')
-		player->pos.x = column;
+	new.x = player->pos.x + move_x;
+	new.y = player->pos.y + move_y;
+	if (map->map2d[(int)(new.y + PADDING)][(int)player->pos.x] != '1'
+		&& map->map2d[(int)(new.y - PADDING)][(int)player->pos.x] != '1')
+		player->pos.y = new.y;
+	if (map->map2d[(int)player->pos.y][(int)(new.x + PADDING)] != '1'
+		&& map->map2d[(int)player->pos.y][(int)(new.x - PADDING)] != '1')
+		player->pos.x = new.x;
 }
 
 void	movement_hook(t_data *data)
