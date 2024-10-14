@@ -6,7 +6,7 @@
 /*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 20:21:15 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/12 21:15:20 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/10/13 20:27:40 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	simulation(void *param)
 	if (data->is_minimap)
 		draw_minimap(data);
 	draw_aim(data->img, sprite->aim);
-	draw_weapon(data, sprite, data->img);
+	draw_weapon(data, sprite);
 	if (mlx_image_to_window(data->mlx, data->img, 0, 0) < 0)
 		error_free_exit(data, "Failed to display mlx image");
 }

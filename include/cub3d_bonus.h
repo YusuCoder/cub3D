@@ -6,7 +6,7 @@
 /*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 14:37:53 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/13 20:13:59 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/10/13 20:56:15 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,6 @@ typedef enum s_weapon
 	PISTOL,
 	KNIFE,
 }	t_weapon;
-
-typedef enum s_option
-{
-	SHOOT,
-	NOT_SHOOT,
-}	t_option;
 
 /*----------------*/
 /*  Table struct  */
