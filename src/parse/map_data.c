@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 18:29:46 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/10/13 13:50:33 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/14 17:38:54 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,15 +166,23 @@ int	set_path(t_map *texture, char **tex_path)
 	}
 	if (!texture->path_texture_north || !texture->path_texture_east || !texture->path_texture_south
 			|| !texture->path_texture_west)
-			return (1);
+		return (1);
+	free_map(tex_path);
 	return (0);
 }
 
 int	map_data(t_data *data)
 {
 	if (set_path(&data->map, data->texture.tex_path) == 1)
+	{
+		free_map(data->texture.tex_path);
 		return(error_msg("Failed to get texture path!", 1));
+	}
 	if (rgb_codes(data, data->texture.rgb_codes) == 1)
+	{
+		free_map(data->texture.rgb_codes);
 		return (error_msg("Failed to get color codes!", 1));
+	}
+	free_map(data->texture.rgb_codes);
 	return (0);
 }

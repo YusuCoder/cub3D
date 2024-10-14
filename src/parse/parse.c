@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 13:12:10 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/10/12 18:29:34 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/14 17:58:36 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,8 @@ int	parse(t_data *data, char **argv)
 	validate_map(argv[1], data);
 	extract_path(data);
 	extract_color(data);
-	// extract_map(data);
+	extract_map(data);
+	filter_map(data);
 	if (map_data(data) == 1)
 		exit(EXIT_FAILURE);
 	return (0);

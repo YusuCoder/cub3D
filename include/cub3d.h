@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 19:18:42 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/14 11:49:30 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/10/14 17:44:29 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ typedef struct s_map
 	char		**map_file;
 	int			line_count;
 	char		**map2d;
+	char		**temp_map;
 	char		player_direction;
 	t_point_int	player_position;
 	int			color_floor;
@@ -180,6 +181,10 @@ void	extract_color(t_data *data);
 int		map_data(t_data *data);
 void	free_it(void **data);
 int		get_color(int r, int g, int b, int a);
+void	extract_map(t_data *data);
+void	filter_map(t_data *data);
+void	free_map(char **data);
+void	free_and_exit(char **data);
 
 double	radian(int degree);
 void	init_data(t_data *data);

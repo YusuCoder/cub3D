@@ -11,7 +11,7 @@ RESET	:= \033[0m
 NAME	:= cub3d
 BONUS	:= cub3d_bonus
 CC		:= cc
-CFLAGS	:= -Wall -Wextra -Werror -Ofast -g
+CFLAGS	:= -Wall -Wextra -Werror -Ofast -g -fsanitize=address
 RM		:= rm -rf
 LIBMLX	:= ./MLX42
 
@@ -30,6 +30,7 @@ SRC_FILES	:= main.c \
 				./parse/get_next_line_utils.c \
 				./parse/extracting.c \
 				./parse/map_data.c \
+				./parse/extract_map.c \
 				initializing.c \
 				simulation.c \
 				event_hooks.c \

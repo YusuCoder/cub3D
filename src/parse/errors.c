@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 13:54:22 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/10/12 19:35:00 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/14 17:45:17 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,45 @@ void	free_it(void **data)
 		free(data[i]);
 		i++;
 	}
+
 	if (data)
 	{
 		free(data);
 		data = NULL;
 	}
+}
+void	free_map(char **data)
+{
+	size_t	i;
+
+	i = 0;
+	while (data[i])
+	{
+		free(data[i]);
+		i++;
+	}
+
+	if (data)
+	{
+		free(data);
+		data = NULL;
+	}
+}
+
+void	free_and_exit(char **data)
+{
+	size_t	i;
+
+	i = 0;
+	while (data[i])
+	{
+		free(data[i]);
+		i++;
+	}
+	if (data)
+	{
+		free(data);
+		data = NULL;
+	}
+	exit(EXIT_FAILURE);
 }
