@@ -25,7 +25,7 @@ SRC_PATH	:= ./src
 SRC_FILES	:= main.c \
 				./parse/parse.c \
 				./parse/errors.c \
-				./parse/copy_map.c \
+				./parse/copy_validate_map.c \
 				./parse/get_next_line.c \
 				./parse/get_next_line_utils.c \
 				./parse/extracting.c \

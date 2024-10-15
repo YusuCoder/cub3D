@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 13:12:10 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/10/15 12:30:02 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/15 15:12:01 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,5 +124,6 @@ int	parse(t_data *data, char **argv)
 	if (map_data(data) == 1)
 		exit(EXIT_FAILURE);
 	check_components(data);
+	check_walls(data);
 	return (0);
 }
