@@ -31,6 +31,7 @@ SRC_FILES	:= main.c \
 				./parse/extracting.c \
 				./parse/map_data.c \
 				./parse/extract_map.c \
+				./parse/check_components.c \
 				initializing.c \
 				simulation.c \
 				event_hooks.c \

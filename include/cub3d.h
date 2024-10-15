@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 19:18:42 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/14 17:44:29 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/15 12:49:13 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,6 +185,7 @@ void	extract_map(t_data *data);
 void	filter_map(t_data *data);
 void	free_map(char **data);
 void	free_and_exit(char **data);
+void	check_components(t_data *data);
 
 double	radian(int degree);
 void	init_data(t_data *data);
