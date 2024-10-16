@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 17:25:42 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/14 17:38:41 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/16 16:08:57 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,6 @@ void	init_map(t_data *data)
 	t_map	*map;
 
 	map = &data->map;
-	map->player_direction = 'N';
-	map->player_position.x = 4;
-	map->player_position.y = 7;
 	map->color_ceiling = get_color(data->texture.rgb_cell[0], data->texture.rgb_cell[1], data->texture.rgb_cell[2], 255);
 	map->color_floor = get_color(data->texture.rgb_floor[0], data->texture.rgb_floor[1], data->texture.rgb_floor[2], 255);
 }

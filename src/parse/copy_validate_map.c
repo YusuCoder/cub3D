@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 16:25:24 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/10/15 19:45:12 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/16 14:11:44 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,18 @@ int	middle_walls(char **map)
 	{
 		j = 0;
 		while (map[i][j])
-		{
-			if ((map[i][j] == '0' && ft_strchr(" \t", map[i][j + 1]) != NULL)
-				|| (map[i][j] == '0' && ft_strchr(" \t", map[i][j - 1]) != NULL))
-				return (1);
-			if ((map[i][j] == '0' && ft_strchr(" \t", map[i - 1][j]) != NULL)
-				|| (map[i][j] == ' ' && ft_strchr(" \t", map[i + 1][j]) != NULL))
-				return (1);
+        {
+            if ((map[i][j] == '0' && ft_strchr(" \t", map[i][j + 1]) != NULL)
+                || (map[i][j] == '0' && ft_strchr(" \t", map[i][j - 1]) != NULL))
+                return (1);
+            if ((map[i][j] == '0' && ft_strchr(" \t", map[i - 1][j]) != NULL)
+                || (map[i][j] == ' ' && map[i + 1] != NULL && ft_strchr(" \t", map[i + 1][j]) != NULL))
+                return (1);
+			if (map[i + 1] == NULL)
+			{
+				if ((ft_strchr(" \t", map[i][j]) && map[i - 1][j] == '0'))
+					return (1);
+			}
 			j++;
 		}
 		i++;

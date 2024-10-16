@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 19:18:42 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/15 15:21:56 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/16 15:52:40 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,6 +187,7 @@ void	free_map(char **data);
 void	free_and_exit(char **data);
 void	check_components(t_data *data);
 void	check_walls(t_data *data);
+void	get_player_dir(t_data *data);
 
 double	radian(int degree);
 void	init_data(t_data *data);
