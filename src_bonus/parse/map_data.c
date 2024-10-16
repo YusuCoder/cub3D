@@ -6,11 +6,11 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 18:29:46 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/10/16 18:15:24 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/16 17:08:49 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "../../include/cub3d_bonus.h"
 
 char	*get_path(char *map, int j)
 {
@@ -84,7 +84,7 @@ int	*cp_color(char **rgb, int *color)
 	return (color);
 }
 
-int	*set_color(char *map)
+int	*set_color_rgb(char *map)
 {
 	int		*color;
 	int		i;
@@ -127,13 +127,13 @@ int	rgb_codes(t_data *data, char **rgb)
 	{
 		if (rgb[i][0] == 'C')
 		{
-			data->texture.rgb_cell = set_color(rgb[i] + 1);
+			data->texture.rgb_cell = set_color_rgb(rgb[i] + 1);
 			if (data->texture.rgb_cell == 0)
 				return (error_msg("rgb color error.", 1));
 		}
 		else if (rgb[i][0] == 'F')
 		{
-			data->texture.rgb_floor = set_color(rgb[i] + 1);
+			data->texture.rgb_floor = set_color_rgb(rgb[i] + 1);
 			if (data->texture.rgb_floor == 0)
 				return (error_msg("rgb color error.", 1));
 		}

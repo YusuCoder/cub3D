@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 19:18:42 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/16 15:52:40 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/16 17:07:03 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 /*----------------------*/
 # include <stdio.h>
 # include <math.h>
-#include <fcntl.h>
+# include <fcntl.h>
 # include "../libft/libft.h"
 # include "../MLX42/include/MLX42/MLX42.h"
 # include "get_next_line.h"

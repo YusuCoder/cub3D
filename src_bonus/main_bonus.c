@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:52:54 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/02 15:59:20 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/10/16 17:28:05 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ int	main(int argc, char **argv)
 	t_data	data;
 
 	(void)argc;
-	(void)argv;
-	// check_input(argc, argv);
-	// check_map();
-	// parse_map();
+	if (parse(&data, argv) == 1)
+		return (-1);
+	else
+	{
 	init_data(&data);
 	mlx_set_window_limit(data.mlx, MIN_WIDTH, MIN_HEIGHT, WIDTH, HEIGHT);
 	mlx_resize_hook(data.mlx, &resize_hook, &data);
@@ -29,4 +29,5 @@ int	main(int argc, char **argv)
 	mlx_loop_hook(data.mlx, simulation, &data);
 	mlx_loop(data.mlx);
 	free_exit(&data, EXIT_SUCCESS);
+	}
 }

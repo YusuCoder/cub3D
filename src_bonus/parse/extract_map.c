@@ -6,11 +6,11 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:10:56 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/10/16 18:15:54 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/16 17:06:40 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "../../include/cub3d_bonus.h"
 
 int	get_length(char **map, int i)
 {

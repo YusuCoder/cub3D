@@ -6,11 +6,16 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 15:22:44 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/10/16 18:15:29 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/16 17:22:50 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "../../include/cub3d_bonus.h"
+
+// int	get_color(int r, int g, int b, int a)
+// {
+// 	return (r << 24 | g << 16 | b << 8 | a);
+// }
 
 int	check_player(char **map, t_data *data)
 {

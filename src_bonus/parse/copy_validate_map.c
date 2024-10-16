@@ -6,11 +6,11 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 16:25:24 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/10/16 18:18:10 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/16 18:17:49 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "../../include/cub3d_bonus.h"
 
 int	top_and_btm_walls(char **map)
 {
@@ -36,7 +36,6 @@ int	top_and_btm_walls(char **map)
 	}
 	return (0);
 }
-
 
 int	side_walls(char **map)
 {
@@ -139,17 +138,17 @@ void	check_walls(t_data *data)
 {
 	if (top_and_btm_walls(data->map.map2d) == 1)
 	{
-		printf("Map is not covered with walls\n");
+		printf("Top or bottom walls are not closed\n");
 		free_and_exit(data->map.map2d);
 	}
 	if (side_walls(data->map.map2d) == 1)
 	{
-		printf("Map is not covered with walls\n");
+		printf("Side walls are not closed\n");
 		free_and_exit(data->map.map2d);
 	}
 	if (middle_walls(data->map.map2d) == 1)
 	{
-		printf("Map is not covered with walls\n");
+		printf("Middle walls are not closed\n");
 		free_and_exit(data->map.map2d);
 	}
 	if (size_of_lines(data->map.map2d) == 1)

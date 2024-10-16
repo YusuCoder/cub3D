@@ -6,11 +6,11 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 18:03:28 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/10/16 18:15:46 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/16 17:06:36 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "../../include/cub3d_bonus.h"
 
 void	extract_path(t_data *data)
 {

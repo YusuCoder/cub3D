@@ -6,11 +6,11 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 13:12:10 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/10/16 18:15:17 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/16 17:05:57 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "../../include/cub3d_bonus.h"
 
 int	line_count(char *argv)
 {

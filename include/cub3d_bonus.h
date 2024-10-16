@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 14:37:53 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/13 20:56:15 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/10/16 17:23:11 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,10 @@
 /*----------------------*/
 # include <stdio.h>
 # include <math.h>
+# include <fcntl.h>
 # include "../libft/libft.h"
 # include "../MLX42/include/MLX42/MLX42.h"
+# include "get_next_line.h"
 
 /*-------------------*/
 /*  Constant values  */
@@ -118,7 +120,11 @@ typedef struct s_point_double
 /*--------------*/
 typedef struct s_map
 {
+	int			fd;
+	char		**map_file;
+	char		**temp_map;
 	char		**map2d;
+	int			line_count;
 	char		player_direction;
 	t_point_int	player_position;
 	int			color_floor;
@@ -173,6 +179,10 @@ typedef struct s_texture
 	mlx_texture_t	*west;
 	int				ceiling;
 	int				floor;
+	char			**tex_path;
+	char			**rgb_codes;
+	int				*rgb_cell;
+	int				*rgb_floor;
 }	t_texture;
 
 /*-----------------*/
@@ -208,6 +218,22 @@ typedef struct s_data
 /*-------------*/
 /*  Functions  */
 /*-------------*/
+int			parse(t_data *data, char **argv);
+int			error_msg(char *msg, int exit_code);
+void		copy_map(int row, int column, int i, t_data *data);
+void		extract_path(t_data *data);
+void		extract_color(t_data *data);
+int			map_data(t_data *data);
+void		free_it(void **data);
+int			get_color(int r, int g, int b, int a);
+void		extract_map(t_data *data);
+void		filter_map(t_data *data);
+void		free_map(char **data);
+void		free_and_exit(char **data);
+void		check_components(t_data *data);
+void		check_walls(t_data *data);
+void		get_player_dir(t_data *data);
+
 double		radian(int degree);
 void		init_data(t_data *data);
 void		init_map(t_data *data);

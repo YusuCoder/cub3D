@@ -7,6 +7,7 @@
 		"string_view": "c",
 		"vector": "c",
 		"get_next_line.h": "c",
-		"algorithm": "c"
+		"algorithm": "c",
+		"mlx42.h": "c"
 	}
 }
