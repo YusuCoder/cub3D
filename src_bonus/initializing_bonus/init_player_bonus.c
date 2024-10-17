@@ -6,7 +6,7 @@
 /*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 21:06:51 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/02 20:58:42 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/10/14 16:41:12 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void	invert_view(t_player *player)
 	else if (player->pov == SOUTH)
 		player->angle = radian(90);
 	else if (player->pov == EAST)
-		player->angle = radian(180);
-	else if (player->pov == WEST)
 		player->angle = radian(0);
+	else if (player->pov == WEST)
+		player->angle = radian(180);
 }
 
 void	init_player(t_data *data)
@@ -32,7 +32,7 @@ void	init_player(t_data *data)
 	player = &data->player;
 	map = &data->map;
 	player->angle = 0;
-	player->pitch = 0;
+	// player->pitch = 0;
 	player->fov = radian(VIEW);
 	player->pos.x = map->player_position.x + 0.5;
 	player->pos.y = map->player_position.y + 0.5;

@@ -11,7 +11,7 @@ RESET	:= \033[0m
 NAME	:= cub3d
 BONUS	:= cub3d_bonus
 CC		:= cc
-CFLAGS	:= -Wall -Wextra -Werror -Ofast -g
+CFLAGS	:= -Wall -Wextra -Werror -Ofast -g -fsanitize=address
 RM		:= rm -rf
 LIBMLX	:= ./MLX42
 

@@ -6,7 +6,7 @@
 /*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 21:05:20 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/01 12:41:57 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/10/17 14:47:44 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,23 +59,25 @@ void	init_map(t_data *data)
 	map->map2d[6] = ft_strdup("100000000000000000000000000000000010000000001");
 	map->map2d[7] = ft_strdup("100000000011111111000000000000000010000000001");
 	map->map2d[8] = ft_strdup("100000000000000001000000000000000010000000001");
-	map->map2d[9] = ft_strdup("111001111110111111000000000000000000000000001");
+	map->map2d[9] = ft_strdup("111001111110111111000000000000000020000000001");
 	map->map2d[10] = ft_strdup("100000000000000001111100000000000011111101111");
 	map->map2d[11] = ft_strdup("100000000000000000010000000000000010000000001");
-	map->map2d[12] = ft_strdup("100000000000000000010000000000000000000000001");
+	map->map2d[12] = ft_strdup("10000000000000000001000000000E000020000000001");
 	map->map2d[13] = ft_strdup("100000000011111111110000000000000010000000001");
 	map->map2d[14] = ft_strdup("10000000000000000001000000000000001111111111 ");
 	map->map2d[15] = ft_strdup("10000000000000000001000000000000001");
 	map->map2d[16] = ft_strdup("10000000000000000001000000000000001");
 	map->map2d[17] = ft_strdup("10000000000000000000000000000000001111111111 ");
-	map->map2d[18] = ft_strdup("1000N0000000000000000000000000000000000000001");
+	map->map2d[18] = ft_strdup("100000000000000000000000000000000000000000001");
 	map->map2d[19] = ft_strdup(" 1111111111111111111111111111111111111111111 ");
 	map->map2d[20] = NULL;
 	map->width = set_map_width(map->map2d);
 	map->height = set_map_height(map->map2d);
-	map->player_direction = 'N';
-	map->player_position.x = 4;
-	map->player_position.y = 18;
+	map->player_direction = 'E';
+	map->player_position.x = 30;
+	map->player_position.y = 12;
+	// map->player_position.x = 4;
+	// map->player_position.y = 18;
 	map->color_ceiling = 0x87CEEB;
 	map->color_floor = 0x6B8E23;
 	map->path_texture_north = "textures/wall/metal1.png";

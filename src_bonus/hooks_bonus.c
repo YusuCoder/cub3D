@@ -6,7 +6,7 @@
 /*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 13:36:56 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/12 16:54:05 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/10/17 20:20:53 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,19 +52,30 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	t_data	*data;
 
 	data = param;
-	if ((keydata.key == MLX_KEY_ESCAPE) && keydata.action == MLX_PRESS)
+	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 		free_exit(data, EXIT_SUCCESS);
-	if ((keydata.key == MLX_KEY_M) && keydata.action == MLX_PRESS)
+	if (keydata.key == MLX_KEY_M && keydata.action == MLX_PRESS)
 	{
 		if (data->is_minimap == true)
 			data->is_minimap = false;
 		else
 			data->is_minimap = true;
 	}
-	if ((keydata.key == MLX_KEY_1) && keydata.action == MLX_PRESS)
+	if (keydata.key == MLX_KEY_1 && keydata.action == MLX_PRESS)
 		data->weapon = RIFLE;
-	if ((keydata.key == MLX_KEY_2) && keydata.action == MLX_PRESS)
+	if (keydata.key == MLX_KEY_2 && keydata.action == MLX_PRESS)
 		data->weapon = PISTOL;
-	if ((keydata.key == MLX_KEY_3) && keydata.action == MLX_PRESS)
+	if (keydata.key == MLX_KEY_3 && keydata.action == MLX_PRESS)
 		data->weapon = KNIFE;
+	if (keydata.key == MLX_KEY_SPACE && keydata.action == MLX_PRESS)
+	{
+		if (data->door.is_close == true && data->door.status == CLOSED)
+			data->door.status = OPEN;
+		else if (data->door.is_close == true && data->door.status == OPEN)
+			data->door.status = CLOSED;
+	}
+	// printf("door_pos.x = %d\n", data->door.pos.x);
+	// printf("door_pos.y = %d\n", data->door.pos.y);
+	// printf("door dist = %f\n", data->door.dist);
+	// printf("is_close = %d\n", data->door.is_close);
 }

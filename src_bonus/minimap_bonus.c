@@ -6,7 +6,7 @@
 /*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 11:40:38 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/12 21:15:19 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/10/17 15:24:58 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ void	draw_minimap_player(char **map, t_point_double pos_map, \
 {
 	t_point_double	pos_minimap;
 	double			limit;
+	// char			tile_x;
+	// char			tile_y;
 
 	limit = MINIMAP_TILE / 2;
 	pos_minimap.x = (pos_map.x - offset.x) * MINIMAP_TILE;

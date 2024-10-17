@@ -6,7 +6,7 @@
 /*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 18:06:03 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/09/30 12:46:18 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/10/17 20:21:28 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ void	define_wall_collision(t_data *data, t_ray *ray)
 	int	wall_hit;
 
 	wall_hit = 0;
+	data->is_door = false;
+	data->door.is_close = false;
 	while (wall_hit == 0)
 	{
 		if (ray->side_dist.x < ray->side_dist.y)
@@ -72,6 +74,18 @@ void	define_wall_collision(t_data *data, t_ray *ray)
 		}
 		if (data->map.map2d[ray->map.row][ray->map.column] == '1')
 			wall_hit = 1;
+		else if (data->map.map2d[ray->map.row][ray->map.column] == '2')
+		{
+			data->is_door = true;
+			data->door.pos.x = ray->map.column;
+			data->door.pos.y = ray->map.row;
+			data->door.dist = sqrt(pow(ray->map.column - data->player.pos.x, 2) +
+								pow(ray->map.row - data->player.pos.y, 2));
+			if (fabs(data->door.dist) <= 1.5)
+				data->door.is_close = true;
+			if (data->door.status == CLOSED)
+				wall_hit = 1;
+		}
 	}
 	define_plane_distance(ray, &data->player);
 	define_wall_side(ray);
