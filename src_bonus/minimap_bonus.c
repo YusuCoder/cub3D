@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 11:40:38 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/12 21:15:19 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/10/17 17:05:38 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,37 +116,4 @@ void	draw_minimap(t_data *data)
 	draw_minimap_tiles(&data->map, offset, data->img);
 	draw_minimap_player(data->map.map2d, data->player.pos, offset, data->img);
 }
-
-// void	draw_minimap(t_data *data)
-// {
-// 	t_point_int	offset;
-// 	int			map_width_in_tiles;
-// 	int			map_height_in_tiles;
-
-// 	map_width_in_tiles = data->map.width * MINIMAP_TILE;
-// 	map_height_in_tiles = data->map.height * MINIMAP_TILE;
-
-// 	// Center player unless near the edges of the map
-// 	offset.x = (int)(data->player.pos.x * MINIMAP_TILE - MINIMAP_W / 2);
-// 	offset.y = (int)(data->player.pos.y * MINIMAP_TILE - MINIMAP_H / 2);
-
-// 	// Adjust to keep the minimap starting from the top-left corner if map is smaller
-// 	if (map_width_in_tiles <= MINIMAP_W)
-// 		offset.x = 0;
-// 	else if (offset.x < 0)
-// 		offset.x = 0;
-// 	else if (offset.x > map_width_in_tiles - MINIMAP_W)
-// 		offset.x = map_width_in_tiles - MINIMAP_W;
-
-// 	if (map_height_in_tiles <= MINIMAP_H)
-// 		offset.y = 0;
-// 	else if (offset.y < 0)
-// 		offset.y = 0;
-// 	else if (offset.y > map_height_in_tiles - MINIMAP_H)
-// 		offset.y = map_height_in_tiles - MINIMAP_H;
-
-// 	// Draw the minimap tiles and player
-// 	draw_minimap_tiles(&data->map, offset, data->img);
-// 	draw_minimap_player(data->map.map2d, data->player.pos, offset, data->img);
-// }
 
