@@ -56,6 +56,7 @@ BONUS_SRC		:= main_bonus.c \
 				./parse/extract_map.c \
 				./parse/check_components.c \
 				./parse/get_player_dir.c \
+				./sound_handling/play_sound.c \
 				initializing_bonus/init_data_bonus.c \
 				initializing_bonus/init_map_bonus.c \
 				initializing_bonus/init_player_bonus.c \

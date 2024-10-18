@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 11:40:38 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/18 11:17:07 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/18 16:41:02 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ void	draw_minimap_player(char **map, t_point_double pos_map, \
 	set_tile_pixel(img, (int)pos_minimap.x - MINIMAP_TILE / 2, \
 					(int)pos_minimap.y - MINIMAP_TILE / 2, MINIMAP_PLAYER);
 }
-
 
 void	draw_minimap(t_data *data)
 {

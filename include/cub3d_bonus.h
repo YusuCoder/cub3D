@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 14:37:53 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/18 11:12:05 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/18 18:41:00 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,6 +227,8 @@ typedef struct s_door
 /*---------------*/
 typedef struct s_data
 {
+	pid_t		sound_pid;
+	bool		is_playing_sound;
 	int			width;
 	int			height;
 	t_map		map;
@@ -260,6 +262,8 @@ void		free_and_exit(char **data);
 void		check_components(t_data *data);
 void		check_walls(t_data *data);
 void		get_player_dir(t_data *data);
+pid_t 		player_move_sound(void);
+void		play_sound(pthread_t *thread, void *(*play)(void *));
 
 double		radian(int degree);
 void		init_data(t_data *data);

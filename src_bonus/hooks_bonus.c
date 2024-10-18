@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 13:36:56 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/17 20:20:53 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/10/18 12:13:35 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,9 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 		else if (data->door.is_close == true && data->door.status == OPEN)
 			data->door.status = CLOSED;
 	}
+	// printf("is_door = %d\n", data->is_door);
+	// printf("is_close = %d\n", data->door.is_close);
 	// printf("door_pos.x = %d\n", data->door.pos.x);
 	// printf("door_pos.y = %d\n", data->door.pos.y);
 	// printf("door dist = %f\n", data->door.dist);
-	// printf("is_close = %d\n", data->door.is_close);
 }
