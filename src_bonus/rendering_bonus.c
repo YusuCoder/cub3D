@@ -6,7 +6,7 @@
 /*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 14:41:30 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/03 10:51:02 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/10/16 11:59:15 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,19 @@ int	get_pixel(mlx_texture_t *texture, int x, int y)
 void	define_texture_values(t_data *data, t_ray *ray, \
 							mlx_texture_t **texture, double *wall_x)
 {
-	if (ray->wall == NORTH)
-		*texture = data->texture.north;
-	else if (ray->wall == SOUTH)
-		*texture = data->texture.south;
-	else if (ray->wall == EAST)
-		*texture = data->texture.east;
-	else if (ray->wall == WEST)
-		*texture = data->texture.west;
+	if (data->is_door && data->door.status == CLOSED)
+		*texture = data->texture.test;
+	else
+	{
+		if (ray->wall == NORTH)
+			*texture = data->texture.north;
+		else if (ray->wall == SOUTH)
+			*texture = data->texture.south;
+		else if (ray->wall == EAST)
+			*texture = data->texture.east;
+		else if (ray->wall == WEST)
+			*texture = data->texture.west;
+	}
 	if (ray->side == VERTICAL)
 		*wall_x = data->player.pos.y + ray->plane_dist * ray->direction.y;
 	else
@@ -101,19 +106,3 @@ void	rendering(t_data *data, t_ray *ray, int x)
 	draw_ceiling_floor(data, ray, x);
 	draw_walls(data, ray, x, ray->draw_start);
 }
-
-// void	rendering(t_data *data, t_ray *ray, int x)
-// {
-// 	double	pitch_offset;
-
-// 	ray->line_height = (int)data->height / ray->plane_dist;
-// 	pitch_offset = data->player.pitch * data->height / 2;
-// 	ray->draw_start = -(ray->line_height) / 2 + data->height / 2 + pitch_offset;
-// 	if (ray->draw_start < 0)
-// 		ray->draw_start = 0;
-// 	ray->draw_end = ray->line_height / 2 + data->height / 2 + pitch_offset;
-// 	if (ray->draw_end >= data->height)
-// 		ray->draw_end = data->height - 1;
-// 	draw_ceiling_floor(data, ray, x);
-// 	draw_walls(data, ray, x, ray->draw_start);
-// }

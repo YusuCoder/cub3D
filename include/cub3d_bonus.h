@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 14:37:53 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/16 17:23:11 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/18 11:12:05 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,17 @@ typedef enum s_weapon
 	KNIFE,
 }	t_weapon;
 
+/*---------------*/
+/*  Status enum  */
+/*---------------*/
+typedef enum s_status
+{
+	OPEN,
+	OPENING,
+	CLOSED,
+	CLOSING,
+}	t_status;
+
 /*----------------*/
 /*  Table struct  */
 /*----------------*/
@@ -143,7 +154,6 @@ typedef struct s_map
 typedef struct s_player
 {
 	double			angle;
-	double			pitch;
 	double			fov;
 	t_side			pov;
 	t_point_double	pos;
@@ -173,6 +183,8 @@ typedef struct s_ray
 /*------------------*/
 typedef struct s_texture
 {
+	mlx_texture_t	*door_left[5];
+	mlx_texture_t	*door_right[5];
 	mlx_texture_t	*north;
 	mlx_texture_t	*south;
 	mlx_texture_t	*east;
@@ -183,6 +195,7 @@ typedef struct s_texture
 	char			**rgb_codes;
 	int				*rgb_cell;
 	int				*rgb_floor;
+	mlx_texture_t	*test;
 }	t_texture;
 
 /*-----------------*/
@@ -196,6 +209,18 @@ typedef struct s_sprite
 	mlx_image_t	*pistol[9];
 	mlx_image_t	*knife[7];
 }	t_sprite;
+
+/*---------------*/
+/*  Door struct  */
+/*---------------*/
+typedef struct s_door
+{
+	bool		is_close;
+	double		dist;
+	t_point_int	pos;
+	t_status	status;
+	int			frame;
+}	t_door;
 
 /*---------------*/
 /*  Data struct  */
@@ -213,6 +238,8 @@ typedef struct s_data
 	mlx_image_t	*buf;
 	t_weapon	weapon;
 	bool		is_minimap;
+	bool		is_door;
+	t_door		door;
 }	t_data;
 
 /*-------------*/
