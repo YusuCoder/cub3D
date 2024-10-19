@@ -6,7 +6,7 @@
 /*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 14:41:30 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/18 10:57:06 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/10/18 20:52:09 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int	get_pixel(mlx_texture_t *texture, int x, int y)
 void	define_texture_values(t_data *data, t_ray *ray, \
 							mlx_texture_t **texture, double *wall_x)
 {
-	if (data->is_door && data->door.status == CLOSED)
+	if (data->is_door
+		&& data->map.map2d[ray->map.row][ray->map.column] == '2')
 		*texture = data->texture.test;
 	else
 	{

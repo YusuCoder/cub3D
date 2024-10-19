@@ -6,7 +6,7 @@
 /*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 14:37:53 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/17 15:38:54 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/10/19 13:17:30 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,13 @@
 # define MOVE 0.07
 # define ROTATE 0.05
 # define PADDING 0.1
-# define MINIMAP_W 320
-# define MINIMAP_H 240
-# define MINIMAP_TILE 10
-# define MINIMAP_PLAYER 0xFF0000FF
-# define MINIMAP_EMPTY 0x000000FF
-# define MINIMAP_WALL 0xFFFFFFFF
+# define M_WIDTH 320
+# define M_HEIGHT 240
+# define M_TILE 10
+# define M_PLAYER 0xFF0000FF
+# define M_EMPTY 0x000000FF
+# define M_WALL 0xFFFFFFFF
 # define MOUSE_SPEED 0.002
-# define ANIMATION_SPEED 6
 
 /*-------------*/
 /*  Side enum  */
@@ -77,16 +76,16 @@ typedef enum s_weapon
 	KNIFE,
 }	t_weapon;
 
-/*---------------*/
-/*  Status enum  */
-/*---------------*/
-typedef enum s_status
-{
-	OPEN,
-	OPENING,
-	CLOSED,
-	CLOSING,
-}	t_status;
+// /*---------------*/
+// /*  Status enum  */
+// /*---------------*/
+// typedef enum s_status
+// {
+// 	OPEN,
+// 	OPENING,
+// 	CLOSED,
+// 	CLOSING,
+// }	t_status;
 
 /*----------------*/
 /*  Table struct  */
@@ -208,7 +207,7 @@ typedef struct s_door
 	bool		is_close;
 	double		dist;
 	t_point_int	pos;
-	t_status	status;
+	// t_status	status;
 	int			frame;
 }	t_door;
 
@@ -255,6 +254,7 @@ void		movement_mouse(t_data *data);
 void		ray_casting(t_data *data);
 void		define_step_direction(t_ray *ray, t_player *player);
 void		define_wall_collision(t_data *data, t_ray *ray);
+void		define_door_collision(t_data *data, t_ray *ray, int *wall_hit);
 void		define_plane_distance(t_ray *ray, t_player *player);
 void		rendering(t_data *data, t_ray *ray, int x);
 void		draw_ceiling_floor(t_data *data, t_ray *ray, int x);

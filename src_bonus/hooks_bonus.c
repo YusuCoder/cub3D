@@ -6,7 +6,7 @@
 /*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 13:36:56 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/18 11:01:55 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/10/19 12:34:24 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,18 @@ void	resize_hook(int32_t new_width, int32_t new_height, void *param)
 	}
 }
 
+void	handle_door(t_data *data)
+{
+	if (data->door.is_close == true
+		&& data->map.map2d[data->door.pos.y][data->door.pos.x] == '2')
+		data->map.map2d[data->door.pos.y][data->door.pos.x] = 'O';
+	else if (data->door.is_close == true
+		&& data->map.map2d[data->door.pos.y][data->door.pos.x] == 'O'
+		&& data->map.map2d[(int)data->player.pos.y][(int)data->player.pos.x] \
+			!= 'O')
+		data->map.map2d[data->door.pos.y][data->door.pos.x] = '2';
+}
+
 /*----------------------------------------*/
 /*  Handle pushing buttons on a keyboard  */
 /*----------------------------------------*/
@@ -68,15 +80,12 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	if (keydata.key == MLX_KEY_3 && keydata.action == MLX_PRESS)
 		data->weapon = KNIFE;
 	if (keydata.key == MLX_KEY_SPACE && keydata.action == MLX_PRESS)
-	{
-		if (data->door.is_close == true && data->door.status == CLOSED)
-			data->door.status = OPEN;
-		else if (data->door.is_close == true && data->door.status == OPEN)
-			data->door.status = CLOSED;
-	}
+		handle_door(data);
 	printf("is_door = %d\n", data->is_door);
 	printf("is_close = %d\n", data->door.is_close);
 	printf("door_pos.x = %d\n", data->door.pos.x);
 	printf("door_pos.y = %d\n", data->door.pos.y);
-	printf("door dist = %f\n", data->door.dist);
+	printf("door_dist = %f\n", data->door.dist);
+	// printf("player_pos.x = %f\n", data->player.pos.x);
+	// printf("player_pos.x = %d\n", (int)data->player.pos.x);
 }
