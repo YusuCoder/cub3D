@@ -6,11 +6,37 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 10:50:13 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/19 14:43:13 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/19 14:57:58 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d_bonus.h"
+
+// void	move_player(t_data *data, double move_x, double move_y)
+// {
+// 	t_map			*map;
+// 	t_player		*player;
+// 	t_point_double	new;
+// 	char			tile_x;
+// 	char			tile_y;
+
+// 	map = &data->map;
+// 	player = &data->player;
+// 	new.x = player->pos.x + move_x;
+// 	new.y = player->pos.y + move_y;
+// 	if (new.y > player->pos.y)
+// 		tile_y = map->map2d[(int)(new.y + PADDING)][(int)player->pos.x];
+// 	else
+// 		tile_y = map->map2d[(int)(new.y - PADDING)][(int)player->pos.x];
+// 	if (new.x > player->pos.x)
+// 		tile_x = map->map2d[(int)player->pos.y][(int)(new.x + PADDING)];
+// 	else
+// 		tile_x = map->map2d[(int)player->pos.y][(int)(new.x - PADDING)];
+// 	if (tile_y == '0' || (tile_y == '2' && data->door.status == OPEN))
+// 		player->pos.y = new.y;
+// 	if (tile_x == '0' || (tile_x == '2' && data->door.status == OPEN))
+// 		player->pos.x = new.x;
+// }
 
 void	move_player(t_data *data, double move_x, double move_y)
 {

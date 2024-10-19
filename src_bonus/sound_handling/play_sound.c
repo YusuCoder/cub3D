@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 17:39:58 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/10/19 14:46:08 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/19 15:49:26 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ pid_t player_move_sound(void)
 {
 	pid_t pid;
 
-	if (access("src_bonus/sound_handling/sounds/move4.mp3", F_OK) != -1)
+	if (access("src_bonus/sound_handling/sounds/move_garvel.mp3", F_OK) != -1)
 	{
 		pid = fork();
 		if (pid == 0)
 		{
-			execlp("afplay", "afplay", "-v", "0.9", "src_bonus/sound_handling/sounds/move4.mp3", (char *)NULL);
+			execlp("afplay", "afplay", "-v", "0.9", "src_bonus/sound_handling/sounds/move_garvel.mp3", (char *)NULL);
 			_exit(1);
 		}
 		return (pid);
@@ -37,6 +37,41 @@ pid_t player_move_sound(void)
 		printf("The file 'assets/move4.mp3' does not exist.\n");
 		return (-1);
 	}
+}
+
+void	door_sound(t_data *data)
+{
+	pid_t pid;
+
+	(void)data;
+	if (access("src_bonus/sound_handling/sounds/door.mp3", F_OK) != -1)
+	{
+		pid = fork();
+		if (pid == 0)
+		{
+			execlp("afplay", "afplay", "-v", "0.9", "src_bonus/sound_handling/sounds/door.mp3", (char *)NULL);
+			_exit(1);
+		}
+	}
+	else
+		printf("The file move1.mp3 not found!\n");
+}
+
+void	gun_sound(void)
+{
+	pid_t pid;
+
+	if (access("src_bonus/sound_handling/sounds/gun_shot.mp3", F_OK) != -1)
+	{
+		pid = fork();
+		if (pid == 0)
+		{
+			execlp("afplay", "afplay", "-v", "0.9", "src_bonus/sound_handling/sounds/gun_shot.mp3", (char *)NULL);
+			_exit(1);
+		}
+	}
+	else
+		printf("The file move1.mp3 not found!\n");
 }
 
 
