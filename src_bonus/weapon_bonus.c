@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   weapon_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 15:44:18 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/13 20:18:51 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/10/19 17:29:43 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,16 @@ void	draw_weapon_frame(t_data *data, mlx_image_t *curr, int frame)
 	draw_sprite(data->img, curr, start.x, start.y);
 }
 
+void	set_sound(t_weapon weapon)
+{
+	if (weapon == RIFLE)
+		rifle_sound();
+	else if (weapon == PISTOL)
+		gun_sound();
+	else if (weapon == KNIFE)
+		knife_sound();
+}
+
 void	draw_weapon(t_data *data, t_sprite *sprite)
 {
 	static int	frame;
@@ -66,6 +76,7 @@ void	draw_weapon(t_data *data, t_sprite *sprite)
 	if (mlx_is_mouse_down(data->mlx, MLX_MOUSE_BUTTON_LEFT))
 	{
 		shoot = true;
+		set_sound(data->weapon);
 		frame = 0;
 	}
 	if (!shoot)

@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 14:37:53 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/19 15:49:32 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/19 17:33:37 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -266,6 +266,8 @@ pid_t 		player_move_sound(void);
 void		play_sound(pthread_t *thread, void *(*play)(void *));
 void		door_sound(t_data *data);
 void		gun_sound(void);
+void		knife_sound(void);
+void		rifle_sound(void);
 
 double		radian(int degree);
 void		init_data(t_data *data);

@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 10:50:13 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/19 14:57:58 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/19 17:23:47 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ void	move_player(t_data *data, double move_x, double move_y)
 		tile_x = map->map2d[(int)player->pos.y][(int)(new.x + PADDING)];
 	else
 		tile_x = map->map2d[(int)player->pos.y][(int)(new.x - PADDING)];
-	if (tile_y != '1' || (tile_y == '2' && data->door.status == OPEN))
+	if (tile_y != '1' && (tile_y != '2' || data->door.status == OPEN))
 		player->pos.y = new.y;
-	if (tile_x != '1' || (tile_x == '2' && data->door.status == OPEN))
+	if (tile_x != '1' && (tile_x != '2' || data->door.status == OPEN))
 		player->pos.x = new.x;
 }
 
@@ -81,14 +81,25 @@ void	movement_mouse(t_data *data)
 	mlx_set_mouse_pos(data->mlx, data->width / 2, data->height / 2);
 }
 
-void	movement_handler(t_data *data)
+void	check_sound(t_data *data, bool is_moving)
 {
-	double	*angle;
-	bool	is_moving;
+	if (is_moving)
+	{
+		if (data->sound_pid <= 0)
+			data->sound_pid = player_move_sound();
+	}
+	else
+	{
+		if (data->sound_pid > 0)
+		{
+			kill(data->sound_pid, SIGKILL);
+			data->sound_pid = -1;
+		}
+	}
+}
 
-	is_moving = false;
-	angle = &data->player.angle;
-
+bool	move_hooks(t_data *data, bool is_moving, double *angle)
+{
 	if (mlx_is_key_down(data->mlx, MLX_KEY_W))
 	{
 		move_player(data, cos(*angle) * MOVE, sin(*angle) * MOVE);
@@ -109,21 +120,18 @@ void	movement_handler(t_data *data)
 		move_player(data, -sin(*angle) * MOVE, cos(*angle) * MOVE);
 		is_moving = true;
 	}
-	if (is_moving)
-    {
-    	if (data->sound_pid <= 0)
-    	{
-    	    data->sound_pid = player_move_sound();
-    	}
-    }
-    else
-    {
-        if (data->sound_pid > 0)
-        {
-            kill(data->sound_pid, SIGKILL);
-            data->sound_pid = -1;
-        }
-    }
+	return (is_moving);
+}
+
+void	movement_handler(t_data *data)
+{
+	double	*angle;
+	bool	is_moving;
+
+	is_moving = false;
+	angle = &data->player.angle;
+	is_moving = move_hooks(data, is_moving, angle);
+	check_sound(data, is_moving);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_LEFT))
 	{
 		*angle -= ROTATE;
