@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 10:50:13 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/18 18:52:25 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/19 14:43:13 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void	movement_mouse(t_data *data)
 void	movement_handler(t_data *data)
 {
 	double	*angle;
-	// pthread_t sound_thread;
 	bool	is_moving;
 
 	is_moving = false;
@@ -70,26 +69,33 @@ void	movement_handler(t_data *data)
 		is_moving = true;
 	}
 	if (mlx_is_key_down(data->mlx, MLX_KEY_S))
+	{
 		move_player(data, -cos(*angle) * MOVE, -sin(*angle) * MOVE);
+		is_moving = true;
+	}
 	else if (mlx_is_key_down(data->mlx, MLX_KEY_A))
+	{
 		move_player(data, sin(*angle) * MOVE, -cos(*angle) * MOVE);
+		is_moving = true;
+	}
 	else if (mlx_is_key_down(data->mlx, MLX_KEY_D))
+	{
 		move_player(data, -sin(*angle) * MOVE, cos(*angle) * MOVE);
+		is_moving = true;
+	}
 	if (is_moving)
     {
-        // Check if the sound process has finished
+    	if (data->sound_pid <= 0)
+    	{
+    	    data->sound_pid = player_move_sound();
+    	}
+    }
+    else
+    {
         if (data->sound_pid > 0)
         {
-            // Use waitpid with WNOHANG to check if the process has completed
-            if (waitpid(data->sound_pid, NULL, WNOHANG) == data->sound_pid)
-            {
-                data->sound_pid = -1;  // Reset the sound_pid to indicate no sound is playing
-            }
-        }
-
-        if (data->sound_pid <= 0)  // If no sound is currently playing
-        {
-            data->sound_pid = player_move_sound();  // Start the movement sound
+            kill(data->sound_pid, SIGKILL);
+            data->sound_pid = -1;
         }
     }
 	if (mlx_is_key_down(data->mlx, MLX_KEY_LEFT))
