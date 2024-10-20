@@ -6,12 +6,15 @@
 /*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 21:08:13 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/13 19:16:57 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/10/20 16:14:31 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d_bonus.h"
 
+/*---------------------------*/
+/*  Create new sprite image  */
+/*---------------------------*/
 static mlx_image_t	*new_sprite(t_data *data, char *sprite_path)
 {
 	mlx_texture_t	*texture;
@@ -27,6 +30,9 @@ static mlx_image_t	*new_sprite(t_data *data, char *sprite_path)
 	return (image);
 }
 
+/*---------------------------*/
+/*  Initialize rifle weapon  */
+/*---------------------------*/
 void	init_sprite_rifle(t_data *data, t_sprite *sprite)
 {
 	sprite->rifle[0] = new_sprite(data, "textures/sprite/rifle/rifle.png");
@@ -43,6 +49,9 @@ void	init_sprite_rifle(t_data *data, t_sprite *sprite)
 	sprite->bullet[5] = new_sprite(data, "textures/sprite/rifle/bullet6.png");
 }
 
+/*----------------------------*/
+/*  Initialize pistol weapon  */
+/*----------------------------*/
 void	init_sprite_pistol(t_data *data, t_sprite *sprite)
 {
 	sprite->pistol[0] = new_sprite(data, "textures/sprite/pistol/pistol.png");
@@ -56,6 +65,9 @@ void	init_sprite_pistol(t_data *data, t_sprite *sprite)
 	sprite->pistol[8] = new_sprite(data, "textures/sprite/pistol/pistolF8.png");
 }
 
+/*---------------------------*/
+/*  Initialize knife weapon  */
+/*---------------------------*/
 void	init_sprite_knife(t_data *data, t_sprite *sprite)
 {
 	sprite->knife[0] = new_sprite(data, "textures/sprite/knife/Knife.png");
@@ -67,6 +79,9 @@ void	init_sprite_knife(t_data *data, t_sprite *sprite)
 	sprite->knife[6] = new_sprite(data, "textures/sprite/knife/KnifeF06.png");
 }
 
+/*----------------------------*/
+/*  Initialize sprite struct  */
+/*----------------------------*/
 void	init_sprites(t_data *data)
 {
 	t_sprite	*sprite;

@@ -6,12 +6,15 @@
 /*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 17:25:42 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/16 11:48:46 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/10/20 16:14:43 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d_bonus.h"
 
+/*--------------------------*/
+/*  Initialize data struct  */
+/*--------------------------*/
 void	init_data(t_data *data)
 {
 	data->width = WIDTH;
@@ -19,7 +22,6 @@ void	init_data(t_data *data)
 	data->buf = NULL;
 	data->is_minimap = true;
 	data->is_door = false;
-	data->door.status = CLOSED;
 	data->weapon = RIFLE;
 	data->mlx = mlx_init(data->width, data->height, "cub3D", true);
 	if (data->mlx == NULL)

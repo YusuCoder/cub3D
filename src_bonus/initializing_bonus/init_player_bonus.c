@@ -6,12 +6,15 @@
 /*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 21:06:51 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/14 16:41:12 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/10/20 16:14:34 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d_bonus.h"
 
+/*------------------------*/
+/*  Invert player's view  */
+/*------------------------*/
 void	invert_view(t_player *player)
 {
 	if (player->pov == NORTH)
@@ -24,6 +27,9 @@ void	invert_view(t_player *player)
 		player->angle = radian(180);
 }
 
+/*----------------------------*/
+/*  Initialize player struct  */
+/*----------------------------*/
 void	init_player(t_data *data)
 {
 	t_player	*player;
@@ -32,7 +38,6 @@ void	init_player(t_data *data)
 	player = &data->player;
 	map = &data->map;
 	player->angle = 0;
-	// player->pitch = 0;
 	player->fov = radian(VIEW);
 	player->pos.x = map->player_position.x + 0.5;
 	player->pos.y = map->player_position.y + 0.5;

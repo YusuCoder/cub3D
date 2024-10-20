@@ -6,12 +6,15 @@
 /*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 11:40:38 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/19 13:12:57 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/10/20 16:46:19 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d_bonus.h"
 
+/*------------------------------*/
+/*  Put pixel on minimap image  */
+/*------------------------------*/
 void	set_tile_pixel(mlx_image_t *img, int x, int y, uint32_t color)
 {
 	int	i;
@@ -30,6 +33,9 @@ void	set_tile_pixel(mlx_image_t *img, int x, int y, uint32_t color)
 	}
 }
 
+/*---------------------------------*/
+/*  Set color of tiles on minimap  */
+/*---------------------------------*/
 int	set_color(char **map, uint32_t *color, t_point_int pos, char symbol)
 {
 	char	tile;
@@ -37,13 +43,20 @@ int	set_color(char **map, uint32_t *color, t_point_int pos, char symbol)
 	tile = map[pos.y][pos.x];
 	if (tile == ' ')
 		return (0);
+	if (tile == '0' || tile == symbol)
+		*color = M_EMPTY;
 	else if (tile == '1')
 		*color = M_WALL;
-	else if (tile == '0' || tile == symbol)
-		*color = M_EMPTY;
+	else if (tile == '2')
+		*color = M_DOOR_C;
+	else if (tile == 'O')
+		*color = M_DOOR_O;
 	return (1);
 }
 
+/*-------------------------*/
+/*  Draw tiles on minimap  */
+/*-------------------------*/
 void	draw_minimap_tiles(t_map *map, t_point_int offset, mlx_image_t *img)
 {
 	t_point_int	pos;
@@ -69,35 +82,41 @@ void	draw_minimap_tiles(t_map *map, t_point_int offset, mlx_image_t *img)
 	}
 }
 
+/*--------------------------*/
+/*  Draw player on minimap  */
+/*--------------------------*/
 void	draw_minimap_player(char **map, t_point_double pos_map, \
 							t_point_int offset, mlx_image_t *img)
 {
 	t_point_double	pos;
 	double			limit;
-	char			tile_x;
-	char			tile_y;
 
 	limit = M_TILE / 2;
 	pos.x = (pos_map.x - offset.x) * M_TILE;
 	pos.y = (pos_map.y - offset.y) * M_TILE;
-	tile_x = map[(int)pos_map.y][(int)(pos_map.x + limit / M_TILE)];
-	tile_y = map[(int)(pos_map.y + limit / M_TILE)][(int)pos_map.x];
-	if ((tile_x == '1' || tile_x == '2')
+	if ((map[(int)pos_map.y][(int)(pos_map.x + limit / M_TILE)] == '1'
+		|| map[(int)pos_map.y][(int)(pos_map.x + limit / M_TILE)] == '2')
 		&& fmod(pos.x, M_TILE) > M_TILE - limit)
 		pos.x = (floor(pos.x / M_TILE) + 1) * M_TILE - limit;
-	else if ((tile_x == '1' || tile_x == '2')
+	else if ((map[(int)pos_map.y][(int)(pos_map.x - limit / M_TILE)] == '1'
+		|| map[(int)pos_map.y][(int)(pos_map.x - limit / M_TILE)] == '2')
 		&& fmod(pos.x, M_TILE) < limit)
 		pos.x = floor(pos.x / M_TILE) * M_TILE + limit;
-	if ((tile_y == '1' || tile_y == '2')
+	if ((map[(int)(pos_map.y + limit / M_TILE)][(int)pos_map.x] == '1'
+		|| map[(int)(pos_map.y + limit / M_TILE)][(int)pos_map.x] == '2')
 		&& fmod(pos.y, M_TILE) > M_TILE - limit)
 		pos.y = (floor(pos.y / M_TILE) + 1) * M_TILE - limit;
-	else if ((tile_y == '1' || tile_y == '2')
+	else if ((map[(int)(pos_map.y - limit / M_TILE)][(int)pos_map.x] == '1'
+		|| map[(int)(pos_map.y - limit / M_TILE)][(int)pos_map.x] == '2')
 		&& fmod(pos.y, M_TILE) < limit)
 		pos.y = floor(pos.y / M_TILE) * M_TILE + limit;
-	set_tile_pixel(img, (int)pos.x - limit, (int)pos.y - limit, M_PLAYER);
+	set_tile_pixel(img, (int)pos.x - M_TILE / 2, \
+					(int)pos.y - M_TILE / 2, M_PLAYER);
 }
 
-
+/*----------------------*/
+/*  Draw minimap image  */
+/*----------------------*/
 void	draw_minimap(t_data *data)
 {
 	t_point_int	offset;
@@ -108,7 +127,7 @@ void	draw_minimap(t_data *data)
 		offset.x = 0;
 	if (offset.y < 0)
 		offset.y = 0;
-	if (offset.x > data->map.width - M_WIDTH/ M_TILE)
+	if (offset.x > data->map.width - M_WIDTH / M_TILE)
 		offset.x = data->map.width - M_WIDTH / M_TILE;
 	if (offset.y > data->map.height - M_HEIGHT / M_TILE)
 		offset.y = data->map.height - M_HEIGHT / M_TILE;

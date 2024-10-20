@@ -6,12 +6,15 @@
 /*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 21:05:20 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/18 11:28:13 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/10/20 16:14:40 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d_bonus.h"
 
+/*------------------------*/
+/*  Set width of the map  */
+/*------------------------*/
 int	set_map_width(char **map)
 {
 	int	height;
@@ -32,6 +35,9 @@ int	set_map_width(char **map)
 	return (max_width);
 }
 
+/*-------------------------*/
+/*  Set height of the map  */
+/*-------------------------*/
 int	set_map_height(char **map)
 {
 	int	height;
@@ -42,6 +48,9 @@ int	set_map_height(char **map)
 	return (height);
 }
 
+/*-------------------------*/
+/*  Initialize map struct  */
+/*-------------------------*/
 void	init_map(t_data *data)
 {
 	t_map	*map;
@@ -76,8 +85,6 @@ void	init_map(t_data *data)
 	map->player_direction = 'E';
 	map->player_position.x = 30;
 	map->player_position.y = 12;
-	// map->player_position.x = 4;
-	// map->player_position.y = 18;
 	map->color_ceiling = 0x87CEEB;
 	map->color_floor = 0x6B8E23;
 	map->path_texture_north = "textures/wall/metal1.png";

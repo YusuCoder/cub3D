@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:06:36 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/10/12 17:16:27 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/20 16:00:48 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-#include <sys/types.h>
-#include <sys/uio.h>
+# include <sys/types.h>
+# include <sys/uio.h>
 
 typedef struct t_struct
 {

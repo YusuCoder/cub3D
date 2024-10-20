@@ -6,12 +6,15 @@
 /*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 20:21:15 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/13 20:27:40 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/10/20 16:35:36 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d_bonus.h"
 
+/*-----------------------------------------------------*/
+/*  Set counter to skip first 2 frames of game screen  */
+/*-----------------------------------------------------*/
 void	set_counter(t_data *data, int *counter)
 {
 	if (counter == NULL)
@@ -22,6 +25,9 @@ void	set_counter(t_data *data, int *counter)
 		mlx_set_mouse_pos(data->mlx, data->width / 2, data->height / 2);
 }
 
+/*-------------------------*/
+/*  Start game simulation  */
+/*-------------------------*/
 void	simulation(void *param)
 {
 	t_data		*data;
