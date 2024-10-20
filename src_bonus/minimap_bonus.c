@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 11:40:38 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/19 15:02:44 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/20 14:21:32 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	draw_minimap_tiles(t_map *map, t_point_int offset, mlx_image_t *img)
 	uint32_t	color;
 
 	i.y = -1;
+	color = 0;
 	while (++i.y < M_HEIGHT / M_TILE)
 	{
 		pos.y = offset.y + i.y;

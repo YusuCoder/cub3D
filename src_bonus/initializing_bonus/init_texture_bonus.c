@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_texture_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 21:09:23 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/16 10:40:20 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/10/19 19:02:37 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,6 @@ void	init_texture(t_data *data)
 		|| !check_door(texture->door_left, 5)
 		|| !check_door(texture->door_right, 5))
 		error_free_exit(data, "Failed to create mlx texture");
-	texture->test = mlx_load_png("textures/wall/wood1.png");
+	texture->test = mlx_load_png("textures/door/door_clos.png");
+	texture->door_open = mlx_load_png("textures/door/door_clos.png");
 }

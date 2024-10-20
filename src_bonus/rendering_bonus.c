@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 14:41:30 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/18 20:52:09 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/10/19 19:05:51 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@ void	define_texture_values(t_data *data, t_ray *ray, \
 	if (data->is_door
 		&& data->map.map2d[ray->map.row][ray->map.column] == '2')
 		*texture = data->texture.test;
+	else if (data->is_door
+		&& data->map.map2d[ray->map.row][ray->map.column] == 'O')
+		*texture = data->texture.door_open;
 	else
 	{
 		if (ray->wall == NORTH)

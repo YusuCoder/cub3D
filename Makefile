@@ -11,7 +11,7 @@ RESET	:= \033[0m
 NAME	:= cub3d
 BONUS	:= cub3d_bonus
 CC		:= cc
-CFLAGS	:= -Wall -Wextra -Werror -Ofast -g -fsanitize=address
+CFLAGS	:= -Wall -Wextra -Werror -Ofast -g
 RM		:= rm -rf
 LIBMLX	:= ./MLX42
 
@@ -98,8 +98,12 @@ mlx:
 	@echo "$(GREEN)MLX42 connected.$(RESET)"
 
 $(NAME): $(OBJS) $(LIBFT)
-	@$(CC) $(CFLAGS) $^ -o $@ $(LIBS)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $@ $(LIBS)
 	@echo "$(GREEN)cub3D created.$(RESET)"
+
+# $(NAME): $(OBJS) $(LIBFT)
+# 	@$(CC) $(CFLAGS) $^ -o $@ $(LIBS)
+# 	@echo "$(GREEN)cub3D created.$(RESET)"
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 	@mkdir -p $(@D)

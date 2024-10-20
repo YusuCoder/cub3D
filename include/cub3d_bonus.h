@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 14:37:53 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/19 17:33:37 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/19 18:01:24 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,6 +196,7 @@ typedef struct s_texture
 	int				*rgb_cell;
 	int				*rgb_floor;
 	mlx_texture_t	*test;
+	mlx_texture_t	*door_open;
 }	t_texture;
 
 /*-----------------*/

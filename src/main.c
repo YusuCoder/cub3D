@@ -6,16 +6,22 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:52:54 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/14 16:37:25 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/20 16:25:17 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
+// void	check_leaks(void)
+// {
+// 	system("leaks cub3d");
+// }
+
 int	main(int argc, char **argv)
 {
 	t_data	data;
 
+	// atexit(check_leaks);
 	(void)argc;
 	if (parse(&data, argv) == 1)
 		return (-1);

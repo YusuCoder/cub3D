@@ -8,6 +8,7 @@
 		"vector": "c",
 		"get_next_line.h": "c",
 		"algorithm": "c",
-		"mlx42.h": "c"
+		"mlx42.h": "c",
+		"libft.h": "c"
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 18:29:46 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/10/16 18:15:24 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/20 15:00:06 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int	*set_color(char *map)
 		free_it((void **)rgb_code);
 		return (0);
 	}
-	// free_it((void **)rgb_code);
+	free_map(rgb_code);
 	return (color);
 }
 

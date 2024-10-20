@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:30:30 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/10/16 17:06:50 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/19 18:28:58 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	check_all_components(char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			if (strchr("10NWES2\n \t", map[i][j]) == NULL)
+			if (strchr("10NWES2O\n \t", map[i][j]) == NULL)
     			return (1);
 			j++;
 		}

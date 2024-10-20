@@ -6,16 +6,11 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 15:22:44 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/10/16 17:22:50 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/20 16:29:11 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d_bonus.h"
-
-// int	get_color(int r, int g, int b, int a)
-// {
-// 	return (r << 24 | g << 16 | b << 8 | a);
-// }
 
 int	check_player(char **map, t_data *data)
 {
@@ -42,11 +37,40 @@ int	check_player(char **map, t_data *data)
 	return (1);
 }
 
+int	check_player_pos(char **map)
+{
+	int	i;
+	int	k;
+
+	i = 1;
+	while (map && map[i + 2])
+	{
+		k = 0;
+		while (map[i][k])
+		{
+			if ((ft_strchr("NEWS", map[i][k]) != NULL && ft_strchr(" \t", map[i][k + 1]) != NULL)
+					|| (ft_strchr("NEWS", map[i][k]) != NULL && ft_strchr(" \t", map[i][k - 1]) != NULL))
+				return (1);
+			if ((ft_strchr("NEWS", map[i][k]) != NULL && ft_strchr(" \t", map[i + 1][k]) != NULL)
+					|| (ft_strchr("NEWS", map[i][k]) != NULL && ft_strchr(" \t", map[i - 1][k]) != NULL))
+				return (1);
+			k++;
+		}
+		i++;
+	}
+	return (0);
+}
+
 void	get_player_dir(t_data *data)
 {
 	if(check_player(data->map.map2d, data) == 1)
 	{
 		printf("No player found!\n");
+		free_and_exit(data->map.map2d);
+	}
+	if (check_player_pos(data->map.map2d) == 1)
+	{
+		printf("Warning! Player is in a danger zone!\n");
 		free_and_exit(data->map.map2d);
 	}
 }

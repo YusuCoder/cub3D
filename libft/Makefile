@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+         #
+#    By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/09 16:26:09 by tkubanyc          #+#    #+#              #
-#    Updated: 2024/08/28 17:11:05 by tkubanyc         ###   ########.fr        #
+#    Updated: 2024/10/20 14:57:27 by ryusupov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ BLUE = \033[0;34m
 CYAN = \033[0;36m
 RESET = \033[0m
 
-NAME = libft
+NAME = libft.a
 
 SRCS = ft_atoi.c \
 		ft_isalnum.c \

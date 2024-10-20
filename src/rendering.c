@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 14:41:30 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/09/28 21:44:42 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/10/20 14:27:03 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	draw_walls(t_data *data, t_ray *ray, int x, int y)
 	mlx_texture_t	*texture;
 
 	wall_x = 0.0;
+	texture = NULL;
 	define_texture_values(data, ray, &texture, &wall_x);
 	tex.x = (int)(wall_x * texture->width);
 	if ((ray->side == VERTICAL && ray->direction.x < 0)
