@@ -6,12 +6,15 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 21:05:20 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/18 12:13:17 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/20 17:06:02 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d_bonus.h"
 
+/*------------------------*/
+/*  Set width of the map  */
+/*------------------------*/
 int	set_map_width(char **map)
 {
 	int	height;
@@ -32,6 +35,9 @@ int	set_map_width(char **map)
 	return (max_width);
 }
 
+/*-------------------------*/
+/*  Set height of the map  */
+/*-------------------------*/
 int	set_map_height(char **map)
 {
 	int	height;
@@ -42,6 +48,9 @@ int	set_map_height(char **map)
 	return (height);
 }
 
+/*-------------------------*/
+/*  Initialize map struct  */
+/*-------------------------*/
 void	init_map(t_data *data)
 {
 	t_map	*map;

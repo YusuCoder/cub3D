@@ -6,12 +6,15 @@
 /*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 11:48:25 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/12 15:45:15 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/10/20 16:36:46 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d_bonus.h"
 
+/*---------------------*/
+/*  Draw sprite image  */
+/*---------------------*/
 void	draw_sprite(mlx_image_t *img, mlx_image_t *spr, int start_x, \
 					int start_y)
 {
@@ -42,6 +45,9 @@ void	draw_sprite(mlx_image_t *img, mlx_image_t *spr, int start_x, \
 	}
 }
 
+/*-------------------*/
+/*  Draw aim sprite  */
+/*-------------------*/
 void	draw_aim(mlx_image_t *img, mlx_image_t *aim)
 {
 	int	start_x;

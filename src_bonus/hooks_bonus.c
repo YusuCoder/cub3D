@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 13:36:56 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/19 17:59:39 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/20 17:26:11 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,22 +44,42 @@ void	resize_hook(int32_t new_width, int32_t new_height, void *param)
 	}
 }
 
+/*-----------------------------*/
+/*  Handle minimap definition  */
+/*-----------------------------*/
+void	handle_minimap(t_data *data)
+{
+	if (data->is_minimap == true)
+		data->is_minimap = false;
+	else
+		data->is_minimap = true;
+}
+
+/*--------------------------*/
+/*  Handle door definition  */
+/*--------------------------*/
+
+
 void	handle_door(t_data *data)
 {
-	if (data->door.is_close == true
-		&& data->map.map2d[data->door.pos.y][data->door.pos.x] == '2')
-	{
-		data->map.map2d[data->door.pos.y][data->door.pos.x] = 'O';
-		door_sound(data);
-	}
-	else if (data->door.is_close == true
-		&& data->map.map2d[data->door.pos.y][data->door.pos.x] == 'O'
-		&& data->map.map2d[(int)data->player.pos.y][(int)data->player.pos.x] \
-			!= 'O')
-	{
-		data->map.map2d[data->door.pos.y][data->door.pos.x] = '2';
-		door_sound(data);
-	}
+	t_map		*map;
+	t_door		*door;
+	t_point_int	pos_door;
+	t_point_int	pos_player;
+
+	map = &data->map;
+	door = &data->door;
+	pos_door.x = door->pos.x;
+	pos_door.y = door->pos.y;
+	pos_player.x = (int)data->player.pos.x;
+	pos_player.y = (int)data->player.pos.y;
+	if (door->is_close == true
+		&& map->map2d[pos_door.y][pos_door.x] == '2')
+		map->map2d[pos_door.y][pos_door.x] = 'O';
+	else if (door->is_close == true
+		&& map->map2d[pos_door.y][pos_door.x] == 'O'
+		&& map->map2d[pos_player.y][pos_player.x] != 'O')
+		map->map2d[pos_door.y][pos_door.x] = '2';
 }
 
 /*----------------------------------------*/
@@ -72,19 +92,14 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	data = param;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 		free_exit(data, EXIT_SUCCESS);
-	if (keydata.key == MLX_KEY_M && keydata.action == MLX_PRESS)
-	{
-		if (data->is_minimap == true)
-			data->is_minimap = false;
-		else
-			data->is_minimap = true;
-	}
 	if (keydata.key == MLX_KEY_1 && keydata.action == MLX_PRESS)
 		data->weapon = RIFLE;
 	if (keydata.key == MLX_KEY_2 && keydata.action == MLX_PRESS)
 		data->weapon = PISTOL;
 	if (keydata.key == MLX_KEY_3 && keydata.action == MLX_PRESS)
 		data->weapon = KNIFE;
+	if (keydata.key == MLX_KEY_M && keydata.action == MLX_PRESS)
+		handle_minimap(data);
 	if (keydata.key == MLX_KEY_SPACE && keydata.action == MLX_PRESS)
 		handle_door(data);
 }

@@ -6,12 +6,15 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 15:44:18 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/19 17:29:43 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/20 17:16:45 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d_bonus.h"
 
+/*------------------------*/
+/*  Draw weapon's bullet  */
+/*------------------------*/
 void	draw_bullet(mlx_image_t *img, t_sprite *sprite, int frame)
 {
 	mlx_image_t	*curr_sprite;
@@ -27,6 +30,9 @@ void	draw_bullet(mlx_image_t *img, t_sprite *sprite, int frame)
 	draw_sprite(img, curr_sprite, start.x, start.y);
 }
 
+/*---------------------------*/
+/*  Set drawing start point  */
+/*---------------------------*/
 t_point_int	set_start_point(t_weapon weapon, mlx_image_t *img, \
 							mlx_image_t *curr)
 {
@@ -45,6 +51,9 @@ t_point_int	set_start_point(t_weapon weapon, mlx_image_t *img, \
 	return (start);
 }
 
+/*----------------------------------------*/
+/*  Draw weapon frame with certain image  */
+/*----------------------------------------*/
 void	draw_weapon_frame(t_data *data, mlx_image_t *curr, int frame)
 {
 	t_point_int	start;
@@ -65,6 +74,9 @@ void	set_sound(t_weapon weapon)
 		knife_sound();
 }
 
+/*----------------------*/
+/*  Draw weapon sprite  */
+/*----------------------*/
 void	draw_weapon(t_data *data, t_sprite *sprite)
 {
 	static int	frame;

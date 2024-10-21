@@ -6,7 +6,7 @@
 /*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:49:19 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/12 21:15:18 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/10/20 16:45:47 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@ void	free_array(char **array)
 	free(array);
 }
 
+/*-----------------------*/
+/*  Delete all textures  */
+/*-----------------------*/
 void	delete_textures(t_texture *texture)
 {
 	if (texture->north != NULL)
@@ -53,8 +56,16 @@ void	delete_textures(t_texture *texture)
 		mlx_delete_texture(texture->west);
 		texture->west = NULL;
 	}
+	if (texture->door != NULL)
+	{
+		mlx_delete_texture(texture->door);
+		texture->door = NULL;
+	}
 }
 
+/*----------------------------*/
+/*  Delete all weapon images  */
+/*----------------------------*/
 void	delete_weapon(mlx_t *mlx, mlx_image_t *weapon[], int len)
 {
 	int	i;
@@ -71,6 +82,9 @@ void	delete_weapon(mlx_t *mlx, mlx_image_t *weapon[], int len)
 	}
 }
 
+/*----------------------------*/
+/*  Delete all sprite images  */
+/*----------------------------*/
 void	delete_sprites(t_sprite *sprite, mlx_t *mlx)
 {
 	if (sprite->aim != NULL)
@@ -84,11 +98,14 @@ void	delete_sprites(t_sprite *sprite, mlx_t *mlx)
 	delete_weapon(mlx, sprite->knife, 7);
 }
 
+/*----------------------------------------------*/
+/*  Free all allocated memory and exit program  */
+/*----------------------------------------------*/
 void	free_exit(t_data *data, int exit_status)
 {
 	mlx_close_window(data->mlx);
 	if (data->img != NULL)
-	mlx_delete_image(data->mlx, data->img);
+		mlx_delete_image(data->mlx, data->img);
 	if (data->buf != NULL)
 		mlx_delete_image(data->mlx, data->buf);
 	delete_textures(&data->texture);

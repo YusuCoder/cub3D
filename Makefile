@@ -65,6 +65,7 @@ BONUS_SRC		:= main_bonus.c \
 				simulation_bonus.c \
 				hooks_bonus.c \
 				ray_casting_bonus.c \
+				ray_casting_utils_bonus.c \
 				rendering_bonus.c \
 				utils_bonus.c \
 				free_bonus.c \

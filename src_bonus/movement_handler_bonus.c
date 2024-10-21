@@ -6,38 +6,15 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 10:50:13 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/19 17:23:47 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/21 12:10:43 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d_bonus.h"
 
-// void	move_player(t_data *data, double move_x, double move_y)
-// {
-// 	t_map			*map;
-// 	t_player		*player;
-// 	t_point_double	new;
-// 	char			tile_x;
-// 	char			tile_y;
-
-// 	map = &data->map;
-// 	player = &data->player;
-// 	new.x = player->pos.x + move_x;
-// 	new.y = player->pos.y + move_y;
-// 	if (new.y > player->pos.y)
-// 		tile_y = map->map2d[(int)(new.y + PADDING)][(int)player->pos.x];
-// 	else
-// 		tile_y = map->map2d[(int)(new.y - PADDING)][(int)player->pos.x];
-// 	if (new.x > player->pos.x)
-// 		tile_x = map->map2d[(int)player->pos.y][(int)(new.x + PADDING)];
-// 	else
-// 		tile_x = map->map2d[(int)player->pos.y][(int)(new.x - PADDING)];
-// 	if (tile_y == '0' || (tile_y == '2' && data->door.status == OPEN))
-// 		player->pos.y = new.y;
-// 	if (tile_x == '0' || (tile_x == '2' && data->door.status == OPEN))
-// 		player->pos.x = new.x;
-// }
-
+/*----------------------------*/
+/*  Define player's movement  */
+/*----------------------------*/
 void	move_player(t_data *data, double move_x, double move_y)
 {
 	t_map			*map;
@@ -58,12 +35,15 @@ void	move_player(t_data *data, double move_x, double move_y)
 		tile_x = map->map2d[(int)player->pos.y][(int)(new.x + PADDING)];
 	else
 		tile_x = map->map2d[(int)player->pos.y][(int)(new.x - PADDING)];
-	if (tile_y != '1' && (tile_y != '2' || data->door.status == OPEN))
+	if (tile_y != '1' && tile_y != '2')
 		player->pos.y = new.y;
-	if (tile_x != '1' && (tile_x != '2' || data->door.status == OPEN))
+	if (tile_x != '1' && tile_x != '2')
 		player->pos.x = new.x;
 }
 
+/*-------------------------*/
+/*  Handle mouse movement  */
+/*-------------------------*/
 void	movement_mouse(t_data *data)
 {
 	double			*angle;
@@ -81,6 +61,9 @@ void	movement_mouse(t_data *data)
 	mlx_set_mouse_pos(data->mlx, data->width / 2, data->height / 2);
 }
 
+/*----------------------------*/
+/*  Handle player's movement  */
+/*----------------------------*/
 void	check_sound(t_data *data, bool is_moving)
 {
 	if (is_moving)

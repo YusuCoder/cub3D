@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 14:37:53 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/19 18:01:24 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/21 12:11:14 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@
 # define M_PLAYER 0xFF0000FF
 # define M_EMPTY 0x000000FF
 # define M_WALL 0xFFFFFFFF
+# define M_DOOR_O 0xAAFF00FF
+# define M_DOOR_C 0xFFD700FF
 # define MOUSE_SPEED 0.002
 
 /*-------------*/
@@ -82,13 +84,13 @@ typedef enum s_weapon
 // /*---------------*/
 // /*  Status enum  */
 // /*---------------*/
-typedef enum s_status
-{
-	OPEN,
-	OPENING,
-	CLOSED,
-	CLOSING,
-}	t_status;
+// typedef enum s_status
+// {
+// 	OPEN,
+// 	OPENING,
+// 	CLOSED,
+// 	CLOSING,
+// }	t_status;
 
 /*----------------*/
 /*  Table struct  */
@@ -183,12 +185,11 @@ typedef struct s_ray
 /*------------------*/
 typedef struct s_texture
 {
-	mlx_texture_t	*door_left[5];
-	mlx_texture_t	*door_right[5];
 	mlx_texture_t	*north;
 	mlx_texture_t	*south;
 	mlx_texture_t	*east;
 	mlx_texture_t	*west;
+	mlx_texture_t	*door;
 	int				ceiling;
 	int				floor;
 	char			**tex_path;
@@ -217,10 +218,9 @@ typedef struct s_sprite
 typedef struct s_door
 {
 	bool		is_close;
-	double		dist;
 	t_point_int	pos;
-	t_status	status;
-	int			frame;
+	double		dist;
+	// t_status	status;
 }	t_door;
 
 /*---------------*/
@@ -232,6 +232,7 @@ typedef struct s_data
 	bool		is_playing_sound;
 	int			width;
 	int			height;
+	t_ray		ray;
 	t_map		map;
 	t_player	player;
 	t_texture	texture;
@@ -283,6 +284,8 @@ void		invert_view(t_player *player);
 void		simulation(void *param);
 void		close_hook(void *param);
 void		resize_hook(int32_t new_width, int32_t new_height, void *param);
+void		handle_minimap(t_data *data);
+void		handle_door(t_data *data);
 void		key_hook(mlx_key_data_t keydata, void *param);
 void		movement_handler(t_data *data);
 void		move_player(t_data *data, double move_column, double move_row);
