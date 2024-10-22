@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initializing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 17:25:42 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/18 11:13:18 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/22 12:06:53 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,11 @@ void	init_data(t_data *data)
 	data->width = WIDTH;
 	data->height = HEIGHT;
 	data->buf = NULL;
+	data->texture.east = NULL;
+	data->texture.west = NULL;
+	data->texture.north = NULL;
+	data->texture.south = NULL;
+	data->img = NULL;
 	data->mlx = mlx_init(data->width, data->height, "cub3D", true);
 	if (data->mlx == NULL)
 		error_free_exit(data, "Failed to create mlx");

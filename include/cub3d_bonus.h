@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 14:37:53 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/21 12:11:14 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/22 12:47:38 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,17 +80,6 @@ typedef enum s_weapon
 	PISTOL,
 	KNIFE,
 }	t_weapon;
-
-// /*---------------*/
-// /*  Status enum  */
-// /*---------------*/
-// typedef enum s_status
-// {
-// 	OPEN,
-// 	OPENING,
-// 	CLOSED,
-// 	CLOSING,
-// }	t_status;
 
 /*----------------*/
 /*  Table struct  */
@@ -196,8 +185,6 @@ typedef struct s_texture
 	char			**rgb_codes;
 	int				*rgb_cell;
 	int				*rgb_floor;
-	mlx_texture_t	*test;
-	mlx_texture_t	*door_open;
 }	t_texture;
 
 /*-----------------*/
@@ -220,7 +207,6 @@ typedef struct s_door
 	bool		is_close;
 	t_point_int	pos;
 	double		dist;
-	// t_status	status;
 }	t_door;
 
 /*---------------*/
@@ -260,7 +246,7 @@ int			get_color(int r, int g, int b, int a);
 void		extract_map(t_data *data);
 void		filter_map(t_data *data);
 void		free_map(char **data);
-void		free_and_exit(char **data);
+void		free_and_exit(char **data, t_data *info);
 void		check_components(t_data *data);
 void		check_walls(t_data *data);
 void		get_player_dir(t_data *data);
@@ -270,6 +256,8 @@ void		door_sound(t_data *data);
 void		gun_sound(void);
 void		knife_sound(void);
 void		rifle_sound(void);
+void		free_path(t_data *data);
+void		free_color(t_data *data);
 
 double		radian(int degree);
 void		init_data(t_data *data);

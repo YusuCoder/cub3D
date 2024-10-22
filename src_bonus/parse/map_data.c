@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_data.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 18:29:46 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/10/16 17:08:49 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/22 12:38:23 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int	*set_color_rgb(char *map)
 		free_it((void **)rgb_code);
 		return (0);
 	}
-	// free_it((void **)rgb_code);
+	free_it((void **)rgb_code);
 	return (color);
 }
 

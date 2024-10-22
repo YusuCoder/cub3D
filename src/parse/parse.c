@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 13:12:10 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/10/16 18:15:17 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/22 12:54:25 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,38 @@ void	init_data_parse(t_data *data)
 	data->map.map2d = NULL;
 }
 
+void	free_path(t_data *data)
+{
+	if (data->map.path_texture_north != NULL)
+	{
+		free(data->map.path_texture_north);
+		data->map.path_texture_north = NULL;
+	}
+	if (data->map.path_texture_east != NULL)
+	{
+		free(data->map.path_texture_east);
+		data->map.path_texture_east = NULL;
+	}
+	if (data->map.path_texture_west != NULL)
+	{
+		free(data->map.path_texture_west);
+		data->map.path_texture_west = NULL;
+	}
+	if (data->map.path_texture_south != NULL)
+	{
+		free(data->map.path_texture_south);
+		data->map.path_texture_south = NULL;
+	}
+}
+
+void	free_color(t_data *data)
+{
+	if (data->texture.rgb_cell)
+		free(data->texture.rgb_cell);
+	if (data->texture.rgb_floor)
+		free(data->texture.rgb_floor);
+}
+
 int	parse(t_data *data, char **argv)
 {
 	init_data_parse(data);
@@ -120,9 +152,14 @@ int	parse(t_data *data, char **argv)
 	extract_path(data);
 	extract_color(data);
 	extract_map(data);
+	free_map(data->map.map_file);
 	filter_map(data);
+	free_map(data->map.temp_map);
 	if (map_data(data) == 1)
+	{
+		free_path(data);
 		exit(EXIT_FAILURE);
+	}
 	check_components(data);
 	check_walls(data);
 	get_player_dir(data);

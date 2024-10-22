@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   copy_validate_map.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 16:25:24 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/10/16 18:17:49 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/22 12:48:35 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,22 +139,22 @@ void	check_walls(t_data *data)
 	if (top_and_btm_walls(data->map.map2d) == 1)
 	{
 		printf("Top or bottom walls are not closed\n");
-		free_and_exit(data->map.map2d);
+		free_and_exit(data->map.map2d, data);
 	}
 	if (side_walls(data->map.map2d) == 1)
 	{
 		printf("Side walls are not closed\n");
-		free_and_exit(data->map.map2d);
+		free_and_exit(data->map.map2d, data);
 	}
 	if (middle_walls(data->map.map2d) == 1)
 	{
 		printf("Middle walls are not closed\n");
-		free_and_exit(data->map.map2d);
+		free_and_exit(data->map.map2d, data);
 	}
 	if (size_of_lines(data->map.map2d) == 1)
 	{
 		printf("Map is not covered with walls\n");
-		free_and_exit(data->map.map2d);
+		free_and_exit(data->map.map2d, data);
 	}
 }
 

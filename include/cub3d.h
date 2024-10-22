@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 19:18:42 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/20 16:54:06 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/22 12:53:04 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,10 +185,12 @@ int		get_color(int r, int g, int b, int a);
 void	extract_map(t_data *data);
 void	filter_map(t_data *data);
 void	free_map(char **data);
-void	free_and_exit(char **data);
+void	free_and_exit(char **data, t_data *info);
 void	check_components(t_data *data);
 void	check_walls(t_data *data);
 void	get_player_dir(t_data *data);
+void	free_path(t_data *data);
+void	free_color(t_data *data);
 
 double	radian(int degree);
 void	init_data(t_data *data);

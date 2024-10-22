@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_player_dir.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 15:22:44 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/10/20 16:25:54 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/22 12:54:19 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,11 @@ void	get_player_dir(t_data *data)
 	if(check_player(data->map.map2d, data) == 1)
 	{
 		printf("No player found!\n");
-		free_and_exit(data->map.map2d);
+		free_and_exit(data->map.map2d, data);
 	}
 	if (check_player_pos(data->map.map2d) == 1)
 	{
 		printf("Warning! Player is in a danger zone!\n");
-		free_and_exit(data->map.map2d);
+		free_and_exit(data->map.map2d, data);
 	}
 }

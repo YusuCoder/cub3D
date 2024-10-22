@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_components.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:30:30 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/10/20 14:45:06 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/22 12:53:26 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,11 @@ void	check_components(t_data *data)
 	if (one_component_check(data->map.map2d) == 1)
 	{
 		printf("More than one component found!\n");
-		free_and_exit(data->map.map2d);
+		free_and_exit(data->map.map2d, data);
 	}
 	if (check_all_components(data->map.map2d) == 1)
 	{
 		printf("Unnecessary component found!\n");
-		free_and_exit(data->map.map2d);
+		free_and_exit(data->map.map2d, data);
 	}
 }

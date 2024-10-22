@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extract_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:10:56 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/10/16 18:15:54 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/22 12:54:02 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	extract_map(t_data *data)
 			length = get_length(data->map.map_file, i);
 			data->map.temp_map = (char **)malloc(sizeof(char *) * (length + 1));
 			if (!data->map.temp_map)
-				free_and_exit(data->map.map_file);
+				free_and_exit(data->map.map_file, data);
 			j = 0;
 			while (data->map.map_file[i])
 			{
@@ -87,7 +87,7 @@ void filter_map(t_data *data)
     length = get_filtered_length(data->map.temp_map, i);
     data->map.map2d = (char **)malloc(sizeof(char *) * (length + 1));
     if (!data->map.map2d)
-        free_and_exit(data->map.temp_map);
+        free_and_exit(data->map.temp_map, data);
     j = 0;
     while (data->map.temp_map[i])
     {
@@ -106,5 +106,4 @@ void filter_map(t_data *data)
         i++;
     }
     data->map.map2d[j] = NULL;
-	free_map(data->map.temp_map);
 }

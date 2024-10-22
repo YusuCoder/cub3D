@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 13:12:10 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/10/16 17:05:57 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/22 12:49:50 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,9 +120,14 @@ int	parse(t_data *data, char **argv)
 	extract_path(data);
 	extract_color(data);
 	extract_map(data);
+	free_map(data->map.map_file);
 	filter_map(data);
+	free_map(data->map.temp_map);
 	if (map_data(data) == 1)
+	{
+		free_path(data);
 		exit(EXIT_FAILURE);
+	}
 	check_components(data);
 	check_walls(data);
 	get_player_dir(data);

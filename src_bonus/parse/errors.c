@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 13:54:22 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/10/16 17:06:43 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/22 12:50:57 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	free_map(char **data)
 	}
 }
 
-void	free_and_exit(char **data)
+void		free_and_exit(char **data, t_data *info)
 {
 	size_t	i;
 
@@ -70,5 +70,7 @@ void	free_and_exit(char **data)
 		free(data);
 		data = NULL;
 	}
+	free_color(info);
+	free_path(info);
 	exit(EXIT_FAILURE);
 }

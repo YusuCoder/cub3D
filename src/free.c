@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:49:19 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/20 15:04:56 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/22 12:05:27 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	free_array(char **array)
 
 void	free_exit(t_data *data, int exit_status)
 {
-	mlx_close_window(data->mlx);
+	// mlx_close_window(data->mlx);
 	if (data->img != NULL)
 		mlx_delete_image(data->mlx, data->img);
 	if (data->buf != NULL)
@@ -48,6 +48,8 @@ void	free_exit(t_data *data, int exit_status)
 		mlx_delete_texture(data->texture.west);
 	if (data->mlx != NULL)
 		mlx_terminate(data->mlx);
+	free_color(data);
+	free_path(data);
 	if (data != NULL)
 	{
 		if (data->map.map2d != NULL)

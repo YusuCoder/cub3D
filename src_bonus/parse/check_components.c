@@ -3,14 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   check_components.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:30:30 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/10/19 18:28:58 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/22 12:48:16 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d_bonus.h"
+
+/*---------FREE FUNCTIONS---------*/
+
+void	free_path(t_data *data)
+{
+	if (data->map.path_texture_north != NULL)
+	{
+		free(data->map.path_texture_north);
+		data->map.path_texture_north = NULL;
+	}
+	if (data->map.path_texture_east != NULL)
+	{
+		free(data->map.path_texture_east);
+		data->map.path_texture_east = NULL;
+	}
+	if (data->map.path_texture_west != NULL)
+	{
+		free(data->map.path_texture_west);
+		data->map.path_texture_west = NULL;
+	}
+	if (data->map.path_texture_south != NULL)
+	{
+		free(data->map.path_texture_south);
+		data->map.path_texture_south = NULL;
+	}
+}
+
+void	free_color(t_data *data)
+{
+	if (data->texture.rgb_cell)
+		free(data->texture.rgb_cell);
+	if (data->texture.rgb_floor)
+		free(data->texture.rgb_floor);
+}
+/*-------END OF FREE FUNCTIONS---------*/
 
 int	one_component_check(char **map)
 {
@@ -64,11 +99,11 @@ void	check_components(t_data *data)
 	if (one_component_check(data->map.map2d) == 1)
 	{
 		printf("More than one component found!\n");
-		free_and_exit(data->map.map2d);
+		free_and_exit(data->map.map2d, data);
 	}
 	if (check_all_components(data->map.map2d) == 1)
 	{
 		printf("Unnecessary component found!\n");
-		free_and_exit(data->map.map2d);
+		free_and_exit(data->map.map2d, data);
 	}
 }
