@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:10:56 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/10/16 17:06:40 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/21 12:57:51 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ void filter_map(t_data *data)
                 while (--j >= 0)
                     free(data->map.map2d[j]);
                 free(data->map.map2d);
+				free_map(data->map.temp_map);
                 exit(EXIT_FAILURE);
             }
             j++;

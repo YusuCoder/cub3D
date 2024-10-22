@@ -12,12 +12,21 @@ NAME	:= cub3d
 BONUS	:= cub3d_bonus
 CC		:= cc
 CFLAGS	:= -Wall -Wextra -Werror -Ofast -g
+
 RM		:= rm -rf
 LIBMLX	:= ./MLX42
 
 # Include directories
 INCLUDES	:= -I ./include -I ./libft -I $(LIBMLX)/include
-LIBS		:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
+# LIBS		:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
+
+#for macOS
+# MLX42FLAGS		:= -lglfw -framework Cocoa -framework OpenGL -framework IOKit
+
+#for Ubuntu:
+MLX42FLAGS		:= -lglfw -ldl -lGL
+
+LIBS		:= $(LIBMLX)/build/libmlx42.a -ldl $(MLX42FLAGS) -pthread -lm
 
 # Mandatory Source and Object files
 OBJ_PATH	:= ./obj

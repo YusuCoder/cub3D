@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:49:19 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/20 16:45:47 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/10/22 10:41:24 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,10 @@ void	delete_sprites(t_sprite *sprite, mlx_t *mlx)
 /*----------------------------------------------*/
 void	free_exit(t_data *data, int exit_status)
 {
+	(void)data;
+	(void)exit_status;
+	if (data->map.map2d != NULL)
+		free_array(data->map.map2d);
 	mlx_close_window(data->mlx);
 	if (data->img != NULL)
 		mlx_delete_image(data->mlx, data->img);
@@ -111,7 +115,6 @@ void	free_exit(t_data *data, int exit_status)
 	delete_textures(&data->texture);
 	delete_sprites(&data->sprite, data->mlx);
 	mlx_terminate(data->mlx);
-	if (data->map.map2d != NULL)
-		free_array(data->map.map2d);
 	exit(exit_status);
+	exit(0);
 }
