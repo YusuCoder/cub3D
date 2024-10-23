@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   extract_map.c                                      :+:      :+:    :+:   */
+/*   bonus_extract_map.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:10:56 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/10/22 12:49:30 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/10/23 16:01:59 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,34 +77,34 @@ void	extract_map(t_data *data)
 }
 void filter_map(t_data *data)
 {
-    int i;
-    int j;
-    int length;
+	int i;
+	int j;
+	int length;
 
-    i = 0;
-    while (data->map.temp_map[i][0] == '\n')
-        i++;
-    length = get_filtered_length(data->map.temp_map, i);
-    data->map.map2d = (char **)malloc(sizeof(char *) * (length + 1));
-    if (!data->map.map2d)
-        free_and_exit(data->map.temp_map, data);
-    j = 0;
-    while (data->map.temp_map[i])
-    {
-        if (data->map.temp_map[i][0] != '\n')
-        {
-            data->map.map2d[j] = ft_strdup(data->map.temp_map[i]);
-            if (!data->map.map2d[j])
-            {
-                while (--j >= 0)
-                    free(data->map.map2d[j]);
-                free(data->map.map2d);
+	i = 0;
+	while (data->map.temp_map[i][0] == '\n')
+		i++;
+	length = get_filtered_length(data->map.temp_map, i);
+	data->map.map2d = (char **)malloc(sizeof(char *) * (length + 1));
+	if (!data->map.map2d)
+		free_and_exit(data->map.temp_map, data);
+	j = 0;
+	while (data->map.temp_map[i])
+	{
+		if (data->map.temp_map[i][0] != '\n')
+		{
+			data->map.map2d[j] = ft_strdup(data->map.temp_map[i]);
+			if (!data->map.map2d[j])
+			{
+				while (--j >= 0)
+					free(data->map.map2d[j]);
+				free(data->map.map2d);
 				free_map(data->map.temp_map);
-                exit(EXIT_FAILURE);
-            }
-            j++;
-        }
-        i++;
-    }
-    data->map.map2d[j] = NULL;
+				exit(EXIT_FAILURE);
+			}
+			j++;
+		}
+		i++;
+	}
+	data->map.map2d[j] = NULL;
 }
