@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   extract_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:10:56 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/10/22 12:54:02 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/10/23 13:14:46 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-int	get_length(char **map, int i)
+static int	get_length(char **map, int i)
 {
 	int	temp;
 
@@ -21,89 +21,60 @@ int	get_length(char **map, int i)
 		i++;
 	if (temp > 0)
 		i -= temp;
-	return(i);
+	return (i);
 }
 
-int get_filtered_length(char **map, int i)
+static int	find_map_start(char **map_file)
 {
-    int count;
+	int	i;
 
-	count = 0;
-    while (map[i])
-    {
-        if (map[i][0] != '\n')
-            count++;
-        i++;
-    }
+	i = 0;
+	while (map_file[i])
+	{
+		if (i > 0 && map_file[i - 1][0] == 'C')
+			return (i);
+		i++;
+	}
+	return (-1);
+}
 
-    return (count);
+static char	**allocate_temp_map(char **map_file, int start_index, int length)
+{
+	char	**temp_map;
+	int		i;
+
+	temp_map = (char **)malloc(sizeof(char *) * (length + 1));
+	if (!temp_map)
+		return (NULL);
+	i = 0;
+	while (map_file[start_index] && i < length)
+	{
+		temp_map[i] = ft_strdup(map_file[start_index]);
+		if (!temp_map[i])
+		{
+			while (--i >= 0)
+				free(temp_map[i]);
+			free(temp_map);
+			return (NULL);
+		}
+		start_index++;
+		i++;
+	}
+	temp_map[i] = NULL;
+	return (temp_map);
 }
 
 void	extract_map(t_data *data)
 {
-	int	i;
-	int	j;
+	int	start_index;
 	int	length;
 
-	i = 0;
-	length = 0;
-	while (data->map.map_file[i])
-	{
-		if (i > 0 && data->map.map_file[i - 1][0] == 'C')
-		{
-			length = get_length(data->map.map_file, i);
-			data->map.temp_map = (char **)malloc(sizeof(char *) * (length + 1));
-			if (!data->map.temp_map)
-				free_and_exit(data->map.map_file, data);
-			j = 0;
-			while (data->map.map_file[i])
-			{
-				data->map.temp_map[j] = ft_strdup(data->map.map_file[i]);
-				if (!data->map.temp_map[j])
-				{
-					while (--j >= 0)
-						free(data->map.temp_map[j]);
-					free(data->map.temp_map);
-					exit(EXIT_FAILURE);
-				}
-				j++;
-				i++;
-			}
-			data->map.temp_map[j] = NULL;
-			break;
-		}
-		i++;
-	}
-}
-void filter_map(t_data *data)
-{
-    int i;
-    int j;
-    int length;
-
-    i = 0;
-    while (data->map.temp_map[i][0] == '\n')
-        i++;
-    length = get_filtered_length(data->map.temp_map, i);
-    data->map.map2d = (char **)malloc(sizeof(char *) * (length + 1));
-    if (!data->map.map2d)
-        free_and_exit(data->map.temp_map, data);
-    j = 0;
-    while (data->map.temp_map[i])
-    {
-        if (data->map.temp_map[i][0] != '\n')
-        {
-            data->map.map2d[j] = ft_strdup(data->map.temp_map[i]);
-            if (!data->map.map2d[j])
-            {
-                while (--j >= 0)
-                    free(data->map.map2d[j]);
-                free(data->map.map2d);
-                exit(EXIT_FAILURE);
-            }
-            j++;
-        }
-        i++;
-    }
-    data->map.map2d[j] = NULL;
+	start_index = find_map_start(data->map.map_file);
+	if (start_index == -1)
+		return ;
+	length = get_length(data->map.map_file, start_index);
+	data->map.temp_map = allocate_temp_map(data->map.map_file, \
+			start_index, length);
+	if (!data->map.temp_map)
+		free_and_exit(data->map.map_file, data);
 }

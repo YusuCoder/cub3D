@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_player_dir.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 15:22:44 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/10/22 12:54:19 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/10/23 14:00:25 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,15 @@ int	check_player_pos(char **map)
 		k = 0;
 		while (map[i][k])
 		{
-			if ((ft_strchr("NEWS", map[i][k]) != NULL && ft_strchr(" \t", map[i][k + 1]) != NULL)
-					|| (ft_strchr("NEWS", map[i][k]) != NULL && ft_strchr(" \t", map[i][k - 1]) != NULL))
+			if ((ft_strchr("NEWS", map[i][k]) != NULL
+				&& ft_strchr(" \t", map[i][k + 1]) != NULL)
+				|| (ft_strchr("NEWS", map[i][k]) != NULL
+				&& ft_strchr(" \t", map[i][k - 1]) != NULL))
 				return (1);
-			if ((ft_strchr("NEWS", map[i][k]) != NULL && ft_strchr(" \t", map[i + 1][k]) != NULL)
-					|| (ft_strchr("NEWS", map[i][k]) != NULL && ft_strchr(" \t", map[i - 1][k]) != NULL))
+			if ((ft_strchr("NEWS", map[i][k]) != NULL
+				&& ft_strchr(" \t", map[i + 1][k]) != NULL)
+				|| (ft_strchr("NEWS", map[i][k]) != NULL
+				&& ft_strchr(" \t", map[i - 1][k]) != NULL))
 				return (1);
 			k++;
 		}
@@ -63,7 +67,7 @@ int	check_player_pos(char **map)
 
 void	get_player_dir(t_data *data)
 {
-	if(check_player(data->map.map2d, data) == 1)
+	if (check_player(data->map.map2d, data) == 1)
 	{
 		printf("No player found!\n");
 		free_and_exit(data->map.map2d, data);

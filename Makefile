@@ -21,10 +21,10 @@ INCLUDES	:= -I ./include -I ./libft -I $(LIBMLX)/include
 # LIBS		:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 
 #for macOS
-# MLX42FLAGS		:= -lglfw -framework Cocoa -framework OpenGL -framework IOKit
+MLX42FLAGS		:= -lglfw -framework Cocoa -framework OpenGL -framework IOKit
 
 #for Ubuntu:
-MLX42FLAGS		:= -lglfw -ldl -lGL
+# MLX42FLAGS		:= -lglfw -ldl -lGL
 
 LIBS		:= $(LIBMLX)/build/libmlx42.a -ldl $(MLX42FLAGS) -pthread -lm
 
@@ -42,6 +42,11 @@ SRC_FILES	:= main.c \
 				./parse/extract_map.c \
 				./parse/check_components.c \
 				./parse/get_player_dir.c \
+				./parse/middle_wals.c \
+				./parse/sizeof_lines.c \
+				./parse/filter_map.c \
+				./parse/set_path.c \
+				./parse/utils.c \
 				initializing.c \
 				simulation.c \
 				event_hooks.c \

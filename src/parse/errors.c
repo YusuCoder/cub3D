@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 13:54:22 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/10/22 12:55:05 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/10/23 15:11:59 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	error_msg( char *msg, int exit_code)
 	ft_putstr_fd("\n", 2);
 	return (exit_code);
 }
+
 void	free_it(void **data)
 {
 	size_t	i;
@@ -30,13 +31,32 @@ void	free_it(void **data)
 		free(data[i]);
 		i++;
 	}
-
 	if (data)
 	{
 		free(data);
 		data = NULL;
 	}
 }
+
+void	free_it_exit(void **data)
+{
+	size_t	i;
+
+	i = 0;
+	while (data[i])
+	{
+		free(data[i]);
+		i++;
+	}
+	if (data)
+	{
+		free(data);
+		data = NULL;
+	}
+	perror(RED"Error!\n"RESET);
+	exit(EXIT_FAILURE);
+}
+
 void	free_map(char **data)
 {
 	size_t	i;
@@ -47,7 +67,6 @@ void	free_map(char **data)
 		free(data[i]);
 		i++;
 	}
-
 	if (data)
 	{
 		free(data);

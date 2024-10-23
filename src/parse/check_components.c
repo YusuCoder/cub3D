@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_components.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:30:30 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/10/22 12:53:26 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/10/23 11:58:08 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	check_all_components(char **map)
 		while (map[i][j])
 		{
 			if (ft_strchr("10NWES\n \t", map[i][j]) == NULL)
-    			return (1);
+				return (1);
 			j++;
 		}
 		i++;

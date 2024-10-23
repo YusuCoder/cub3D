@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 17:16:37 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/10/16 18:15:34 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/23 15:12:30 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ char	*remaining(t_struct *vars, char *buffer)
 		return (NULL);
 	}
 	if (vars->new_l_buffer != -1)
-		temp = ft_strndup(buffer, vars->new_l_buffer + 1, ft_strlen_gnl(buffer));
+		temp = ft_strndup(buffer, vars->new_l_buffer + 1, \
+			ft_strlen_gnl(buffer));
 	free(buffer);
 	return (temp);
 }
