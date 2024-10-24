@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 17:16:37 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/10/16 17:06:09 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/24 15:29:13 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ char	*remaining(t_struct *vars, char *buffer)
 		return (NULL);
 	}
 	if (vars->new_l_buffer != -1)
-		temp = ft_strndup(buffer, vars->new_l_buffer + 1, ft_strlen_gnl(buffer));
+		temp = ft_strndup(buffer, vars->new_l_buffer + 1, \
+			ft_strlen_gnl(buffer));
 	free(buffer);
 	return (temp);
 }
@@ -93,23 +94,3 @@ char	*get_next_line(int fd)
 	free(vars);
 	return (result);
 }
-
-// int	main(void)
-// {
-// 	int		fd;
-// 	char	*line;
-
-// 	fd = open("test.txt", O_RDONLY);
-// 	if (fd == -1)
-// 	{
-// 		perror("Error opening vars");
-// 		return (1);
-// 	}
-// 	while ((line = get_next_line(fd)) != NULL)
-// 	{
-// 		printf("%s", line);
-// 		free(line);
-// 	}
-// 	close(fd);
-// 	return (0);
-// }

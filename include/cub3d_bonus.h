@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 14:37:53 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/22 12:47:38 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/10/24 15:50:29 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -250,7 +250,7 @@ void		free_and_exit(char **data, t_data *info);
 void		check_components(t_data *data);
 void		check_walls(t_data *data);
 void		get_player_dir(t_data *data);
-pid_t 		player_move_sound(void);
+pid_t		player_move_sound(void);
 void		play_sound(pthread_t *thread, void *(*play)(void *));
 void		door_sound(t_data *data);
 void		gun_sound(void);
@@ -258,6 +258,12 @@ void		knife_sound(void);
 void		rifle_sound(void);
 void		free_path(t_data *data);
 void		free_color(t_data *data);
+int			size_of_lines(char **map);
+int			middle_walls(char **map);
+void		free_adress_and_exit(char **tex_path, int count);
+void		free_it_exit(void **data);
+int			set_path(t_map *texture, char **tex_path);
+int			check_filename(char *arg, int cub);
 
 double		radian(int degree);
 void		init_data(t_data *data);

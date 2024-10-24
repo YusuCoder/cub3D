@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 17:25:42 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/22 12:35:17 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/10/24 15:39:33 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void	init_null(mlx_image_t *image[], int limit)
 		i++;
 	}
 }
-void	init_data(t_data *data)
+
+void	init_vars(t_data *data)
 {
 	data->width = WIDTH;
 	data->height = HEIGHT;
@@ -39,6 +40,11 @@ void	init_data(t_data *data)
 	data->texture.south = NULL;
 	data->texture.door = NULL;
 	data->sprite.aim = NULL;
+}
+
+void	init_data(t_data *data)
+{
+	init_vars(data);
 	init_null(data->sprite.rifle, 6);
 	init_null(data->sprite.bullet, 6);
 	init_null(data->sprite.pistol, 9);

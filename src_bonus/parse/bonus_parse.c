@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   bonus_parse.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 13:12:10 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/10/22 12:49:50 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/10/24 15:25:57 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	line_count(char *argv)
 		}
 		close(fd);
 	}
-	return(counter);
+	return (counter);
 }
 
 void	validate_map(char *argv, t_data *data)
@@ -45,7 +45,8 @@ void	validate_map(char *argv, t_data *data)
 	i = 0;
 	row = 0;
 	column = 0;
-	if ((data->map.line_count = line_count(argv)) == -1)
+	data->map.line_count = line_count(argv);
+	if ((data->map.line_count) == -1)
 		exit(EXIT_FAILURE);
 	data->map.map_file = ft_calloc(data->map.line_count + 1, sizeof(char *));
 	if (!data->map.map_file)
@@ -58,46 +59,6 @@ void	validate_map(char *argv, t_data *data)
 		copy_map(row, column, i, data);
 		close(data->map.fd);
 	}
-}
-
-int is_cub_file(char *str)
-{
-	size_t length;
-
-	length = ft_strlen(str);
-	if ((str[length - 4] != '.' || str[length - 3] != 'c' || str[length - 2] != 'u' || str[length - 1] != 'b'))
-		return (0);
-	return (1);
-}
-
-int is_dir(char *str)
-{
-	int fd;
-	int res;
-
-	res = 0;
-	fd = open(str, O_DIRECTORY);
-	if (fd >= 0)
-	{
-		close(fd);
-		res = 1;
-	}
-	return (res);
-}
-
-int check_filename(char *arg, int cub)
-{
-	int fd;
-
-	if (is_dir(arg))
-		return (error_msg("is directory", 1));
-	fd = open(arg, O_RDONLY);
-	if (fd == -1)
-		return (error_msg("open error!", 1));
-	close(fd);
-	if (cub && !is_cub_file(arg))
-		return (error_msg("File is not .cub", 1));
-	return (0);
 }
 
 void	init_data_parse(t_data *data)
@@ -115,7 +76,7 @@ int	parse(t_data *data, char **argv)
 {
 	init_data_parse(data);
 	if (check_filename(argv[1], 1) == 1)
-		return(1);
+		return (1);
 	validate_map(argv[1], data);
 	extract_path(data);
 	extract_color(data);

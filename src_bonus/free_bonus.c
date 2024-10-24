@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:49:19 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/22 12:36:39 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/10/24 15:37:56 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,6 @@ void	delete_sprites(t_sprite *sprite, mlx_t *mlx)
 /*----------------------------------------------*/
 void	free_exit(t_data *data, int exit_status)
 {
-	// (void)data;
-	// (void)exit_status;
 	free_color(data);
 	free_path(data);
 	if (data->map.map2d != NULL)

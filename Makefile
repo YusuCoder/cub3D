@@ -60,17 +60,23 @@ SRC_FILES	:= main.c \
 BONUS_OBJ_PATH	:= ./obj_bonus
 BONUS_SRC_PATH	:= ./src_bonus
 BONUS_SRC		:= main_bonus.c \
-				./parse/parse.c \
-				./parse/errors.c \
-				./parse/copy_validate_map.c \
+				./parse/bonus_parse.c \
+				./parse/bonus_errors.c \
+				./parse/bonus_copy_validate_map.c \
 				./parse/get_next_line.c \
 				./parse/get_next_line_utils.c \
-				./parse/extracting.c \
-				./parse/map_data.c \
-				./parse/extract_map.c \
-				./parse/check_components.c \
-				./parse/get_player_dir.c \
+				./parse/bonus_extracting.c \
+				./parse/bonus_map_data.c \
+				./parse/bonus_extract_map.c \
+				./parse/bonus_check_components.c \
+				./parse/bonus_get_player_dir.c \
 				./sound_handling/play_sound.c \
+				./sound_handling/utils.c \
+				./parse/bonus_sizeof_lines.c \
+				./parse/bonus_middle_wals.c \
+				./parse/bonus_filter_map.c \
+				./parse/bonus_set_path.c \
+				./parse/bonus_utils.c \
 				initializing_bonus/init_data_bonus.c \
 				initializing_bonus/init_map_bonus.c \
 				initializing_bonus/init_player_bonus.c \

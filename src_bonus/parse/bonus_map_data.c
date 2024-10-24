@@ -1,44 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_data.c                                         :+:      :+:    :+:   */
+/*   bonus_map_data.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 18:29:46 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/10/22 12:38:23 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/10/24 15:16:42 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d_bonus.h"
-
-char	*get_path(char *map, int j)
-{
-	int		i;
-	int		length;
-	char	*path;
-
-	length = 1;
-	i = 0;
-	while (map[j] && (map[j] == ' ' || map[j] == '\t'))
-		j++;
-	while (map[length] && (map[length] != ' ' || map[length] != '\t'))
-		length++;
-	path = malloc(sizeof(char) * (length - j + 1));
-	if (path == NULL)
-		return (NULL);
-	while (map[j] && (map[j] != ' ' && map[j] != '\t' && map[j] != '\n'))
-		path[i++] = map[j++];
-	path[i] = '\0';
-	while (map[j] && (map[j] == ' ' || map[j] == '\t'))
-		j++;
-	if (map[j] && (map[j] != '\n'))
-	{
-		free(path);
-		path = NULL;
-	}
-	return (path);
-}
 
 int	is_not_digit(char *str)
 {
@@ -70,7 +42,6 @@ int	*cp_color(char **rgb, int *color)
 			free(color);
 			exit(EXIT_FAILURE);
 		}
-
 		color[i] = ft_atoi(rgb[i]);
 		if (color[i] < 0 || color[i] > 255)
 		{
@@ -97,11 +68,7 @@ int	*set_color_rgb(char *map)
 	while (rgb_code[i])
 		i++;
 	if (i != 3)
-	{
-		printf("Invalid number of RGB components!\n");
-		free_it((void **)rgb_code);
-		exit(EXIT_FAILURE);
-	}
+		free_it_exit((void **)rgb_code);
 	color = malloc(sizeof(int) * 3);
 	if (!color)
 	{
@@ -111,8 +78,7 @@ int	*set_color_rgb(char *map)
 	if (!cp_color(rgb_code, color))
 	{
 		free(color);
-		free_it((void **)rgb_code);
-		return (0);
+		free_it_exit((void **)rgb_code);
 	}
 	free_it((void **)rgb_code);
 	return (color);
@@ -120,7 +86,7 @@ int	*set_color_rgb(char *map)
 
 int	rgb_codes(t_data *data, char **rgb)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (rgb[i])
@@ -139,35 +105,8 @@ int	rgb_codes(t_data *data, char **rgb)
 		}
 		else
 			return (error_msg("Error!", 1));
-
 		i++;
 	}
-	return (0);
-}
-
-int	set_path(t_map *texture, char **tex_path)
-{
-	int	i;
-
-	i = 0;
-	while (tex_path[i])
-	{
-		if (tex_path[i][0] == 'W' && tex_path[i][1] == 'E')
-			texture->path_texture_west = get_path(tex_path[i], 2);
-		else if (tex_path[i][0] == 'S' && tex_path[i][1] == 'O')
-			texture->path_texture_south = get_path(tex_path[i], 2);
-		else if (tex_path[i][0] == 'E' && tex_path[i][1] == 'A')
-			texture->path_texture_east = get_path(tex_path[i], 2);
-		else if (tex_path[i][0] == 'N' && tex_path[i][1] == 'O')
-			texture->path_texture_north = get_path(tex_path[i], 2);
-		else
-			return (1);
-		i++;
-	}
-	if (!texture->path_texture_north || !texture->path_texture_east || !texture->path_texture_south
-			|| !texture->path_texture_west)
-		return (1);
-	free_map(tex_path);
 	return (0);
 }
 
@@ -176,7 +115,7 @@ int	map_data(t_data *data)
 	if (set_path(&data->map, data->texture.tex_path) == 1)
 	{
 		free_map(data->texture.tex_path);
-		return(error_msg("Failed to get texture path!", 1));
+		return (error_msg("Failed to get texture path!", 1));
 	}
 	if (rgb_codes(data, data->texture.rgb_codes) == 1)
 	{

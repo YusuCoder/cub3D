@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 13:36:56 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/20 17:26:11 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/24 15:38:18 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,6 @@ void	handle_minimap(t_data *data)
 /*--------------------------*/
 /*  Handle door definition  */
 /*--------------------------*/
-
-
 void	handle_door(t_data *data)
 {
 	t_map		*map;
