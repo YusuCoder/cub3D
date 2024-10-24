@@ -14,7 +14,7 @@ CC		:= cc
 CFLAGS	:= -Wall -Wextra -Werror -Ofast -g
 
 RM		:= rm -rf
-LIBMLX	:= ./MLX42
+LIBMLX	:= ./mlx_lib
 
 # Include directories
 INCLUDES	:= -I ./include -I ./libft -I $(LIBMLX)/include
@@ -111,8 +111,8 @@ HEADER_BONUS	:= include/cub3d_bonus.h
 # Rules
 all: submodule mlx $(LIBFT) $(NAME)
 
-submodule:
-	@git submodule update --init --recursive > /dev/null 2>&1
+# submodule:
+# 	@git submodule update --init --recursive > /dev/null 2>&1
 
 mlx:
 	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4 > /dev/null 2>&1
