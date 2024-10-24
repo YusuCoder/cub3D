@@ -111,7 +111,7 @@ HEADER_BONUS	:= include/cub3d_bonus.h
 # Rules
 all: submodule mlx $(LIBFT) $(NAME)
 
-# submodule:
+submodule:
 	@git submodule update --init --recursive > /dev/null 2>&1
 
 mlx:
