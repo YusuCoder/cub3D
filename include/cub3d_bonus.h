@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 14:37:53 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/24 16:34:32 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/25 12:15:53 by tkubanyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@
 # define MIN_HEIGHT 768
 # define VIEW 66
 # define GRID 64
-# define MOVE 0.07
+# define MOVE 0.08
 # define ROTATE 0.05
-# define PADDING 0.1
+# define PADDING 0.2
 # define M_WIDTH 320
 # define M_HEIGHT 240
 # define M_TILE 10
