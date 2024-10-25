@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 13:36:56 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/24 15:38:18 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/25 18:57:54 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,35 @@ void	handle_door(t_data *data)
 	pos_player.y = (int)data->player.pos.y;
 	if (door->is_close == true
 		&& map->map2d[pos_door.y][pos_door.x] == '2')
+	{
+		door_sound();
 		map->map2d[pos_door.y][pos_door.x] = 'O';
+	}
 	else if (door->is_close == true
 		&& map->map2d[pos_door.y][pos_door.x] == 'O'
 		&& map->map2d[pos_player.y][pos_player.x] != 'O')
+	{
+		door_sound();
 		map->map2d[pos_door.y][pos_door.x] = '2';
+	}
+}
+
+void	handle_timer(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	if (data->timer_active)
+	{
+		data->timer_active = 0;
+		printf("----------------->Timer turned off.<---------------\n");
+	}
+	else
+	{
+		data->timer_active = 1;
+		data->timer_start = time(NULL);
+		printf("----------------->Timer turned on.<----------------\n");
+	}
 }
 
 /*----------------------------------------*/
@@ -100,4 +124,6 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 		handle_minimap(data);
 	if (keydata.key == MLX_KEY_SPACE && keydata.action == MLX_PRESS)
 		handle_door(data);
+	if (keydata.key == MLX_KEY_T && keydata.action == MLX_PRESS)
+		handle_timer(data);
 }

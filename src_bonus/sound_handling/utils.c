@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   until.c                                            :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 15:33:45 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/10/24 15:34:46 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/25 14:41:42 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,10 @@ pid_t	player_move_sound(void)
 	}
 }
 
-void	door_sound(t_data *data)
+void	door_sound(void)
 {
 	pid_t	pid;
 
-	(void)data;
 	if (access("src_bonus/sound_handling/sounds/door.mp3", F_OK) != -1)
 	{
 		pid = fork();

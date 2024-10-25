@@ -157,3 +157,18 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re bonus submodule mlx
+
+
+# /*        XXXXXX       XXXXXXXXXXX   */
+# /*       XXXXXXX      XXXXXXXXXXXXX  */
+# /*      XXXXXXXX     XXX         XXX */
+# /*     XXX   XXX     XXX         XXX */
+# /*    XXX    XXX               XXXX  */
+# /*   XXX     XXX             XXXX    */
+# /*  XXX      XXX           XXXX      */
+# /* XXX       XXX         XXXX        */
+# /* XXXXXXXXXXXXXXXX    XXXX          */
+# /* XXXXXXXXXXXXXXXX  XXXX            */
+# /*           XXX     XXX             */
+# /*           XXX     XXXXXXXXXXXXXXX */
+# /*           XXX     XXXXXXXXXXXXXXX */

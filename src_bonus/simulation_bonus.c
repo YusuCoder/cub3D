@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simulation_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 20:21:15 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/20 16:35:36 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/10/25 18:58:28 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,25 @@ void	set_counter(t_data *data, int *counter)
 		mlx_set_mouse_pos(data->mlx, data->width / 2, data->height / 2);
 }
 
+void	time_checker(t_data *data)
+{
+	time_t	current_time;
+	double	elapsed_time;
+	int		i;
+
+	i = 0;
+	if (data->timer_active)
+	{
+		current_time = time(NULL);
+		elapsed_time = difftime(current_time, data->timer_start);
+		if (elapsed_time >= 10)
+		{
+			printf("-------------->Time's up! Exiting game...\n");
+			free_exit(data, EXIT_SUCCESS);
+		}
+	}
+}
+
 /*-------------------------*/
 /*  Start game simulation  */
 /*-------------------------*/
@@ -41,6 +60,7 @@ void	simulation(void *param)
 		set_counter(data, &counter);
 		return ;
 	}
+	time_checker(data);
 	if (data->img != NULL)
 		mlx_delete_image(data->mlx, data->img);
 	data->img = mlx_new_image(data->mlx, data->width, data->height);

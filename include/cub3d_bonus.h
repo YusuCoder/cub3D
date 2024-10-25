@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 14:37:53 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/25 12:15:53 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/10/25 18:30:43 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 # include "../mlx_lib/include/MLX42/MLX42.h"
 # include "get_next_line.h"
 # include <signal.h>
+# include <time.h>
 
 /*-------------------*/
 /*  Constant values  */
@@ -229,6 +230,9 @@ typedef struct s_data
 	t_weapon	weapon;
 	bool		is_minimap;
 	bool		is_door;
+	int			timer_active;
+    time_t		timer_start;
+	mlx_image_t	*num_imgs[11];
 	t_door		door;
 }	t_data;
 
@@ -252,7 +256,7 @@ void		check_walls(t_data *data);
 void		get_player_dir(t_data *data);
 pid_t		player_move_sound(void);
 void		play_sound(pthread_t *thread, void *(*play)(void *));
-void		door_sound(t_data *data);
+void		door_sound(void);
 void		gun_sound(void);
 void		knife_sound(void);
 void		rifle_sound(void);
@@ -264,6 +268,7 @@ void		free_adress_and_exit(char **tex_path, int count);
 void		free_it_exit(void **data);
 int			set_path(t_map *texture, char **tex_path);
 int			check_filename(char *arg, int cub);
+void		draw_timer(t_data *data);
 
 double		radian(int degree);
 void		init_data(t_data *data);
