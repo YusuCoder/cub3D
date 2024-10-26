@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 14:37:53 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/25 18:30:43 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/26 14:30:42 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -320,5 +320,8 @@ t_point_int	set_start_point(t_weapon weapon, mlx_image_t *img, \
 							mlx_image_t *curr);
 int			set_frame_limit(t_weapon weapon);
 mlx_image_t	*set_current_frame(t_weapon weapon, t_sprite *sprite, int frame);
+int			get_tile_x(t_map *map, t_point_double new, t_player *player, double move_x);
+int			get_tile_y(t_map *map, t_point_double new, t_player *player, double move_y);
+int			get_tile_diag(t_map *map, t_point_double new, double move_x, double move_y);
 
 #endif

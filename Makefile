@@ -54,7 +54,8 @@ SRC_FILES	:= main.c \
 				rendering.c \
 				utils.c \
 				free.c \
-				error.c
+				error.c \
+				movement.c
 
 # Bonus Source and Object files
 BONUS_OBJ_PATH	:= ./obj_bonus
@@ -94,7 +95,8 @@ BONUS_SRC		:= main_bonus.c \
 				sprite_bonus.c \
 				weapon_bonus.c \
 				weapon_utils_bonus.c \
-				movement_handler_bonus.c
+				movement_handler_bonus.c \
+				movement_utils.c
 
 # Add paths to object files
 OBJS		:= $(patsubst %, $(OBJ_PATH)/%, $(SRC_FILES:.c=.o))

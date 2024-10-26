@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 10:50:13 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/22 10:41:36 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/26 14:39:01 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,27 +17,28 @@
 /*----------------------------*/
 void	move_player(t_data *data, double move_x, double move_y)
 {
-	t_map			*map;
 	t_player		*player;
 	t_point_double	new;
 	char			tile_x;
 	char			tile_y;
+	char			tile_diag;
 
-	map = &data->map;
 	player = &data->player;
 	new.x = player->pos.x + move_x;
 	new.y = player->pos.y + move_y;
-	if (new.y > player->pos.y)
-		tile_y = map->map2d[(int)(new.y + PADDING)][(int)player->pos.x];
-	else
-		tile_y = map->map2d[(int)(new.y - PADDING)][(int)player->pos.x];
-	if (new.x > player->pos.x)
-		tile_x = map->map2d[(int)player->pos.y][(int)(new.x + PADDING)];
-	else
-		tile_x = map->map2d[(int)player->pos.y][(int)(new.x - PADDING)];
-	if (tile_y != '1' && tile_y != '2')
+	tile_x = get_tile_x(&data->map, new, player, move_x);
+	tile_y = get_tile_y(&data->map, new, player, move_y);
+	tile_diag = get_tile_diag(&data->map, new, move_x, move_y);
+	if ((tile_y != '1' && tile_y != '2')
+		&& (tile_x != '1' && tile_x != '2')
+		&& (tile_diag != '1' && tile_diag != '2'))
+	{
 		player->pos.y = new.y;
-	if (tile_x != '1' && tile_x != '2')
+		player->pos.x = new.x;
+	}
+	else if ((tile_y != '1' && tile_y != '2') && move_y != 0)
+		player->pos.y = new.y;
+	else if ((tile_x != '1' && tile_x != '2') && move_x != 0)
 		player->pos.x = new.x;
 }
 

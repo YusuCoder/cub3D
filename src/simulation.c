@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simulation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkubanyc <tkubanyc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 20:21:15 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/14 11:50:29 by tkubanyc         ###   ########.fr       */
+/*   Updated: 2024/10/26 14:42:07 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,28 @@
 
 void	move_player(t_data *data, double move_x, double move_y)
 {
-	t_map			*map;
 	t_player		*player;
 	t_point_double	new;
+	char			tile_x;
+	char			tile_y;
+	char			tile_diag;
 
-	map = &data->map;
 	player = &data->player;
 	new.x = player->pos.x + move_x;
 	new.y = player->pos.y + move_y;
-	if (map->map2d[(int)(new.y + PADDING)][(int)player->pos.x] != '1'
-		&& map->map2d[(int)(new.y - PADDING)][(int)player->pos.x] != '1')
+	tile_x = get_tile_x(&data->map, new, player, move_x);
+	tile_y = get_tile_y(&data->map, new, player, move_y);
+	tile_diag = get_tile_diag(&data->map, new, move_x, move_y);
+	if ((tile_y != '1')
+		&& (tile_x != '1')
+		&& (tile_diag != '1'))
+	{
 		player->pos.y = new.y;
-	if (map->map2d[(int)player->pos.y][(int)(new.x + PADDING)] != '1'
-		&& map->map2d[(int)player->pos.y][(int)(new.x - PADDING)] != '1')
+		player->pos.x = new.x;
+	}
+	else if (tile_y != '1' && move_y != 0)
+		player->pos.y = new.y;
+	else if (tile_x != '1' && move_x != 0)
 		player->pos.x = new.x;
 }
 
