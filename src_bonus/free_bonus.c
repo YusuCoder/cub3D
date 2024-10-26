@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:49:19 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/24 15:37:56 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/26 15:04:44 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,5 +115,10 @@ void	free_exit(t_data *data, int exit_status)
 	delete_sprites(&data->sprite, data->mlx);
 	if (data->mlx != NULL)
 		mlx_terminate(data->mlx);
+	if (data->sound_pid > 0)
+	{
+		kill(data->sound_pid, SIGKILL);
+		data->sound_pid = -1;
+	}
 	exit(exit_status);
 }

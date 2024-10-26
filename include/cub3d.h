@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 19:18:42 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/26 14:43:24 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/26 14:59:18 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,8 +223,11 @@ void	free_array(char **array);
 void	free_exit(t_data *data, int exit_status);
 void	ft_perror(char *error_msg);
 void	error_free_exit(t_data *data, char *error_msg);
-int		get_tile_x(t_map *map, t_point_double new, t_player *player, double move_x);
-int		get_tile_y(t_map *map, t_point_double new, t_player *player, double move_y);
-int		get_tile_diag(t_map *map, t_point_double new, double move_x, double move_y);
+int		get_tile_x(t_map *map, t_point_double new, \
+			t_player *player, double move_x);
+int		get_tile_y(t_map *map, t_point_double new, \
+			t_player *player, double move_y);
+int		get_tile_diag(t_map *map, t_point_double new, \
+			double move_x, double move_y);
 
 #endif

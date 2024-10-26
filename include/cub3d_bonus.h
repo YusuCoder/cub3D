@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 14:37:53 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/26 14:30:42 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/26 15:07:35 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,6 +217,7 @@ typedef struct s_data
 {
 	pid_t		sound_pid;
 	bool		is_playing_sound;
+	int			game_over;
 	int			width;
 	int			height;
 	t_ray		ray;
@@ -231,7 +232,7 @@ typedef struct s_data
 	bool		is_minimap;
 	bool		is_door;
 	int			timer_active;
-    time_t		timer_start;
+	time_t		timer_start;
 	mlx_image_t	*num_imgs[11];
 	t_door		door;
 }	t_data;
@@ -268,7 +269,8 @@ void		free_adress_and_exit(char **tex_path, int count);
 void		free_it_exit(void **data);
 int			set_path(t_map *texture, char **tex_path);
 int			check_filename(char *arg, int cub);
-void		draw_timer(t_data *data);
+void		handle_timer(t_data *data);
+void		game_over(void);
 
 double		radian(int degree);
 void		init_data(t_data *data);
@@ -320,8 +322,11 @@ t_point_int	set_start_point(t_weapon weapon, mlx_image_t *img, \
 							mlx_image_t *curr);
 int			set_frame_limit(t_weapon weapon);
 mlx_image_t	*set_current_frame(t_weapon weapon, t_sprite *sprite, int frame);
-int			get_tile_x(t_map *map, t_point_double new, t_player *player, double move_x);
-int			get_tile_y(t_map *map, t_point_double new, t_player *player, double move_y);
-int			get_tile_diag(t_map *map, t_point_double new, double move_x, double move_y);
+int			get_tile_x(t_map *map, t_point_double new, \
+				t_player *player, double move_x);
+int			get_tile_y(t_map *map, t_point_double new, \
+				t_player *player, double move_y);
+int			get_tile_diag(t_map *map, t_point_double new, \
+				double move_x, double move_y);
 
 #endif

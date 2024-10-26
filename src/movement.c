@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 14:39:43 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/10/26 14:42:26 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/26 14:51:00 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ int	get_tile_y(t_map *map, t_point_double new, t_player *player, double move_y)
 /*-------------------------------------------------------------*/
 int	get_tile_diag(t_map *map, t_point_double new, double move_x, double move_y)
 {
-	int tile_index_y;
-	int tile_index_x;
+	int	tile_index_y;
+	int	tile_index_x;
 
 	if (move_y > 0)
 		tile_index_y = (int)(new.y + PADDING);

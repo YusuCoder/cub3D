@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 13:36:56 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/25 18:57:54 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/26 14:57:30 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,24 +83,6 @@ void	handle_door(t_data *data)
 	{
 		door_sound();
 		map->map2d[pos_door.y][pos_door.x] = '2';
-	}
-}
-
-void	handle_timer(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	if (data->timer_active)
-	{
-		data->timer_active = 0;
-		printf("----------------->Timer turned off.<---------------\n");
-	}
-	else
-	{
-		data->timer_active = 1;
-		data->timer_start = time(NULL);
-		printf("----------------->Timer turned on.<----------------\n");
 	}
 }
 
