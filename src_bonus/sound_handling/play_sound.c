@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 17:39:58 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/10/26 14:27:44 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/27 18:14:34 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	game_over(void)
 		pid = fork();
 		if (pid == 0)
 		{
-			execlp("afplay", "afplay", "-v", "0.7", \
+			execlp("afplay", "afplay", "-v", "1.0", \
 				"src_bonus/sound_handling/sounds/demon.mp3", (char *) NULL);
 			_exit(1);
 		}

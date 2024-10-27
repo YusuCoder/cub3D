@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 15:33:45 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/10/25 14:41:42 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/27 18:16:22 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	door_sound(void)
 		pid = fork();
 		if (pid == 0)
 		{
-			execlp("afplay", "afplay", "-v", "0.5", \
+			execlp("afplay", "afplay", "-v", "0.3", \
 				"src_bonus/sound_handling/sounds/door.mp3", (char *) NULL);
 			_exit(1);
 		}
@@ -62,7 +62,7 @@ void	gun_sound(void)
 		pid = fork();
 		if (pid == 0)
 		{
-			execlp("afplay", "afplay", "-v", "0.7", \
+			execlp("afplay", "afplay", "-v", "0.1", \
 				"src_bonus/sound_handling/sounds/pistol.mp3", (char *) NULL);
 			_exit(1);
 		}
@@ -80,7 +80,7 @@ void	rifle_sound(void)
 		pid = fork();
 		if (pid == 0)
 		{
-			execlp("afplay", "afplay", "-v", "0.7", \
+			execlp("afplay", "afplay", "-v", "0.1", \
 				"src_bonus/sound_handling/sounds/gun_shot.mp3", (char *) NULL);
 			_exit(1);
 		}
@@ -98,7 +98,7 @@ void	knife_sound(void)
 		pid = fork();
 		if (pid == 0)
 		{
-			execlp("afplay", "afplay", "-v", "0.7", \
+			execlp("afplay", "afplay", "-v", "0.1", \
 				"src_bonus/sound_handling/sounds/knife.mp3", (char *) NULL);
 			_exit(1);
 		}
