@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 18:29:46 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/10/27 16:23:42 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/27 16:55:23 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void	map_data(t_data *data)
 		free_map(data->texture.rgb_codes);
 		free_map(data->map.map2d);
 		free_path(data);
+		printf(RED"Path error!\n"RESET);
 		exit(EXIT_FAILURE);
 	}
 	if (rgb_codes(data, data->texture.rgb_codes) == 1)
