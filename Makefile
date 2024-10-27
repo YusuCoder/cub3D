@@ -118,17 +118,17 @@ all: submodule mlx $(LIBFT) $(NAME)
 submodule:
 	@git submodule update --init --recursive > /dev/null 2>&1
 
-mlx:
-	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4 > /dev/null 2>&1
+# Build MLX only if libmlx42.a is missing
+mlx: $(LIBMLX)/build/libmlx42.a
+
+$(LIBMLX)/build/libmlx42.a:
+	@cmake $(LIBMLX) -B $(LIBMLX)/build > /dev/null 2>&1
+	@make -C $(LIBMLX)/build -j4 > /dev/null 2>&1
 	@echo "$(GREEN)MLX42 connected.$(RESET)"
 
 $(NAME): $(OBJS) $(LIBFT)
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $@ $(LIBS)
 	@echo "$(GREEN)cub3D created.$(RESET)"
-
-# $(NAME): $(OBJS) $(LIBFT)
-# 	@$(CC) $(CFLAGS) $^ -o $@ $(LIBS)
-# 	@echo "$(GREEN)cub3D created.$(RESET)"
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 	@mkdir -p $(@D)
