@@ -47,6 +47,7 @@ SRC_FILES	:= main.c \
 				./parse/filter_map.c \
 				./parse/set_path.c \
 				./parse/utils.c \
+				./parse/cp_color.c \
 				initializing.c \
 				simulation.c \
 				event_hooks.c \
@@ -78,6 +79,7 @@ BONUS_SRC		:= main_bonus.c \
 				./parse/bonus_filter_map.c \
 				./parse/bonus_set_path.c \
 				./parse/bonus_utils.c \
+				./parse/bonus_cp_color.c \
 				initializing_bonus/init_data_bonus.c \
 				initializing_bonus/init_map_bonus.c \
 				initializing_bonus/init_player_bonus.c \

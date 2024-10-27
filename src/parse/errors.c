@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 13:54:22 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/10/23 15:11:59 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/27 15:50:49 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,22 +38,12 @@ void	free_it(void **data)
 	}
 }
 
-void	free_it_exit(void **data)
+void	free_it_exit(t_data *data)
 {
-	size_t	i;
-
-	i = 0;
-	while (data[i])
-	{
-		free(data[i]);
-		i++;
-	}
-	if (data)
-	{
-		free(data);
-		data = NULL;
-	}
-	perror(RED"Error!\n"RESET);
+	printf(RED"Error! Wrong RGB codes!\n"RESET);
+	free_map(data->map.map_file);
+	free_map(data->texture.tex_path);
+	free_path(data);
 	exit(EXIT_FAILURE);
 }
 
@@ -62,15 +52,18 @@ void	free_map(char **data)
 	size_t	i;
 
 	i = 0;
-	while (data[i])
+	if (data && data[i])
 	{
-		free(data[i]);
-		i++;
-	}
-	if (data)
-	{
-		free(data);
-		data = NULL;
+		while (data && data[i])
+		{
+			free(data[i]);
+			i++;
+		}
+		if (data)
+		{
+			free(data);
+			data = NULL;
+		}
 	}
 }
 
@@ -79,15 +72,18 @@ void	free_and_exit(char **data, t_data *info)
 	size_t	i;
 
 	i = 0;
-	while (data[i])
+	if (data && data[i])
 	{
-		free(data[i]);
-		i++;
-	}
-	if (data)
-	{
-		free(data);
-		data = NULL;
+		while (data[i])
+		{
+			free(data[i]);
+			i++;
+		}
+		if (data)
+		{
+			free(data);
+			data = NULL;
+		}
 	}
 	free_path(info);
 	free_color(info);

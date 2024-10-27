@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 15:07:18 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/10/23 15:11:02 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/26 20:51:27 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	free_color(t_data *data)
 {
-	if (data->texture.rgb_cell)
+	if (data->texture.rgb_cell != NULL)
 		free(data->texture.rgb_cell);
-	if (data->texture.rgb_floor)
+	if (data->texture.rgb_floor != NULL)
 		free(data->texture.rgb_floor);
 }
 

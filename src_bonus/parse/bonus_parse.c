@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 13:12:10 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/10/24 15:25:57 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/27 15:48:33 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,7 @@ int	parse(t_data *data, char **argv)
 	free_map(data->map.map_file);
 	filter_map(data);
 	free_map(data->map.temp_map);
-	if (map_data(data) == 1)
-	{
-		free_path(data);
-		exit(EXIT_FAILURE);
-	}
+	map_data(data);
 	check_components(data);
 	check_walls(data);
 	get_player_dir(data);

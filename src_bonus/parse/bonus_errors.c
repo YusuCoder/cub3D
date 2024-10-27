@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 13:54:22 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/10/24 15:12:58 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/27 15:51:05 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,22 +38,12 @@ void	free_it(void **data)
 	}
 }
 
-void	free_it_exit(void **data)
+void	free_it_exit(t_data *data)
 {
-	size_t	i;
-
-	i = 0;
-	while (data[i])
-	{
-		free(data[i]);
-		i++;
-	}
-	if (data)
-	{
-		free(data);
-		data = NULL;
-	}
-	perror(RED"Error!\n"RESET);
+	printf(RED"Error! Wrong RGB codes!\n"RESET);
+	free_map(data->map.map_file);
+	free_map(data->texture.tex_path);
+	free_path(data);
 	exit(EXIT_FAILURE);
 }
 

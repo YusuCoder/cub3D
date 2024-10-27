@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 19:18:42 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/26 14:59:18 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/27 16:22:16 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,7 +179,7 @@ int		error_msg(char *msg, int exit_code);
 void	copy_map(int row, int column, int i, t_data *data);
 void	extract_path(t_data *data);
 void	extract_color(t_data *data);
-int		map_data(t_data *data);
+void	map_data(t_data *data);
 void	free_it(void **data);
 int		get_color(int r, int g, int b, int a);
 void	extract_map(t_data *data);
@@ -193,10 +193,11 @@ void	free_color(t_data *data);
 int		size_of_lines(char **map);
 int		middle_walls(char **map);
 void	filter_map(t_data *data);
-void	free_it_exit(void **data);
 int		set_path(t_map *texture, char **tex_path);
 void	free_path(t_data *data);
 int		check_filename(char *arg, int cub);
+void	free_it_exit(t_data *data);
+int		*cp_color(char **rgb, int *color);
 
 double	radian(int degree);
 void	init_data(t_data *data);

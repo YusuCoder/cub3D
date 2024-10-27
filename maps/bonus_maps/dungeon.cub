@@ -1,7 +1,7 @@
 NO textures/wall/lava.png
 SO textures/wall/water1.png
-EA textures/wall/water2.png
-WE textures/wall/water3.png
+EA textures/wall/dead2.png
+WE textures/wall/dead3.png
 
 F 76,76,76
 C 99,99,99
