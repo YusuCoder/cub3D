@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 13:12:10 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/10/27 15:48:33 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/27 17:20:34 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,14 @@ int	parse(t_data *data, char **argv)
 	extract_color(data);
 	extract_map(data);
 	free_map(data->map.map_file);
+	if (pre_check_map(data->map.temp_map) == 0)
+	{
+		free_map(data->texture.tex_path);
+		free_map(data->texture.rgb_codes);
+		free_map(data->map.temp_map);
+		printf(RED"Invalid Map!\n"RESET);
+		exit(EXIT_FAILURE);
+	}
 	filter_map(data);
 	free_map(data->map.temp_map);
 	map_data(data);

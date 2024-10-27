@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 12:44:23 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/10/23 13:13:38 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/27 17:14:09 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,43 @@ static char	**copy_filtered_map(char **temp_map, int start_index, int length)
 	return (map2d);
 }
 
+int	pre_check_map(char **map)
+{
+	int	i;
+	int	j;
+	int	flag;
+
+	i = 0;
+	flag = 0;
+	while (map && map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == '0')
+				flag++;
+			j++;
+		}
+		i++;
+	}
+	if (flag < 2)
+		return (0);
+	return (1);
+}
+
 void	filter_map(t_data *data)
 {
 	int	start_index;
 	int	length;
 
+	if (pre_check_map(data->map.temp_map) == 0)
+	{
+		free_map(data->texture.tex_path);
+		free_map(data->texture.rgb_codes);
+		free_map(data->map.temp_map);
+		printf(RED"Invalid Map!\n"RESET);
+		exit(EXIT_FAILURE);
+	}
 	start_index = find_first_non_empty_line(data->map.temp_map);
 	length = get_filtered_length(data->map.temp_map, start_index);
 	data->map.map2d = copy_filtered_map(data->map.temp_map, \

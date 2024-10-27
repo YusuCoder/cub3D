@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 14:37:53 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/27 16:21:10 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/27 17:19:36 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -272,6 +272,7 @@ int			check_filename(char *arg, int cub);
 void		handle_timer(t_data *data);
 void		game_over(void);
 int			*cp_color(char **rgb, int *color);
+int			pre_check_map(char **map);
 
 double		radian(int degree);
 void		init_data(t_data *data);
