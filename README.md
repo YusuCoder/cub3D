@@ -44,4 +44,44 @@ According to the constraints imposed by the subject, the parsing was carried out
 
 
 ### 2. Graphical rendering:
-  - Rendering
+  - Ray casting
+    - Raycasting is a rendering technique used to create a 3D perspective of the game world. In this part, raycasting is implemented to calculate the angles of rays emanating from the player’s viewpoint. These rays are then cast onto the walls of the map, allowing the determination of the distance from the player to each wall. Based on these calculations, the engine determines the color of each wall to be rendered on the         screen. Raycasting creates the illusion of depth and adds a sense of realism to the game environment.
+  - Rendering the walls:
+    - In this part of the project deals with rendering the game world, including walls, floors, and ceilings, onto the screen. By utilizing the map layout, the player’s position and direction, and the raycasting results, the engine determines the appropriate colors for each pixel on the screen. This information is then used to render the walls, creating a 3D perspective. Additionally, floors and ceilings are rendered to         enhance the immersive experience. The rendering part gives life and visual representation to the game world.
+  - Player Movement:
+    - This part focuses on handling player movement and rotation within the game world. Keyboard input is used to control the player, allowing them to move forward, backward, and sideways. Additionally, the player can rotate left or right. The code monitors keyboard events and updates the player’s position and direction accordingly. This part enables the player to navigate and explore the game world.
+
+![Horizontal line check](https://github.com/YusuCoder/cub3D/blob/parse/textures/renderuing.png?raw=true)
+
+## Installation
+
+1. Clone the repository
+```
+  git clone https://github.com/YusuCoder/cub3D.git
+```
+
+2. Open the repository and run this command:
+```
+  make
+```
+
+### OR
+```
+  make bonus
+```
+
+## Controls:
+
+```1```, ```2```, ```3``` for changing the weapons<br>
+```M``` to hide or show the minimap<br>
+```W,A,S,D``` to move the player<br>
+```T``` to set the timer<br>
+
+
+## Useful links:
+
+- https://lodev.org/cgtutor/raycasting.html
+- https://en.wikipedia.org/wiki/Digital_differential_analyzer_(graphics_algorithm)
+- https://guy-grave.developpez.com/tutoriels/jeux/doom-wolfenstein-raycasting/
+- https://github.com/vinibiavatti1/RayCastingTutorial/wiki
+- https://github.com/qst0/ft_libgfx
