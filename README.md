@@ -76,6 +76,7 @@ According to the constraints imposed by the subject, the parsing was carried out
 ```M``` to hide or show the minimap<br>
 ```W,A,S,D``` to move the player<br>
 ```T``` to set the timer<br>
+```space``` to open the doors<br>
 
 
 ## Useful links:
