@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 20:21:15 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/26 15:12:57 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/27 16:31:20 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 void	handle_timer(t_data *data)
 {
-	int	i;
-
-	i = 0;
 	if (data->timer_active)
 	{
 		data->timer_active = 0;
@@ -47,9 +44,7 @@ void	time_checker(t_data *data)
 {
 	time_t	current_time;
 	double	elapsed_time;
-	int		i;
 
-	i = 0;
 	if (data->timer_active)
 	{
 		current_time = time(NULL);

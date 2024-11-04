@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   middle_wals.c                                      :+:      :+:    :+:   */
+/*   bonus_middle_wals.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 11:56:30 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/10/23 11:57:08 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/26 16:00:20 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,16 @@ static int	check_last_line(char **map, int i, int j)
 	return (0);
 }
 
+static int	check_doors(char **map, int i, int j)
+{
+	if ((map[i][j] == '2'
+		&& ft_strchr(" \t", map[i - 1][j]) != NULL)
+		|| (map[i][j] == '2'
+		&& map[i + 1] != NULL && ft_strchr(" \t", map[i + 1][j]) != NULL))
+		return (1);
+	return (0);
+}
+
 int	middle_walls(char **map)
 {
 	int	i;
@@ -56,6 +66,8 @@ int	middle_walls(char **map)
 			if (check_vertical(map, i, j))
 				return (1);
 			if (check_last_line(map, i, j))
+				return (1);
+			if (check_doors(map, i, j))
 				return (1);
 			j++;
 		}

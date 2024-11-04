@@ -1,37 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   play_sound.c                                       :+:      :+:    :+:   */
+/*   cp_color.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/18 17:39:58 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/10/27 18:14:34 by ryusupov         ###   ########.fr       */
+/*   Created: 2024/10/27 16:20:11 by ryusupov          #+#    #+#             */
+/*   Updated: 2024/10/27 16:23:45 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-void	play_sound(pthread_t *thread, void *(*play)(void *))
+static int	is_not_digit(char *str)
 {
-	pthread_create(thread, NULL, play, NULL);
-	pthread_detach(*thread);
+	int	i;
+	int	check;
+
+	i = 0;
+	check = 1;
+	while (str[i])
+	{
+		if (ft_isdigit(str[i]) == 1)
+			check = 0;
+		i++;
+	}
+	return (check);
 }
 
-void	game_over(void)
+int	*cp_color(char **rgb, int *color)
 {
-	pid_t	pid;
+	int	i;
 
-	if (access("src_bonus/sound_handling/sounds/demon.mp3", F_OK) != -1)
+	i = 0;
+	while (i < 3)
 	{
-		pid = fork();
-		if (pid == 0)
+		if (is_not_digit(rgb[i]) == 1)
+			return (0);
+		color[i] = ft_atoi(rgb[i]);
+		if (color[i] < 0 || color[i] > 255)
 		{
-			execlp("afplay", "afplay", "-v", "1.0", \
-				"src_bonus/sound_handling/sounds/demon.mp3", (char *) NULL);
-			_exit(1);
+			free(color);
+			return (0);
 		}
+		i++;
 	}
-	else
-		printf("The file move1.mp3 not found!\n");
+	return (color);
 }

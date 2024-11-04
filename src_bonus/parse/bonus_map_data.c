@@ -6,61 +6,37 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 18:29:46 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/10/24 15:16:42 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/27 16:56:04 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d_bonus.h"
 
-int	is_not_digit(char *str)
+int	*check_color(int *color, char **rgb_code)
 {
-	int	i;
-	int	check;
-
-	i = 0;
-	check = 1;
-	while (str[i])
+	color = malloc(sizeof(int) * 3);
+	if (!color)
 	{
-		if (ft_isdigit(str[i]) == 1)
-			check = 0;
-		i++;
+		free_map(rgb_code);
+		return (0);
 	}
-	return (check);
-}
-
-int	*cp_color(char **rgb, int *color)
-{
-	int	i;
-
-	i = 0;
-	while (i < 3)
+	if (!cp_color(rgb_code, color))
 	{
-		if (is_not_digit(rgb[i]) == 1)
-		{
-			printf("Invalid RGB format!.\n");
-			free_it((void **)rgb);
-			free(color);
-			exit(EXIT_FAILURE);
-		}
-		color[i] = ft_atoi(rgb[i]);
-		if (color[i] < 0 || color[i] > 255)
-		{
-			printf("Invalid RGB value: %d\n", color[i]);
-			free_it((void **)rgb);
-			free(color);
-			exit(EXIT_FAILURE);
-		}
-		i++;
+		free_map(rgb_code);
+		return (0);
 	}
+	free_map(rgb_code);
 	return (color);
 }
 
-int	*set_color_rgb(char *map)
+static int	*set_color_code(char *map, t_data *data)
 {
 	int		*color;
 	int		i;
 	char	**rgb_code;
 
+	(void)data;
+	color = NULL;
 	rgb_code = ft_split(map, ',');
 	if (!rgb_code)
 		return (0);
@@ -68,19 +44,13 @@ int	*set_color_rgb(char *map)
 	while (rgb_code[i])
 		i++;
 	if (i != 3)
-		free_it_exit((void **)rgb_code);
-	color = malloc(sizeof(int) * 3);
-	if (!color)
 	{
-		free_it((void **)rgb_code);
+		free_map(rgb_code);
 		return (0);
 	}
-	if (!cp_color(rgb_code, color))
-	{
-		free(color);
-		free_it_exit((void **)rgb_code);
-	}
-	free_it((void **)rgb_code);
+	color = check_color(color, rgb_code);
+	if (color == 0)
+		return (0);
 	return (color);
 }
 
@@ -93,13 +63,13 @@ int	rgb_codes(t_data *data, char **rgb)
 	{
 		if (rgb[i][0] == 'C')
 		{
-			data->texture.rgb_cell = set_color_rgb(rgb[i] + 1);
+			data->texture.rgb_cell = set_color_code(rgb[i] + 1, data);
 			if (data->texture.rgb_cell == 0)
 				return (error_msg("rgb color error.", 1));
 		}
 		else if (rgb[i][0] == 'F')
 		{
-			data->texture.rgb_floor = set_color_rgb(rgb[i] + 1);
+			data->texture.rgb_floor = set_color_code(rgb[i] + 1, data);
 			if (data->texture.rgb_floor == 0)
 				return (error_msg("rgb color error.", 1));
 		}
@@ -110,18 +80,25 @@ int	rgb_codes(t_data *data, char **rgb)
 	return (0);
 }
 
-int	map_data(t_data *data)
+void	map_data(t_data *data)
 {
 	if (set_path(&data->map, data->texture.tex_path) == 1)
 	{
 		free_map(data->texture.tex_path);
-		return (error_msg("Failed to get texture path!", 1));
+		free_map(data->texture.rgb_codes);
+		free_map(data->map.map2d);
+		free_path(data);
+		printf(RED"Path error!\n"RESET);
+		exit(EXIT_FAILURE);
 	}
 	if (rgb_codes(data, data->texture.rgb_codes) == 1)
 	{
+		free_path(data);
+		if (data->texture.rgb_floor)
+			free(data->texture.rgb_floor);
 		free_map(data->texture.rgb_codes);
-		return (error_msg("Failed to get color codes!", 1));
+		free_map(data->map.map2d);
+		exit(EXIT_FAILURE);
 	}
 	free_map(data->texture.rgb_codes);
-	return (0);
 }

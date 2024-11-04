@@ -6,11 +6,35 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 14:49:12 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/10/24 15:08:54 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/27 17:19:20 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d_bonus.h"
+
+int	pre_check_map(char **map)
+{
+	int	i;
+	int	j;
+	int	flag;
+
+	i = 0;
+	flag = 0;
+	while (map && map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == '0')
+				flag++;
+			j++;
+		}
+		i++;
+	}
+	if (flag < 2)
+		return (0);
+	return (1);
+}
 
 void	free_adress_and_exit(char **tex_path, int count)
 {

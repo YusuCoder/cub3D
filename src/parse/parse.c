@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 13:12:10 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/10/23 15:10:55 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/27 18:04:13 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,9 @@ void	init_data_parse(t_data *data)
 	data->map.color_ceiling = 0;
 	data->map.color_floor = 0;
 	data->map.map2d = NULL;
+	data->texture.rgb_codes = NULL;
+	data->map.map_file = NULL;
+	data->texture.tex_path = NULL;
 }
 
 int	parse(t_data *data, char **argv)
@@ -84,13 +87,10 @@ int	parse(t_data *data, char **argv)
 	free_map(data->map.map_file);
 	filter_map(data);
 	free_map(data->map.temp_map);
-	if (map_data(data) == 1)
-	{
-		free_path(data);
-		exit(EXIT_FAILURE);
-	}
+	map_data(data);
 	check_components(data);
 	check_walls(data);
 	get_player_dir(data);
 	return (0);
 }
+//rgb_codes conditional jump and leak

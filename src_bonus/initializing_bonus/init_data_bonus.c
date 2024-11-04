@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 17:25:42 by tkubanyc          #+#    #+#             */
-/*   Updated: 2024/10/26 15:13:08 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/26 15:31:32 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	init_vars(t_data *data)
 	data->sprite.aim = NULL;
 	data->timer_active = 0;
 	data->game_over = 0;
+	data->sound_pid = 0;
 }
 
 void	init_data(t_data *data)

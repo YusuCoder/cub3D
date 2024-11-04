@@ -47,6 +47,7 @@ SRC_FILES	:= main.c \
 				./parse/filter_map.c \
 				./parse/set_path.c \
 				./parse/utils.c \
+				./parse/cp_color.c \
 				initializing.c \
 				simulation.c \
 				event_hooks.c \
@@ -78,6 +79,7 @@ BONUS_SRC		:= main_bonus.c \
 				./parse/bonus_filter_map.c \
 				./parse/bonus_set_path.c \
 				./parse/bonus_utils.c \
+				./parse/bonus_cp_color.c \
 				initializing_bonus/init_data_bonus.c \
 				initializing_bonus/init_map_bonus.c \
 				initializing_bonus/init_player_bonus.c \
@@ -116,17 +118,17 @@ all: submodule mlx $(LIBFT) $(NAME)
 submodule:
 	@git submodule update --init --recursive > /dev/null 2>&1
 
-mlx:
-	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4 > /dev/null 2>&1
+# Build MLX only if libmlx42.a is missing
+mlx: $(LIBMLX)/build/libmlx42.a
+
+$(LIBMLX)/build/libmlx42.a:
+	@cmake $(LIBMLX) -B $(LIBMLX)/build > /dev/null 2>&1
+	@make -C $(LIBMLX)/build -j4 > /dev/null 2>&1
 	@echo "$(GREEN)MLX42 connected.$(RESET)"
 
 $(NAME): $(OBJS) $(LIBFT)
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $@ $(LIBS)
 	@echo "$(GREEN)cub3D created.$(RESET)"
-
-# $(NAME): $(OBJS) $(LIBFT)
-# 	@$(CC) $(CFLAGS) $^ -o $@ $(LIBS)
-# 	@echo "$(GREEN)cub3D created.$(RESET)"
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 	@mkdir -p $(@D)

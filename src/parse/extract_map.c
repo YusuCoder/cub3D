@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:10:56 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/10/23 13:14:46 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/10/27 16:51:57 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,13 @@ void	extract_map(t_data *data)
 
 	start_index = find_map_start(data->map.map_file);
 	if (start_index == -1)
-		return ;
+	{
+		free_map(data->texture.rgb_codes);
+		free_map(data->texture.tex_path);
+		free_map(data->map.map_file);
+		printf(RED"No map found!\n"RESET);
+		exit(EXIT_FAILURE);
+	}
 	length = get_length(data->map.map_file, start_index);
 	data->map.temp_map = allocate_temp_map(data->map.map_file, \
 			start_index, length);
